@@ -3,9 +3,7 @@ title: 'Education Dataset Analysis Pipeline: Walkthrough #1'
 output: html_document
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = F, warning = F, cache = F)
-```
+
 
 # Background 
 
@@ -51,14 +49,16 @@ Discussion board data is both rich and unstructured, in that it is primarily in 
 
 # Processing the data
 
-```{r, loading-packages}
+
+```r
 library(readxl)
 library(tidyverse)
 library(lubridate)
 library(here)
 ```
 
-```{r}
+
+```r
 # Gradebook and log-trace data for F15 and S16 semesters
 s12_course_data <- read_csv(
   here(
@@ -92,10 +92,77 @@ s12_time_spent <- read_csv(
 
 ## Viewing the data
 
-```{r}
+
+```r
 s12_pre_survey 
+```
+
+```
+## # A tibble: 1,102 x 16
+##    RespondentId StartDate CompletedDate LanguageCode opdata_CourseID
+##           <dbl> <chr>     <chr>         <chr>        <chr>          
+##  1       426746 2015.08.… <NA>          en           FrScA-S116-01  
+##  2       426775 2015.08.… 2015.08.24 1… en           BioA-S116-01   
+##  3       427483 2015.08.… <NA>          en           OcnA-S116-03   
+##  4       429883 2015.09.… 2015.09.02 1… en           AnPhA-S116-01  
+##  5       430158 2015.09.… 2015.09.03 9… en           AnPhA-S116-01  
+##  6       430161 2015.09.… 2015.09.03 9… en           AnPhA-S116-02  
+##  7       430162 2015.09.… 2015.09.03 9… en           AnPhA-T116-01  
+##  8       430167 2015.09.… 2015.09.03 9… en           BioA-S116-01   
+##  9       430170 2015.09.… 2015.09.03 9… en           BioA-T116-01   
+## 10       430172 2015.09.… 2015.09.03 9… en           PhysA-S116-01  
+## # … with 1,092 more rows, and 11 more variables: opdata_username <chr>,
+## #   Q1MaincellgroupRow1 <dbl>, Q1MaincellgroupRow2 <dbl>,
+## #   Q1MaincellgroupRow3 <dbl>, Q1MaincellgroupRow4 <dbl>,
+## #   Q1MaincellgroupRow5 <dbl>, Q1MaincellgroupRow6 <dbl>,
+## #   Q1MaincellgroupRow7 <dbl>, Q1MaincellgroupRow8 <dbl>,
+## #   Q1MaincellgroupRow9 <dbl>, Q1MaincellgroupRow10 <dbl>
+```
+
+```r
 s12_course_data
+```
+
+```
+## # A tibble: 29,711 x 16
+##    CourseSectionOr… Bb_UserPK EnrollmentStatus EnrollmentReason Gender
+##    <chr>                <dbl> <chr>            <chr>            <chr> 
+##  1 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS <dbl>,
+## #   Gradebook_Item <chr>, Item_Position <dbl>, Gradebook_Type <chr>,
+## #   Gradebook_Date <chr>, Grade_Category <chr>, Status <lgl>,
+## #   Points_Earned <chr>, Points_Attempted <dbl>, Points_Possible <dbl>,
+## #   last_access_date <drtn>
+```
+
+```r
 s12_time_spent
+```
+
+```
+## # A tibble: 598 x 6
+##    CourseID CourseSectionID CourseSectionOrigID Bb_UserPK   CUPK TimeSpent
+##       <dbl>           <dbl> <chr>                   <dbl>  <dbl>     <dbl>
+##  1       27           17146 OcnA-S116-01            44638 190682     1383.
+##  2       27           17146 OcnA-S116-01            54346 194259     1191.
+##  3       27           17146 OcnA-S116-01            57981 196014     3343.
+##  4       27           17146 OcnA-S116-01            66740 190463      965.
+##  5       27           17146 OcnA-S116-01            67920 191593     4095.
+##  6       27           17146 OcnA-S116-01            85355 190104      595.
+##  7       27           17146 OcnA-S116-01            85644 190685     1632.
+##  8       27           17146 OcnA-S116-01            86349 191713     1601.
+##  9       27           17146 OcnA-S116-01            86460 191887     1891.
+## 10       27           17146 OcnA-S116-01            87970 194256     3123.
+## # … with 588 more rows
 ```
 
 ## Processing the pre-survey data
@@ -107,7 +174,8 @@ Often, survey data needs to be processed in order to be (most) useful. Here, we 
  - Categorizing each question into a measure 
  - Computing the mean of each measure 
 
-```{r}
+
+```r
 s12_pre_survey  <- s12_pre_survey  %>%
     # Rename the qustions something easier to work with because R is case sensitive
     # and working with variable names in mix case is prone to error
@@ -169,18 +237,31 @@ s12_measure_mean <- s12_pre_survey %>%
 s12_measure_mean
 ```
 
+```
+## # A tibble: 3 x 3
+##   measure mean_response percent_NA
+##   <chr>           <dbl>      <dbl>
+## 1 int              4.26      0.171
+## 2 pc               3.65      0.170
+## 3 uv               3.76      0.170
+```
+
 ## Processing the course data
 
 We also can process the course data in order to obtain more information.
 
-```{r error = TRUE}
+
+```r
 # split course section into components
 s12_course_data <- s12_course_data %>%
   separate(col = CourseSectionOrigId,
            into = c('subject', 'semester', 'section'),
            sep = '-',
            remove = FALSE)
+```
 
+```
+## Error in eval_tidy(enquo(var), var_env): object 'CourseSectionOrigId' not found
 ```
 
 This led to pulling out the subject, semester, and section from the course ID; variables that we can use later on.
@@ -193,7 +274,8 @@ For these data, both have variables for the course and the student, though they 
 
 Let's start with the pre-survey data. We will rename RespondentID and opdata_CourseID to be student_id and course_id, respectively.
 
-```{r}
+
+```r
 s12_pre_survey <- s12_pre_survey %>% 
     rename(student_id = RespondentId,
            course_id = opdata_CourseID)
@@ -201,11 +283,31 @@ s12_pre_survey <- s12_pre_survey %>%
 s12_pre_survey
 ```
 
+```
+## # A tibble: 1,102 x 16
+##    student_id StartDate CompletedDate LanguageCode course_id
+##         <dbl> <chr>     <chr>         <chr>        <chr>    
+##  1     426746 2015.08.… <NA>          en           FrScA-S1…
+##  2     426775 2015.08.… 2015.08.24 1… en           BioA-S11…
+##  3     427483 2015.08.… <NA>          en           OcnA-S11…
+##  4     429883 2015.09.… 2015.09.02 1… en           AnPhA-S1…
+##  5     430158 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  6     430161 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  7     430162 2015.09.… 2015.09.03 9… en           AnPhA-T1…
+##  8     430167 2015.09.… 2015.09.03 9… en           BioA-S11…
+##  9     430170 2015.09.… 2015.09.03 9… en           BioA-T11…
+## 10     430172 2015.09.… 2015.09.03 9… en           PhysA-S1…
+## # … with 1,092 more rows, and 11 more variables: opdata_username <chr>,
+## #   q1 <dbl>, q2 <dbl>, q3 <dbl>, q4 <dbl>, q5 <dbl>, q6 <dbl>, q7 <dbl>,
+## #   q8 <dbl>, q9 <dbl>, q10 <dbl>
+```
+
 Looks better now!
 
 Let's proceed to the course data. Our goal is to rename two variables that correspond to the course and the student so that we can match with the other variables we just created for the pre-survey data.
 
-```{r}
+
+```r
 s12_course_data <- s12_course_data %>% 
     rename(student_id = Bb_UserPK,
            course_id = CourseSectionOrigID)
@@ -213,10 +315,32 @@ s12_course_data <- s12_course_data %>%
 s12_course_data
 ```
 
+```
+## # A tibble: 29,711 x 16
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    <chr>          <dbl> <chr>            <chr>            <chr> 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS <dbl>,
+## #   Gradebook_Item <chr>, Item_Position <dbl>, Gradebook_Type <chr>,
+## #   Gradebook_Date <chr>, Grade_Category <chr>, Status <lgl>,
+## #   Points_Earned <chr>, Points_Attempted <dbl>, Points_Possible <dbl>,
+## #   last_access_date <drtn>
+```
+
 Now that we have two variables that are consistent across both datasets - we have called them "course_id" and "student_id" -  we can join these using the **dplyr** function, `left_join()`. 
 Let's save our joined data as a new object called "dat."
 
-```{r}
+
+```r
 dat <- left_join(s12_course_data, 
                  s12_pre_survey, 
                  by = c("student_id", "course_id"))
@@ -224,9 +348,34 @@ dat <- left_join(s12_course_data,
 dat
 ```
 
+```
+## # A tibble: 29,711 x 30
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    <chr>          <dbl> <chr>            <chr>            <chr> 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 25 more variables: FinalGradeCEMS <dbl>,
+## #   Gradebook_Item <chr>, Item_Position <dbl>, Gradebook_Type <chr>,
+## #   Gradebook_Date <chr>, Grade_Category <chr>, Status <lgl>,
+## #   Points_Earned <chr>, Points_Attempted <dbl>, Points_Possible <dbl>,
+## #   last_access_date <drtn>, StartDate <chr>, CompletedDate <chr>,
+## #   LanguageCode <chr>, opdata_username <chr>, q1 <dbl>, q2 <dbl>,
+## #   q3 <dbl>, q4 <dbl>, q5 <dbl>, q6 <dbl>, q7 <dbl>, q8 <dbl>, q9 <dbl>,
+## #   q10 <dbl>
+```
+
 Just one more data frame to merge:
 
-```{r}
+
+```r
 s12_time_spent <- s12_time_spent %>%
   rename(student_id = Bb_UserPK, 
          course_id = CourseSectionOrigID)
@@ -241,8 +390,34 @@ Note that they're now combined, even though the course data has many more rows: 
 
 We have a pretty large data frame! Let's take a quick look.
 
-```{r}
+
+```r
 dat
+```
+
+```
+## # A tibble: 29,711 x 34
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    <chr>          <dbl> <chr>            <chr>            <chr> 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 29 more variables: FinalGradeCEMS <dbl>,
+## #   Gradebook_Item <chr>, Item_Position <dbl>, Gradebook_Type <chr>,
+## #   Gradebook_Date <chr>, Grade_Category <chr>, Status <lgl>,
+## #   Points_Earned <chr>, Points_Attempted <dbl>, Points_Possible <dbl>,
+## #   last_access_date <drtn>, StartDate <chr>, CompletedDate <chr>,
+## #   LanguageCode <chr>, opdata_username <chr>, q1 <dbl>, q2 <dbl>,
+## #   q3 <dbl>, q4 <dbl>, q5 <dbl>, q6 <dbl>, q7 <dbl>, q8 <dbl>, q9 <dbl>,
+## #   q10 <dbl>, CourseID <dbl>, CourseSectionID <dbl>, CUPK <dbl>,
+## #   TimeSpent <dbl>
 ```
 
 It looks like we have neary 30,000 observations from 30 variables.
@@ -253,7 +428,8 @@ Now that our data are ready to go, we can start to ask some questions of the dat
 
 One thing we might be wondering is how time spent on course is related to students' final grade. Let's first calculate the percentage of points students earned as a measure of their final grade (noting that the teacher may have assigned a different grade--or weighted their grades in ways not reflected through the points).
 
-```{r}
+
+```r
 dat <- dat %>% 
     group_by(student_id, course_id) %>% 
     mutate(Points_Earned = as.integer(Points_Earned)) %>% 
@@ -268,18 +444,24 @@ dat <- dat %>%
 
 <!-- This is really trivial and obvious; need a new/better relationship -->
 
-```{r}
+
+```r
 ggplot(dat, aes(x = TimeSpent, y = percentage_earned)) +
     geom_point()
 ```
 
+<img src="06-walkthrough-1_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+
 There appears to be *some* relationship. What if we added a line of best fit - a linear model?
 
-```{r}
+
+```r
 ggplot(dat, aes(x = TimeSpent, y = percentage_earned)) +
     geom_point() + 
     geom_smooth(method = "lm")
 ```
+
+<img src="06-walkthrough-1_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 So, it appeares that the more time students spent on the course, the more points they earned.
 
@@ -287,9 +469,32 @@ So, it appeares that the more time students spent on the course, the more points
 
 We can find out exactly what the relationship is using a linear model.
 
-```{r}
+
+```r
 m_linear <- lm(percentage_earned ~ TimeSpent, data = dat)
 summary(m_linear)
+```
+
+```
+## 
+## Call:
+## lm(formula = percentage_earned ~ TimeSpent, data = dat)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.63001 -0.07894  0.05366  0.15742  0.34544 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 6.102e-01  2.158e-03  282.77   <2e-16 ***
+## TimeSpent   7.983e-05  9.399e-07   84.94   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.2236 on 29481 degrees of freedom
+##   (228 observations deleted due to missingness)
+## Multiple R-squared:  0.1966,	Adjusted R-squared:  0.1966 
+## F-statistic:  7214 on 1 and 29481 DF,  p-value: < 2.2e-16
 ```
 
 ## But what about different courses?
@@ -298,32 +503,76 @@ Is there course-specific differences in how much time students spend on the
 course as well as in how time spent is related to the percentage of points 
 students earned?
 
-```{r}
+
+```r
 ggplot(dat, aes(x = TimeSpent, y = percentage_earned, color = course_id)) +
     geom_point()
 ```
 
-```{r}
+<img src="06-walkthrough-1_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+
+```r
 ggplot(dat, aes(x = TimeSpent, y = percentage_earned, color = course_id)) +
     geom_point() +
     geom_smooth(method = "lm")
 ```
 
+<img src="06-walkthrough-1_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
 There appears to be so. One way we can test is to use what is called a multi-level model. This requires a new package; one of the most common for estimating these types of models is **lme4**. We use it very similarly to the `lm()` function, but we pass it an additional argument about what the *groups*, or levels, in the data are.
 
-```{r}
+
+```r
 # install.packages("lme4")
 library(lme4)
 m_course <- lmer(percentage_earned ~ TimeSpent + (1|course_id), data = dat)
 summary(m_course)
 ```
 
+```
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: percentage_earned ~ TimeSpent + (1 | course_id)
+##    Data: dat
+## 
+## REML criterion at convergence: -8619.3
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.3371 -0.3701  0.2154  0.6418  2.1217 
+## 
+## Random effects:
+##  Groups    Name        Variance Std.Dev.
+##  course_id (Intercept) 0.008815 0.09389 
+##  Residual              0.043475 0.20851 
+## Number of obs: 29483, groups:  course_id, 26
+## 
+## Fixed effects:
+##              Estimate Std. Error t value
+## (Intercept) 5.820e-01  1.863e-02   31.25
+## TimeSpent   8.884e-05  9.273e-07   95.81
+## 
+## Correlation of Fixed Effects:
+##           (Intr)
+## TimeSpent -0.090
+## fit warnings:
+## Some predictor variables are on very different scales: consider rescaling
+```
+
 A common way to understand how much variability is at the group level is to calculate the *intra-class* correlation. This value is the proportion of the variability in the outcome (the *y*-variable) that is accounted for solely by the groups identified in the model. There is a useful function in the **sjstats** package for doing this.
 
-```{r}
+
+```r
 # install.packages("sjstats")
 library(sjstats)
 icc(m_course)
+```
+
+```
+## # Intraclass Correlation Coefficient
+## 
+##      Adjusted ICC: 0.169
+##   Conditional ICC: 0.131
 ```
 
 This shows that nearly 17% of the variability in the percentage of points students earned can be explained simply by knowing what class they are in. 

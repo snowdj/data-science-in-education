@@ -3,7 +3,8 @@ title: 'Education Dataset Analysis Pipeline: Walk Through #3'
 output: html_document
 ---
 
-```{r analysis-preferences}
+
+```r
 # Seed for random number generation
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed, eval = TRUE, echo = FALSE, results = 'hide',
@@ -41,12 +42,7 @@ title: 'Education Dataset Analysis Pipeline: Walk Through #3'
 output: html_document
 ---
 
-```{r analysis-preferences-01}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed, eval = TRUE, echo = FALSE, results = 'hide',
-                      message = FALSE, warning = FALSE)
-```
+
 
 # Background
 
@@ -97,82 +93,49 @@ To interpret our findings, we examined three main things: (1) predictive accurac
 
 # Analysis
 
-```{r}
-library(tidyverse)
-library(caret)
-library(here)
-```
+
 
 First, we will load the data, *filter* the data to include only the data from one year, and *select* variables of interest.
 
-```{r}
-f <- here::here("online-science-motivation-w-disc.csv")
 
-d <- read_csv(f)
-
-d <-d %>% filter(!str_detect(course_ID, "S217"))
-
-d <- d %>% 
-    select(pre_int, pre_uv,  pre_percomp, time_spent,course_ID, final_grade, subject, enrollment_reason, semester, enrollment_status, cogproc, social, posemo, negemo, n)
-```
 
 ## Use of caret
 
 Here, we remove observations with missing data (per our note above about random forests requiring complete cases).
 
-```{r}
-nrow(d)
-d <- na.omit(d)
-nrow(d)
-```
+
 
 First, machine learning methods often involve using a large number of variables. Oftentimes, some of these variables will not be suitable to use: they may be highly correlated with other variables, for instance, or may have very little - or no - variability. Indeed, for the data set used in this study, one variables has the same (character string) value for all of the observations. We can detect this variable and any others using the following function:
 
-```{r}
-nearZeroVar(d, saveMetrics = TRUE)
-```
+
 
 If we look at `enrollment_status`, we will see that it is "Approved/Enrolled" for *all* of the students. When we use this in certian models, t may cause some problems, and so we remove it first.
 
-```{r}
-d <- select(d, -enrollment_status)
-```
+
 
 Note that many times you may wish to pre-process the variables, such as by centering or scaling them; we could this with code like the following, which is not run here, as we will first try this out with the variables' original values.
 
-```{r, eval = FALSE}
-d <- mutate_if(d, 
-               is.numeric, scale)
-```
+
 
 We will want to make character string variables into factors.
 
-```{r}
-d <- mutate_if(d, is.character, as.factor)
-```
+
 
 Now, we will prepare the **train** and **test** datasets, using the caret function for creating data partitions. Here, the **p** argument specifies what proportion of the data we want to be in the **training** partition. Note that this function splits the data based upon the outcome, so that the training and test data sets will both have comparable values for the outcome. Note the `times = 1` argument; this function can be used to create *multiple* train and test sets, something we will describe in more detail later.
 
-```{r}
-trainIndex <- createDataPartition(d$final_grade,
-                                  p = .8, 
-                                  list = FALSE,
-                                  times = 1)
 
-d_train <- d[ trainIndex,] # can we make this tidy w/ filter
-d_test <- d[-trainIndex,]
-```
 
 Finally, we will estimate the models.
 
 Here, we will use the train function, passing *all* of the variables in the data frame (except for the outcome, or dependent variable, `final_grade`) as predictors. NOte that you can read more about the specific random forest implementation chosen [here](http://topepo.github.io/caret/train-models-by-tag.html#random-forest).
 
-```{r error = TRUE}
-rf_fit <- train(final_grade ~ .,
-                data = d_train,
-                method = "ranger")
 
-rf_fit
+```
+## Error: Required package is missing
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'rf_fit' not found
 ```
 
 We have some results! First, we see that we have 400 samples, or 400 observations, the number in the train data set. No pre-processing steps were specified in the model fitting (note that) these the output of `preProcess` can be passed to `train()` to center, scale, and transform the data in many other ways. Next, note that a resampling technique has been used: this is not for validating the model (per se), but is rather for selecting tuning parameters, or options that need to be specified as a part of the modeling. These parameters can be manually provided, or can be estimated via strategies such as the bootstrap resample (or *k*-folds cross validation).
@@ -181,155 +144,23 @@ It appears that the model with the value of the **mtry** tuning parameter equal 
 
 Let's see if we end up with slightly different values if we change the resampling technique to cross-validation, instead of bootstrap resampling.
 
-```{r error = TRUE}
-train_control <- trainControl(method = "repeatedcv",
-                              number = 10,
-                              repeats = 10)
 
-rf_fit1 <- train(final_grade ~ .,
-                data = d_train,
-                method = "ranger",
-                trControl = train_control)
 
-rf_fit1
-```
 
-The same tuning parameter values seem to be found with this method. Let's check just one last thing - what if we do not fix **min.node.size** to five?
 
-Let's create our own grid of values to test. We'll stick with the default bootstrap resampling method to choose the best model.
 
-```{r}
-tune_grid <- expand.grid(mtry = c(2, 22, 42),
-                         splitrule = c("variance", "extratrees"),
-                         min.node.size = c(1, 5, 10, 15, 20))
 
-rf_fit2 <- train(final_grade ~ .,
-                data = d_train,
-                method = "ranger",
-                tuneGrid = tune_grid)
 
-rf_fit2
-```
 
-The model with the same values as identified before but with **min.node.size** equal to 1 seems to fit best, though the improvement seems to be fairly small relative to the difference the other tuning parameters seem to make. 
 
-Let's take a look at this model. We will first note the large number of independent variables: this is due to the factors being treated as dummy codes. We can also note the *OOB prediction error (MSE)`, of 0.351, and the proportion of the variance explained, or R squared, of 0.658.
 
-```{r}
-rf_fit2$finalModel
-```
 
-## Predicted values
 
-Using the simpler model without treating `min.node.size` as a tuning paramete
 
-In particular, let's explore predicted values. In particular, we can see how predicted values compare to those in the test set to understand predictive accuracy. 
 
-First, let's calculte the Root Mean Square Error (RMSE), just to gain practice working with the model output.
 
-```{r}
-d_train_augmented <- mutate(d_train, 
-                  pred = predict(rf_fit, d_train),
-                  obs = final_grade, # this is to calculate summmary statistics using caret
-                  raw_diff = pred - final_grade,
-                  abs_diff = abs(pred - final_grade))
 
-d_train_augmented %>%
-    summarize(MAE = mean(abs_diff),
-              RMSE = sqrt(mean(raw_diff^2)))
-```
 
-We can calculate these automatically using the **caret** `defaultSummary()` function (which just requires columns with `obs` and `pred` in it in a data frame):
 
-```{r}
-# install.packages("MLmetrics")
-defaultSummary(as.data.frame(d_train))
-```
 
-The RMSE and MAE values correspond to those we calculated manually. Note that an $R^2$ value is also calculated as the square of the correlation between the observed and predicted values. 
 
-So, what do these values tell us? On average, our predictions are around 4 percentage points away from their actual values. Not so bad!
-
-Why use RMSE, though, over MAE? [Note: don't kow why].
-
-# Examining predictive accuracy on the test data set
-
-What if we use the test data set - data not used to train the model?
-
-```{r, eval = FALSE}
-# NOT RUN AS I WAS HAVING TROUBLE GETTING THIS TO WORK BEACUSE OF A FACTOR LEVEL NOT IN D_TEST - we've had this issue before and there are workarounds
-d_test_augmented <- mutate(d_test,
-                           pred = predict(rf_fit, d_test),
-                           obs = final_grade)
-
-defaultSummary(as.data.frame(d_test_augmented))
-```
-
-We can compare this to the values above to see how much poorer - if at all - performance is on data not used to train the model.
-
-## Variable importance measures
-
-We can examine two different variable importance measures using the **ranger** method in **caret**.
-
-Note that importance values are not calcultaed automatically, but that "impurity" or "permutation" can be passed to the `importance` argument in `train()`. See more [here](https://alexisperrier.com/datascience/2015/08/27/feature-importance-random-forests-gini-accuracy.html).
-
-We'll re-run the model, but will add an argument to call the variable importance metric.
-
-```{r}
-rf_fit_imp <- train(final_grade ~ .,
-                data = d_train,
-                method = "ranger",
-                importance = "impurity")
-
-varImp(rf_fit_imp)
-```
-
-We can visualize these:
-
-```{r}
-varImp(rf_fit_imp) %>%
-    pluck(1) %>%
-    rownames_to_column("var") %>%
-    ggplot(aes(x = reorder(var, Overall), y = Overall)) +
-    geom_col() +
-    coord_flip()
-```
-
-We can see whether these change with the different importance measures.
-
-```{r}
-rf_fit_imp_permutation <- train(final_grade ~ .,
-                data = d_train,
-                method = "ranger",
-                importance = "permutation")
-
-varImp(rf_fit_imp_permutation) %>%
-    pluck(1) %>%
-    rownames_to_column("var") %>%
-    ggplot(aes(x = reorder(var, Overall), y = Overall)) +
-    geom_col() +
-    coord_flip()
-```
-
-They are similar but somewhat different. One takeaway from this analysis is that what course students are in seems to have a different effect depending on the course. Also, how much students write in their discussion posts (`n`) seems to be very important - as does the time students spend in their course. Finally, there are some subject level differences (in terms of how predictive subject is). Perhaps grades should be normalized within subject: would this still be an important predictor, then?
-
-## Comparing a random forest to a regression
-
-You may be curious about comparing the predictive accuracy of the model to a linear model (a regression).
-
-```{r, warning = FALSE}
-d_train_lm <- mutate_if(d_train, is.character, as.factor) # may want to move this earlier; it seems important for method = lm but not ranger, for some reason
-
-lm_fit <- train(final_grade ~ .,
-                data = d_train_lm, 
-                method = "lm")
-
-d_train_lm <- mutate(d_train, 
-                     obs = final_grade,
-                     pred = predict(lm_fit, d_train_lm))
-
-defaultSummary(as.data.frame(d_train_lm))
-defaultSummary(as.data.frame(d_train_augmented))
-```
-
-We can see that the random forest technique seems to perform better than regression. It may be interesting to compare the results from the random forest not to a more straightforward model, such as a regression, but to a more sophisticated model, like one for deep learning. For now, we'll leave that to you.
