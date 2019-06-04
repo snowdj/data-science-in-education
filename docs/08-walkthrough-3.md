@@ -145,22 +145,118 @@ It appears that the model with the value of the **mtry** tuning parameter equal 
 Let's see if we end up with slightly different values if we change the resampling technique to cross-validation, instead of bootstrap resampling.
 
 
+```
+## Error: Required package is missing
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'rf_fit1' not found
+```
+
+The same tuning parameter values seem to be found with this method. Let's check just one last thing - what if we do not fix **min.node.size** to five?
+
+Let's create our own grid of values to test. We'll stick with the default bootstrap resampling method to choose the best model.
+
+
+```
+## Error: Required package is missing
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'rf_fit2' not found
+```
+
+The model with the same values as identified before but with **min.node.size** equal to 1 seems to fit best, though the improvement seems to be fairly small relative to the difference the other tuning parameters seem to make. 
+
+Let's take a look at this model. We will first note the large number of independent variables: this is due to the factors being treated as dummy codes. We can also note the *OOB prediction error (MSE)`, of 0.351, and the proportion of the variance explained, or R squared, of 0.658.
+
+
+```
+## Error in eval(expr, envir, enclos): object 'rf_fit2' not found
+```
+
+## Predicted values
+
+Using the simpler model without treating `min.node.size` as a tuning paramete
+
+In particular, let's explore predicted values. In particular, we can see how predicted values compare to those in the test set to understand predictive accuracy. 
+
+First, let's calculte the Root Mean Square Error (RMSE), just to gain practice working with the model output.
+
+
+```
+## Error in predict(rf_fit, d_train): object 'rf_fit' not found
+```
+
+```
+## Error in eval(lhs, parent, parent): object 'd_train_augmented' not found
+```
+
+We can calculate these automatically using the **caret** `defaultSummary()` function (which just requires columns with `obs` and `pred` in it in a data frame):
+
+
+```
+## Error in `[.data.frame`(data, , "pred"): undefined columns selected
+```
+
+The RMSE and MAE values correspond to those we calculated manually. Note that an $R^2$ value is also calculated as the square of the correlation between the observed and predicted values. 
+
+So, what do these values tell us? On average, our predictions are around 4 percentage points away from their actual values. Not so bad!
+
+Why use RMSE, though, over MAE? [Note: don't kow why].
+
+# Examining predictive accuracy on the test data set
+
+What if we use the test data set - data not used to train the model?
 
 
 
+We can compare this to the values above to see how much poorer - if at all - performance is on data not used to train the model.
+
+## Variable importance measures
+
+We can examine two different variable importance measures using the **ranger** method in **caret**.
+
+Note that importance values are not calcultaed automatically, but that "impurity" or "permutation" can be passed to the `importance` argument in `train()`. See more [here](https://alexisperrier.com/datascience/2015/08/27/feature-importance-random-forests-gini-accuracy.html).
+
+We'll re-run the model, but will add an argument to call the variable importance metric.
 
 
+```
+## Error: Required package is missing
+```
+
+```
+## Error in varImp(rf_fit_imp): object 'rf_fit_imp' not found
+```
+
+We can visualize these:
 
 
+```
+## Error in varImp(rf_fit_imp): object 'rf_fit_imp' not found
+```
+
+We can see whether these change with the different importance measures.
 
 
+```
+## Error: Required package is missing
+```
+
+```
+## Error in varImp(rf_fit_imp_permutation): object 'rf_fit_imp_permutation' not found
+```
+
+They are similar but somewhat different. One takeaway from this analysis is that what course students are in seems to have a different effect depending on the course. Also, how much students write in their discussion posts (`n`) seems to be very important - as does the time students spend in their course. Finally, there are some subject level differences (in terms of how predictive subject is). Perhaps grades should be normalized within subject: would this still be an important predictor, then?
+
+## Comparing a random forest to a regression
+
+You may be curious about comparing the predictive accuracy of the model to a linear model (a regression).
 
 
+```
+## Error in as.data.frame(d_train_augmented): object 'd_train_augmented' not found
+```
 
-
-
-
-
-
-
-
+We can see that the random forest technique seems to perform better than regression. It may be interesting to compare the results from the random forest not to a more straightforward model, such as a regression, but to a more sophisticated model, like one for deep learning. For now, we'll leave that to you.

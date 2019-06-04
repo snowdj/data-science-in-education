@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 17 Examining predictive accuracy on the test data set | Data Science in Education</title>
+  <meta name="description" content="proof of concept" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 17 Examining predictive accuracy on the test data set | Data Science in Education" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="proof of concept" />
+  <meta name="github-repo" content="data-edu/data-science-in-education" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 17 Examining predictive accuracy on the test data set | Data Science in Education" />
+  
+  <meta name="twitter:description" content="proof of concept" />
+  
+
+<meta name="author" content="multiple" />
+
+
+<meta name="date" content="2019-06-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="analysis.html">
+<link rel="next" href="head.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science in Education</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#the-challenge-of-data-science-in-education"><i class="fa fa-check"></i><b>1.0.1</b> The Challenge of Data Science in Education</a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#meeting-the-challenge"><i class="fa fa-check"></i><b>1.0.2</b> Meeting the Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i><b>2</b> How to Use This Book</a></li>
+<li class="chapter" data-level="3" data-path="a-reproducible-approach.html"><a href="a-reproducible-approach.html"><i class="fa fa-check"></i><b>3</b> A Reproducible Approach</a></li>
+<li class="chapter" data-level="4" data-path="a-self-driven-analytic-approach.html"><a href="a-self-driven-analytic-approach.html"><i class="fa fa-check"></i><b>4</b> A Self-Driven Analytic Approach</a></li>
+<li class="chapter" data-level="5" data-path="unique-challenges.html"><a href="unique-challenges.html"><i class="fa fa-check"></i><b>5</b> Unique challenges</a><ul>
+<li class="chapter" data-level="5.1" data-path="unique-challenges.html"><a href="unique-challenges.html#challenges-common-to-doing-data-science-in-any-domain"><i class="fa fa-check"></i><b>5.1</b> Challenges common to doing data science in any domain</a></li>
+<li class="chapter" data-level="5.2" data-path="unique-challenges.html"><a href="unique-challenges.html#lack-of-processes-and-procedures"><i class="fa fa-check"></i><b>5.2</b> Lack of processes and procedures</a></li>
+<li class="chapter" data-level="5.3" data-path="unique-challenges.html"><a href="unique-challenges.html#few-guidelines-from-research-and-evaluation"><i class="fa fa-check"></i><b>5.3</b> Few guidelines from research and evaluation</a></li>
+<li class="chapter" data-level="5.4" data-path="unique-challenges.html"><a href="unique-challenges.html#limited-training-and-educational-opportunities-for-educational-data-science"><i class="fa fa-check"></i><b>5.4</b> Limited training and educational opportunities for educational data science</a></li>
+<li class="chapter" data-level="5.5" data-path="unique-challenges.html"><a href="unique-challenges.html#the-complex-and-messy-nature-of-educational-data"><i class="fa fa-check"></i><b>5.5</b> The complex and messy nature of educational data</a></li>
+<li class="chapter" data-level="5.6" data-path="unique-challenges.html"><a href="unique-challenges.html#ethical-and-legal-concerns"><i class="fa fa-check"></i><b>5.6</b> Ethical and legal concerns</a></li>
+<li class="chapter" data-level="5.7" data-path="unique-challenges.html"><a href="unique-challenges.html#analytic-challenges"><i class="fa fa-check"></i><b>5.7</b> Analytic challenges</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="foundational-skills.html"><a href="foundational-skills.html"><i class="fa fa-check"></i><b>6</b> Foundational Skills</a><ul>
+<li class="chapter" data-level="6.1" data-path="foundational-skills.html"><a href="foundational-skills.html#track-one-getting-started"><i class="fa fa-check"></i><b>6.1</b> Track One: Getting Started</a></li>
+<li class="chapter" data-level="6.2" data-path="foundational-skills.html"><a href="foundational-skills.html#downloading-r-and-r-studio"><i class="fa fa-check"></i><b>6.2</b> Downloading R and R Studio</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="foundational-skills.html"><a href="foundational-skills.html#to-download-r"><i class="fa fa-check"></i><b>6.2.1</b> To download R:</a></li>
+<li class="chapter" data-level="6.2.2" data-path="foundational-skills.html"><a href="foundational-skills.html#to-download-r-studio"><i class="fa fa-check"></i><b>6.2.2</b> To download R Studio:</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="foundational-skills.html"><a href="foundational-skills.html#check-that-it-worked"><i class="fa fa-check"></i><b>6.3</b> Check that it worked</a></li>
+<li class="chapter" data-level="6.4" data-path="foundational-skills.html"><a href="foundational-skills.html#help-im-completely-new-to-using-r-r-studio"><i class="fa fa-check"></i><b>6.4</b> Help, I’m completely new to using R / R Studio!</a></li>
+<li class="chapter" data-level="6.5" data-path="foundational-skills.html"><a href="foundational-skills.html#creating-projects"><i class="fa fa-check"></i><b>6.5</b> Creating Projects</a></li>
+<li class="chapter" data-level="6.6" data-path="foundational-skills.html"><a href="foundational-skills.html#packages"><i class="fa fa-check"></i><b>6.6</b> Packages</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="foundational-skills.html"><a href="foundational-skills.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>6.6.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="6.6.2" data-path="foundational-skills.html"><a href="foundational-skills.html#running-functions-from-packages"><i class="fa fa-check"></i><b>6.6.2</b> Running Functions from Packages</a></li>
+<li class="chapter" data-level="6.6.3" data-path="foundational-skills.html"><a href="foundational-skills.html#track-two-welcome-to-the-tidyverse"><i class="fa fa-check"></i><b>6.6.3</b> Track Two: Welcome to the Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-data-from-various-sources"><i class="fa fa-check"></i><b>6.7</b> Loading Data from Various Sources</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="foundational-skills.html"><a href="foundational-skills.html#saving-a-file-from-the-web"><i class="fa fa-check"></i><b>6.7.1</b> Saving a File from the Web</a></li>
+<li class="chapter" data-level="6.7.2" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-a-csv-file"><i class="fa fa-check"></i><b>6.7.2</b> Loading a CSV File</a></li>
+<li class="chapter" data-level="6.7.3" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-excel-files"><i class="fa fa-check"></i><b>6.7.3</b> Loading Excel files</a></li>
+<li class="chapter" data-level="6.7.4" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-sav-files"><i class="fa fa-check"></i><b>6.7.4</b> Loading SAV files</a></li>
+<li class="chapter" data-level="6.7.5" data-path="foundational-skills.html"><a href="foundational-skills.html#google-sheets"><i class="fa fa-check"></i><b>6.7.5</b> Google Sheets</a></li>
+<li class="chapter" data-level="6.7.6" data-path="foundational-skills.html"><a href="foundational-skills.html#saving-files"><i class="fa fa-check"></i><b>6.7.6</b> Saving Files</a></li>
+<li class="chapter" data-level="6.7.7" data-path="foundational-skills.html"><a href="foundational-skills.html#conclusion"><i class="fa fa-check"></i><b>6.7.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="foundational-skills.html"><a href="foundational-skills.html#processing-data"><i class="fa fa-check"></i><b>6.8</b> Processing Data</a></li>
+<li class="chapter" data-level="6.9" data-path="foundational-skills.html"><a href="foundational-skills.html#communicating-sharing-results"><i class="fa fa-check"></i><b>6.9</b> Communicating / sharing results</a></li>
+<li class="chapter" data-level="6.10" data-path="foundational-skills.html"><a href="foundational-skills.html#other-foundational-notes"><i class="fa fa-check"></i><b>6.10</b> Other foundational notes</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="foundational-skills.html"><a href="foundational-skills.html#configuring-r-studio"><i class="fa fa-check"></i><b>6.10.1</b> Configuring R Studio</a></li>
+<li class="chapter" data-level="6.10.2" data-path="foundational-skills.html"><a href="foundational-skills.html#getting-data-in-and-out"><i class="fa fa-check"></i><b>6.10.2</b> Getting data in and out</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>7</b> Background</a><ul>
+<li class="chapter" data-level="7.1" data-path="background.html"><a href="background.html#self-report-survey"><i class="fa fa-check"></i><b>7.1</b> 1. Self-report survey</a></li>
+<li class="chapter" data-level="7.2" data-path="background.html"><a href="background.html#log-trace-data"><i class="fa fa-check"></i><b>7.2</b> 2. Log-trace data</a></li>
+<li class="chapter" data-level="7.3" data-path="background.html"><a href="background.html#achievement-related-and-gradebook-data"><i class="fa fa-check"></i><b>7.3</b> 3. Achievement-related and gradebook data</a></li>
+<li class="chapter" data-level="7.4" data-path="background.html"><a href="background.html#discussion-board-data"><i class="fa fa-check"></i><b>7.4</b> 4. Discussion board data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="processing-the-data.html"><a href="processing-the-data.html"><i class="fa fa-check"></i><b>8</b> Processing the data</a><ul>
+<li class="chapter" data-level="8.1" data-path="processing-the-data.html"><a href="processing-the-data.html#viewing-the-data"><i class="fa fa-check"></i><b>8.1</b> Viewing the data</a></li>
+<li class="chapter" data-level="8.2" data-path="processing-the-data.html"><a href="processing-the-data.html#processing-the-pre-survey-data"><i class="fa fa-check"></i><b>8.2</b> Processing the pre-survey data</a></li>
+<li class="chapter" data-level="8.3" data-path="processing-the-data.html"><a href="processing-the-data.html#processing-the-course-data"><i class="fa fa-check"></i><b>8.3</b> Processing the course data</a></li>
+<li class="chapter" data-level="8.4" data-path="processing-the-data.html"><a href="processing-the-data.html#joining-the-data"><i class="fa fa-check"></i><b>8.4</b> Joining the data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visualizations-and-models.html"><a href="visualizations-and-models.html"><i class="fa fa-check"></i><b>9</b> Visualizations and Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="visualizations-and-models.html"><a href="visualizations-and-models.html#visualization-of-the-relationship-between-time-spent-on-course-and-percentage-of-points-earned"><i class="fa fa-check"></i><b>9.1</b> Visualization of the relationship between time spent on course and percentage of points earned</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="linear-model-regression.html"><a href="linear-model-regression.html"><i class="fa fa-check"></i><b>10</b> Linear model (regression)</a><ul>
+<li class="chapter" data-level="10.1" data-path="linear-model-regression.html"><a href="linear-model-regression.html#but-what-about-different-courses"><i class="fa fa-check"></i><b>10.1</b> But what about different courses?</a></li>
+<li class="chapter" data-level="10.2" data-path="linear-model-regression.html"><a href="linear-model-regression.html#introduction-1"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="linear-model-regression.html"><a href="linear-model-regression.html#driving-question-and-objectives"><i class="fa fa-check"></i><b>10.3</b> Driving Question and Objectives</a></li>
+<li class="chapter" data-level="10.4" data-path="linear-model-regression.html"><a href="linear-model-regression.html#data-import"><i class="fa fa-check"></i><b>10.4</b> Data Import</a></li>
+<li class="chapter" data-level="10.5" data-path="linear-model-regression.html"><a href="linear-model-regression.html#r-markdown"><i class="fa fa-check"></i><b>10.5</b> R Markdown</a></li>
+<li class="chapter" data-level="10.6" data-path="linear-model-regression.html"><a href="linear-model-regression.html#including-plots"><i class="fa fa-check"></i><b>10.6</b> Including Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="background-1.html"><a href="background-1.html"><i class="fa fa-check"></i><b>11</b> Background</a></li>
+<li class="chapter" data-level="12" data-path="information-about-the-dataset.html"><a href="information-about-the-dataset.html"><i class="fa fa-check"></i><b>12</b> Information about the dataset</a></li>
+<li class="chapter" data-level="13" data-path="background-2.html"><a href="background-2.html"><i class="fa fa-check"></i><b>13</b> Background</a></li>
+<li class="chapter" data-level="14" data-path="information-about-the-dataset-1.html"><a href="information-about-the-dataset-1.html"><i class="fa fa-check"></i><b>14</b> Information about the dataset</a></li>
+<li class="chapter" data-level="15" data-path="information-on-random-forests.html"><a href="information-on-random-forests.html"><i class="fa fa-check"></i><b>15</b> Information on random forests</a></li>
+<li class="chapter" data-level="16" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>16</b> Analysis</a><ul>
+<li class="chapter" data-level="16.1" data-path="analysis.html"><a href="analysis.html#use-of-caret"><i class="fa fa-check"></i><b>16.1</b> Use of caret</a></li>
+<li class="chapter" data-level="16.2" data-path="analysis.html"><a href="analysis.html#predicted-values"><i class="fa fa-check"></i><b>16.2</b> Predicted values</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html"><i class="fa fa-check"></i><b>17</b> Examining predictive accuracy on the test data set</a><ul>
+<li class="chapter" data-level="17.1" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#variable-importance-measures"><i class="fa fa-check"></i><b>17.1</b> Variable importance measures</a></li>
+<li class="chapter" data-level="17.2" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#comparing-a-random-forest-to-a-regression"><i class="fa fa-check"></i><b>17.2</b> Comparing a random forest to a regression</a></li>
+<li class="chapter" data-level="17.3" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#background-3"><i class="fa fa-check"></i><b>17.3</b> Background</a></li>
+<li class="chapter" data-level="17.4" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#creating-a-network-graph"><i class="fa fa-check"></i><b>17.4</b> Creating a network graph</a></li>
+<li class="chapter" data-level="17.5" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#clustering"><i class="fa fa-check"></i><b>17.5</b> Clustering</a><ul>
+<li class="chapter" data-level="17.5.1" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#identifying-the-typical-number-of-clusters-returned-with-the-spinglass-algorithm"><i class="fa fa-check"></i><b>17.5.1</b> Identifying the “typical” number of clusters returned with the spinglass algorithm</a></li>
+<li class="chapter" data-level="17.5.2" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#test-of-statistical-significance-for-spinglass-clusters"><i class="fa fa-check"></i><b>17.5.2</b> Test of statistical significance for spinglass clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#network-visualization-with-clusters"><i class="fa fa-check"></i><b>17.6</b> Network Visualization with Clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="head.html"><a href="head.html"><i class="fa fa-check"></i><b>18</b> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</a><ul>
+<li class="chapter" data-level="18.1" data-path="head.html"><a href="head.html#selection-and-influence"><i class="fa fa-check"></i><b>18.1</b> Selection and influence</a></li>
+<li class="chapter" data-level="18.2" data-path="head.html"><a href="head.html#creating-example-data-in-the-form-of-an-edgelist"><i class="fa fa-check"></i><b>18.2</b> Creating example data in the form of an edgelist</a></li>
+<li class="chapter" data-level="18.3" data-path="head.html"><a href="head.html#an-example-of-influence"><i class="fa fa-check"></i><b>18.3</b> An example of influence</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="head.html"><a href="head.html#calculating-an-exposure-term"><i class="fa fa-check"></i><b>18.3.1</b> Calculating an exposure term</a></li>
+<li class="chapter" data-level="18.3.2" data-path="head.html"><a href="head.html#regression-linear-models"><i class="fa fa-check"></i><b>18.3.2</b> Regression (linear models)</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="head.html"><a href="head.html#selection-models"><i class="fa fa-check"></i><b>18.4</b> Selection models</a></li>
+<li class="chapter" data-level="18.5" data-path="head.html"><a href="head.html#references"><i class="fa fa-check"></i><b>18.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="background-4.html"><a href="background-4.html"><i class="fa fa-check"></i><b>19</b> Background</a></li>
+<li class="chapter" data-level="20" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>20</b> The Data</a><ul>
+<li class="chapter" data-level="20.0.1" data-path="the-data.html"><a href="the-data.html#understanding-trends"><i class="fa fa-check"></i><b>20.0.1</b> Understanding Trends</a></li>
+<li class="chapter" data-level="20.0.2" data-path="the-data.html"><a href="the-data.html#making-comparisons"><i class="fa fa-check"></i><b>20.0.2</b> Making Comparisons</a></li>
+<li class="chapter" data-level="20.0.3" data-path="the-data.html"><a href="the-data.html#finding-inequities"><i class="fa fa-check"></i><b>20.0.3</b> Finding Inequities</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="advanced-uses.html"><a href="advanced-uses.html"><i class="fa fa-check"></i><b>21</b> Advanced Uses</a><ul>
+<li class="chapter" data-level="21.1" data-path="advanced-uses.html"><a href="advanced-uses.html#multi-level-models"><i class="fa fa-check"></i><b>21.1</b> Multi-level models</a></li>
+<li class="chapter" data-level="21.2" data-path="advanced-uses.html"><a href="advanced-uses.html#text-analysis"><i class="fa fa-check"></i><b>21.2</b> Text analysis</a></li>
+<li class="chapter" data-level="21.3" data-path="advanced-uses.html"><a href="advanced-uses.html#longitudinal-analysis"><i class="fa fa-check"></i><b>21.3</b> Longitudinal analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="solutions-for-adopting-data-science-techniques-in-education.html"><a href="solutions-for-adopting-data-science-techniques-in-education.html"><i class="fa fa-check"></i><b>22</b> Solutions for Adopting Data Science Techniques in Education</a></li>
+<li class="chapter" data-level="23" data-path="students-doing-data-science.html"><a href="students-doing-data-science.html"><i class="fa fa-check"></i><b>23</b> Students doing data science</a></li>
+<li class="chapter" data-level="24" data-path="resources-used-in-the-creation-of-this-text.html"><a href="resources-used-in-the-creation-of-this-text.html"><i class="fa fa-check"></i><b>24</b> Resources used in the creation of this text</a></li>
+<li class="chapter" data-level="25" data-path="learning-more.html"><a href="learning-more.html"><i class="fa fa-check"></i><b>25</b> Learning More</a><ul>
+<li class="chapter" data-level="25.1" data-path="learning-more.html"><a href="learning-more.html#how-to-learn-more-work-in-the-open"><i class="fa fa-check"></i><b>25.1</b> How to learn more: Work in the open</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="learning-more.html"><a href="learning-more.html#welcoming-others"><i class="fa fa-check"></i><b>25.1.1</b> Welcoming others</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="learning-more.html"><a href="learning-more.html#sharing-ones-work"><i class="fa fa-check"></i><b>25.2</b> Sharing one’s work</a></li>
+<li class="chapter" data-level="25.3" data-path="learning-more.html"><a href="learning-more.html#asking-for-and-receiving-help"><i class="fa fa-check"></i><b>25.3</b> Asking for and receiving help</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="learning-more.html"><a href="learning-more.html#adopting-a-growth-mindset"><i class="fa fa-check"></i><b>25.3.1</b> Adopting a growth mindset</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="learning-more.html"><a href="learning-more.html#books-and-resources"><i class="fa fa-check"></i><b>25.4</b> Books and Resources</a></li>
+<li class="chapter" data-level="25.5" data-path="learning-more.html"><a href="learning-more.html#courses-and-communities"><i class="fa fa-check"></i><b>25.5</b> Courses and Communities</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science in Education</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="examining-predictive-accuracy-on-the-test-data-set" class="section level1">
+<h1><span class="header-section-number">Chapter 17</span> Examining predictive accuracy on the test data set</h1>
+<p>What if we use the test data set - data not used to train the model?</p>
+<p>We can compare this to the values above to see how much poorer - if at all - performance is on data not used to train the model.</p>
+<div id="variable-importance-measures" class="section level2">
+<h2><span class="header-section-number">17.1</span> Variable importance measures</h2>
+<p>We can examine two different variable importance measures using the <strong>ranger</strong> method in <strong>caret</strong>.</p>
+<p>Note that importance values are not calcultaed automatically, but that “impurity” or “permutation” can be passed to the <code>importance</code> argument in <code>train()</code>. See more <a href="https://alexisperrier.com/datascience/2015/08/27/feature-importance-random-forests-gini-accuracy.html">here</a>.</p>
+<p>We’ll re-run the model, but will add an argument to call the variable importance metric.</p>
+<pre><code>## Error: Required package is missing</code></pre>
+<pre><code>## Error in varImp(rf_fit_imp): object &#39;rf_fit_imp&#39; not found</code></pre>
+<p>We can visualize these:</p>
+<pre><code>## Error in varImp(rf_fit_imp): object &#39;rf_fit_imp&#39; not found</code></pre>
+<p>We can see whether these change with the different importance measures.</p>
+<pre><code>## Error: Required package is missing</code></pre>
+<pre><code>## Error in varImp(rf_fit_imp_permutation): object &#39;rf_fit_imp_permutation&#39; not found</code></pre>
+<p>They are similar but somewhat different. One takeaway from this analysis is that what course students are in seems to have a different effect depending on the course. Also, how much students write in their discussion posts (<code>n</code>) seems to be very important - as does the time students spend in their course. Finally, there are some subject level differences (in terms of how predictive subject is). Perhaps grades should be normalized within subject: would this still be an important predictor, then?</p>
+</div>
+<div id="comparing-a-random-forest-to-a-regression" class="section level2">
+<h2><span class="header-section-number">17.2</span> Comparing a random forest to a regression</h2>
+<p>You may be curious about comparing the predictive accuracy of the model to a linear model (a regression).</p>
+<pre><code>## Error in as.data.frame(d_train_augmented): object &#39;d_train_augmented&#39; not found</code></pre>
+<p>We can see that the random forest technique seems to perform better than regression. It may be interesting to compare the results from the random forest not to a more straightforward model, such as a regression, but to a more sophisticated model, like one for deep learning. For now, we’ll leave that to you.</p>
+
+</div>
+<div id="background-3" class="section level2">
+<h2><span class="header-section-number">17.3</span> Background</h2>
+<p>Relationships are important to us. In the case of many research techniques, relationships are—deservedly—the focus of analyses. It is not very difficult to imagine <em>qualitative</em> techniques to study relationships: one could ask other individuals about who their friends are, why they are their friends, and what they like to do when with them.</p>
+<p>Increasingly, it is also not hard to imagine <em>quantitative</em> techniques to study relationships, too. In a way, the same questions that could be used qualitatively can serve as the basis for the quantitative study of relationships. Indeed, <strong>social network analysis</strong> uses these relations in a range of visualizations as well as statistical models.</p>
+</div>
+<div id="creating-a-network-graph" class="section level2">
+<h2><span class="header-section-number">17.4</span> Creating a network graph</h2>
+<p>Now, we’ll use the <strong>igraph</strong> package to create a <em>graph</em> of our simulated data’s network. Once we have this graph, we can calculate many useful descriptive statistics associated with the network’s features:</p>
+<ul>
+<li><em>Diameter</em>: The length of the longest geodesic; that is, the max distance between two nodes in the network.<br />
+</li>
+<li><em>Density</em>: The ratio of the number of edges and the number of possible edges for a network of that size.<br />
+</li>
+<li><em>Transitivity</em>: The balance of connections. Also called the clustering coefficient. The probability that the adjacent vertices of a vertex are connected. When the clustering coefficient is large it implies that a graph is highly clustered around a few nodes; when it is low it implies that the links in the graph are relatively evenly spread among all the nodes (Hogan, 2017).<br />
+</li>
+<li><em>Reciprocity</em>: The proportion of mutual connections (in a directed network). The probability that the opposite counterpart of a directed edge is also included in the graph.<br />
+</li>
+<li><em>Degree</em>: The number of connections someone has with others nominating or being a nominee (Kadushin, 2012).</li>
+</ul>
+<p>Keep in mind that measures such as diameter and density “can be misleading when comparing graphs of substantially different sizes” (Hogan, 2017, p. 255). Therefore, these measures should only be used to compare networks of similar size, or the same network at different points in time.</p>
+<p>First, let’s create the network graph, called <code>sim_graph</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(igraph)</code></pre>
+<pre><code>## Error in library(igraph): there is no package called &#39;igraph&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">sim_graph &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(nominator, nominee) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># this creates an edgelist</span>
+<span class="st">    </span>as.matrix <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">graph_from_edgelist</span>(<span class="dt">directed=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">set_vertex_attr</span>(<span class="dt">name=</span><span class="st">&#39;degree&#39;</span>, <span class="dt">value=</span><span class="kw">degree</span>(., <span class="dt">mode=</span><span class="st">&#39;total&#39;</span>, <span class="dt">loops=</span><span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">set_vertex_attr</span>(<span class="dt">name=</span><span class="st">&#39;in_degree&#39;</span>, <span class="dt">value=</span><span class="kw">degree</span>(., <span class="dt">mode=</span><span class="st">&#39;in&#39;</span>, <span class="dt">loops=</span><span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">set_vertex_attr</span>(<span class="dt">name=</span><span class="st">&#39;out_degree&#39;</span>, <span class="dt">value=</span><span class="kw">degree</span>(., <span class="dt">mode=</span><span class="st">&#39;out&#39;</span>, <span class="dt">loops=</span><span class="ot">FALSE</span>))</code></pre>
+<pre><code>## Error in data %&gt;% select(nominator, nominee) %&gt;% as.matrix %&gt;% graph_from_edgelist(directed = TRUE) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">network_summary &lt;-<span class="st"> </span>sim_graph <span class="op">%&gt;%</span><span class="st"> </span>V <span class="op">%&gt;%</span><span class="st"> </span>length <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># number of vertices/nodes</span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span>gsize) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># number of edges</span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span>diameter) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># max distance between two vertices</span>
+<span class="st">    </span><span class="kw">rbind</span>({sim_graph <span class="op">%&gt;%</span><span class="st"> </span>edge_density <span class="op">*</span><span class="st"> </span><span class="dv">100</span>} <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st">     </span>
+<span class="st">    </span><span class="kw">rbind</span>({sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transitivity</span>(<span class="st">&quot;global&quot;</span>) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>} <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>({sim_graph <span class="op">%&gt;%</span><span class="st"> </span>reciprocity <span class="op">*</span><span class="st"> </span><span class="dv">100</span>} <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>))  <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">vertex_attr</span>(<span class="st">&#39;degree&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>mean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">vertex_attr</span>(<span class="st">&#39;degree&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>sd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">vertex_attr</span>(<span class="st">&#39;degree&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>median) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">vertex_attr</span>(<span class="st">&#39;degree&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>min) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">rbind</span>(sim_graph <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">vertex_attr</span>(<span class="st">&#39;degree&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>max)</code></pre>
+<pre><code>## Error in sim_graph %&gt;% V %&gt;% length %&gt;% rbind(sim_graph %&gt;% gsize) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(network_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<pre><code>## Error in colnames(network_summary) &lt;- c(&quot;&quot;): object &#39;network_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(network_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="st">&quot;Number of edges: &quot;</span>, <span class="st">&quot;Diameter: &quot;</span>,
+                               <span class="st">&quot;Density: &quot;</span>, <span class="st">&quot;Transitivity: &quot;</span>, <span class="st">&quot;Reciprocity: &quot;</span>,
+                               <span class="st">&quot;Mean degree: &quot;</span>, <span class="st">&quot;SD degree: &quot;</span>, <span class="st">&quot;Median degree: &quot;</span>,
+                               <span class="st">&quot;Min degree: &quot;</span>, <span class="st">&quot;Max degree: &quot;</span>)</code></pre>
+<pre><code>## Error in rownames(network_summary) &lt;- c(&quot;Number of nodes: &quot;, &quot;Number of edges: &quot;, : object &#39;network_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">network_summary</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;network_summary&#39; not found</code></pre>
+</div>
+<div id="clustering" class="section level2">
+<h2><span class="header-section-number">17.5</span> Clustering</h2>
+<p>With a graph of our simulated network, we can see if <em>clustering</em> occurs in this network and describe some characteristics of these clusters.</p>
+<p>First, a definition: a <em>cluster</em>—also called a community or group—is a set of nodes with many edges inside the community and few edges between outside it (i.e. between the community itself and the rest of the graph). There are numerous methods for determining network clusters, but here we use the <em>spinglass clustering algorithm</em>, which maps community detection onto finding the ground state of an infinite range spin glass. Csardi, Nepusz, and Airoldi (2016, pp. 132-133) explained:</p>
+<blockquote>
+<p>The clustering method of <a href="https://arxiv.org/abs/cond-mat/0603718">Reichardt and Bornholdt</a> (2006) is motivated by spin glass models from statistical physics. Such models are used to describe and explain magnetism at the microscopic scale at finite temperatures. Reichardt and Bornholdt (2006) drew an analogy between spin glass models and the problem of community detection on graphs and proposed an algorithm based on the simulated annealing of the spin glass model to obtain well-defined communities in a graph. A spin glass model consists of a set of particles called spins that are coupled by ferromagnetic or antiferromagnetic bonds. Each spin can be in one of k possible states. The well-known Potts model then defines the total energy of the spin glass with a given spin configuration… Spins and interactions in the Potts model are very similar to graphs: each spin in the model corresponds to a vertex, and each interaction corresponds to an edge… Reichardt and Bornholdt (2006) gave efficient update rules for the above energy function, making it possible to apply a simulated annealing procedure to find the ground state of the model that corresponds to a low energy configuration. Their algorithm starts from a random configuration of spins and tries to flip all the spins once in each time step. After each individual spin flip, the energy of the new configuration is evaluated.</p>
+</blockquote>
+<p>In other words, the spinglass clustering algorithm partitions nodes into communities by optimizing an energy function. The energy is optimized using the following function (Reichardt and Bornholdt, 2008):
+<span class="math display">\[H({\sigma}) = -\sum(a_{ij} \textrm{internal links}) + \sum(b_{ij}\textrm{internal non-links}) + \sum(c_{ij}\textrm{external links}) - \sum(d_{ij}\textrm{external non-links})\]</span>.</p>
+<p>This function penalizes missing edges or non-links of people/nodes in the same cluster and present links or edges between people/nodes in different clusters. It also rewards present links or edges between people/nodes in the same cluster and missing links or edges between people/nodes in different clusters. Thus, a lower score (i.e., lower energy level) is better as it means that the internal links and external non-links have more weightage in that model. In other words, in a strong model, members within clusters are strongly linked and members in separate clusters are weakly linked . Here, <span class="math inline">\(a_{ij}, b_{ij}, c_{ij}, d_{ij}\)</span> represent the individual weights of the four components.</p>
+<p>The initial R code to produce spinglass clusters is straightforward. First, we identify one “giant” cluster—basically, all nodes that have even a loose connection to each other and create a new network graph by removing any nodes that are not part of the giant cluster. Let’s call the graph of the giant cluster <code>giant_cluster</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(igraph)</code></pre>
+<pre><code>## Error in library(igraph): there is no package called &#39;igraph&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">giant_cluster &lt;-<span class="st"> </span>sim_graph <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">set_vertex_attr</span>(<span class="dt">name=</span><span class="st">&#39;membership&#39;</span>, 
+                    <span class="dt">value =</span> <span class="kw">clusters</span>(sim_graph) <span class="op">%&gt;%</span><span class="st"> </span>as.data.frame <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pull</span>(membership)
+    ) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">delete_vertices</span>({<span class="kw">vertex_attr</span>(., <span class="st">&#39;membership&#39;</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>} <span class="op">%&gt;%</span><span class="st"> </span>which)</code></pre>
+<pre><code>## Error in sim_graph %&gt;% set_vertex_attr(name = &quot;membership&quot;, value = clusters(sim_graph) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<p>Next, we separate the giant cluster into more meaningful clusters, as determined by the spinglass clustering algorithm. We store the cluster information in <code>csg0</code>:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="op">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span><span class="st"> </span>HEAD
+<span class="kw">library</span>(tidyverse)
+
+create_yvar2 =<span class="st"> </span><span class="cf">function</span>(yv1) {
+  <span class="co"># Creates yvar2 as a linear outcome of yvar1 </span>
+  <span class="co"># Args: </span>
+  <span class="co">#   yv1: yvar1</span>
+  yv1 <span class="op">*</span><span class="st"> </span><span class="fl">.25</span> <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span> <span class="dv">100</span>)
+}
+
+<span class="co">#------------------------------------------------------------------------------</span>
+
+<span class="co"># Make the dataset </span>
+high_y_values &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">yvar1 =</span> <span class="kw">sample</span>(<span class="dv">1000</span><span class="op">:</span><span class="dv">10000</span>, <span class="dv">100</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yvar2 =</span> <span class="kw">map_dbl</span>(yvar1, create_yvar2))</code></pre>
+<pre><code>## Error: &lt;text&gt;:1:1: unexpected input
+## 1: &lt;&lt;
+##     ^</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(simstudy)
+<span class="op">==</span><span class="er">=====</span>
+csg_<span class="dv">0</span> &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span>cluster_spinglass  <span class="co"># creates the clusters; &#39;csg&#39; = cluster spinglass</span>
+csg_<span class="dv">0</span><span class="op">$</span>membership <span class="op">%&gt;%</span><span class="st"> </span>unique <span class="op">%&gt;%</span><span class="st"> </span>length  <span class="co"># number of clusters/communities/groups</span></code></pre>
+<pre><code>## Error: &lt;text&gt;:2:1: unexpected &#39;==&#39;
+## 1: library(simstudy)
+## 2: ==
+##    ^</code></pre>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>58d1f3d32df76c709efd19069c532b125f465a3d</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>One of the important outcomes of this method is the <em>modularity</em> value <span class="math inline">\(M\)</span>. Modularity measures how good the division is, or how separated are the different vertex types from each other. The spinglass algorithm looks for the modularity of the optimal partition. For a given network, the partition with maximum modularity corresponds to the optimal community structure (i.e., a higher <span class="math inline">\(M\)</span> is better).</p>
+<p>The maximum modularity score is +1 and according to Hogan (2017), networks with a modularity above 0.3 as “very modular,” meanig that most edges are within communities. Note also that if <span class="math inline">\(M\)</span> = 0, all nodes belong to one group.</p>
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+data1 &lt;- genData(500, def)
+data1
+=======</p>
+<pre class="sourceCode r"><code class="sourceCode r">csg_<span class="dv">0</span><span class="op">$</span>modularity
+<span class="op">&gt;</span><span class="er">&gt;&gt;&gt;&gt;&gt;&gt;</span><span class="st"> </span>58d1f3d32df76c709efd19069c532b125f465a3d</code></pre>
+<pre><code>## Error: &lt;text&gt;:2:1: unexpected &#39;&gt;&#39;
+## 1: csg_0$modularity
+## 2: &gt;
+##    ^</code></pre>
+<div id="identifying-the-typical-number-of-clusters-returned-with-the-spinglass-algorithm" class="section level3">
+<h3><span class="header-section-number">17.5.1</span> Identifying the “typical” number of clusters returned with the spinglass algorithm</h3>
+<p>It is important to note that a different result is returned each time the spinglass clustering algorithm is run. For this reason, we needed to run a number of simulations to see what the “typical” number of clusters are. We ran the algorithm 100 times and looked at the mean and median number of clusters obtained. We made a note of a <em>seed</em> that produced the median number of clusters, confirmed that this was reproducible, and then set this seed so that all future work will be run with this same clustering configuration.</p>
+<pre class="sourceCode r"><code class="sourceCode r">csg_matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow=</span><span class="dv">1</span>, <span class="dt">ncol=</span><span class="dv">100</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) {
+    <span class="kw">print</span>(i)
+    <span class="kw">set.seed</span>(i)
+    csg =<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span>cluster_spinglass
+    csg_matrix[<span class="dv">1</span>,i] &lt;-<span class="st"> </span><span class="kw">max</span>(csg<span class="op">$</span>membership)
+}</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% cluster_spinglass: could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">csg_matrix_summary &lt;-<span class="st"> </span>csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>length <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">rbind</span>(csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>mean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>sd <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>median) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>min) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">rbind</span>(csg_matrix <span class="op">%&gt;%</span><span class="st"> </span>max)</code></pre>
+<pre><code>## Error in csg_matrix %&gt;% length %&gt;% rbind(csg_matrix %&gt;% mean %&gt;% round(2)) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(csg_matrix_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<pre><code>## Error in colnames(csg_matrix_summary) &lt;- c(&quot;&quot;): object &#39;csg_matrix_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(csg_matrix_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;number of tests: &quot;</span>, <span class="st">&quot;mean: &quot;</span>, <span class="st">&quot;sd: &quot;</span>,  <span class="st">&quot;median: &quot;</span>, <span class="st">&quot;min: &quot;</span>, <span class="st">&quot;max: &quot;</span>)</code></pre>
+<pre><code>## Error in rownames(csg_matrix_summary) &lt;- c(&quot;number of tests: &quot;, &quot;mean: &quot;, : object &#39;csg_matrix_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">csg_matrix_summary</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;csg_matrix_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## select a seed from this list which reproduces the median number of clusters</span>
+seeds &lt;-{<span class="kw">as.vector</span>(csg_matrix) <span class="op">==</span><span class="st"> </span><span class="kw">median</span>(csg_matrix)} <span class="op">%&gt;%</span><span class="st"> </span>which</code></pre>
+<pre><code>## Error in {: could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">our_seed &lt;-<span class="st"> </span>seeds[<span class="dv">1</span>]</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;seeds&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(our_seed)  <span class="co"># set the seed</span></code></pre>
+<pre><code>## Error in set.seed(our_seed): object &#39;our_seed&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">csg &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span>cluster_spinglass</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% cluster_spinglass: could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">csg_summary &lt;-<span class="st"> </span>csg<span class="op">$</span>vcount <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(giant_cluster <span class="op">%&gt;%</span><span class="st"> </span>gsize) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(csg<span class="op">$</span>csize <span class="op">%&gt;%</span><span class="st"> </span>length) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rbind</span>(csg<span class="op">$</span>modularity <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">4</span>))</code></pre>
+<pre><code>## Error in csg$vcount %&gt;% rbind(giant_cluster %&gt;% gsize) %&gt;% rbind(csg$csize %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(csg_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;&quot;</span>)</code></pre>
+<pre><code>## Error in colnames(csg_summary) &lt;- c(&quot;&quot;): object &#39;csg_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rownames</span>(csg_summary) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Number of nodes: &quot;</span>, <span class="st">&quot;Number of edges: &quot;</span>, <span class="st">&quot;Number of clusters: &quot;</span>, <span class="st">&quot;Modularity: &quot;</span>)</code></pre>
+<pre><code>## Error in rownames(csg_summary) &lt;- c(&quot;Number of nodes: &quot;, &quot;Number of edges: &quot;, : object &#39;csg_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">csg_summary</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;csg_summary&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Size of each cluster: &quot;</span>, <span class="dt">quote=</span><span class="ot">FALSE</span>); <span class="kw">print</span>(csg<span class="op">$</span>csize)</code></pre>
+<pre><code>## [1] Size of each cluster:</code></pre>
+<pre><code>## Error in print(csg$csize): object &#39;csg&#39; not found</code></pre>
+</div>
+<div id="test-of-statistical-significance-for-spinglass-clusters" class="section level3">
+<h3><span class="header-section-number">17.5.2</span> Test of statistical significance for spinglass clusters</h3>
+<p>The test for statistical significance for spinglass clustering is a bit different than the familiar tests that return <span class="math inline">\(p\)</span>-values (Csardi, Nepusz, &amp; Airoldi (2016, pp. 132-138).</p>
+<p>The idea behind this test of significance is that a random network of equal size and degree distribution as our observed network should have a lower modularity score–that is, if the observed network does in fact have statistically significant clustering.</p>
+<p>The following R procedure generates 100 randomized instances of our network (with the same size and degree distribution) using the <code>sample_ degseq()</code> function. The <code>method = 'vl'</code> ensures that there are no loop edges in the randomly generated networks. We then applied the spinglass clustering algorithm to each of the 100 randomized instances of the network.</p>
+<p>A ‘0’ result from this procudure indicates that no randomized networks have community structure with a modularity score that is higher than the one obtained from the original, observed network. Hence a ‘0’ result means that our network has significant community structure; any non-zero results means that the detected spinglass clusters are not statistically significant.</p>
+<pre class="sourceCode r"><code class="sourceCode r">degrees &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span>as.undirected <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">degree</span>(<span class="dt">mode=</span><span class="st">&#39;all&#39;</span>, <span class="dt">loops=</span><span class="ot">FALSE</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% as.undirected %&gt;% degree(mode = &quot;all&quot;, loops = FALSE): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">qr_vl &lt;-<span class="st"> </span><span class="kw">replicate</span>(<span class="dv">100</span>, <span class="kw">sample_degseq</span>(degrees, <span class="dt">method=</span><span class="st">&quot;vl&quot;</span>), 
+                   <span class="dt">simplify=</span><span class="ot">FALSE</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">lapply</span>(cluster_spinglass) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">sapply</span>(modularity) </code></pre>
+<pre><code>## Error in replicate(100, sample_degseq(degrees, method = &quot;vl&quot;), simplify = FALSE) %&gt;% : could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(qr_vl <span class="op">&gt;</span><span class="st"> </span>csg<span class="op">$</span>modularity) <span class="op">/</span><span class="st"> </span><span class="dv">100</span></code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;qr_vl&#39; not found</code></pre>
+</div>
+</div>
+<div id="network-visualization-with-clusters" class="section level2">
+<h2><span class="header-section-number">17.6</span> Network Visualization with Clusters</h2>
+<p>Visualizations of social networks are interesting and powerful–and increasingly common.</p>
+<p>Here, we create a visualization of our network structure, using the color palette generated by our spinglass clustering.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## color-blind palette</span>
+<span class="co">## source: https://jacksonlab.agronomy.wisc.edu/2016/05/23/15-level-colorblind-friendly-palette/</span>
+palette &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;#000000&quot;</span>,<span class="st">&quot;#004949&quot;</span>,<span class="st">&quot;#009292&quot;</span>,<span class="st">&quot;#ff6db6&quot;</span>,<span class="st">&quot;#ffb6db&quot;</span>,
+             <span class="st">&quot;#490092&quot;</span>,<span class="st">&quot;#006ddb&quot;</span>,<span class="st">&quot;#b66dff&quot;</span>,<span class="st">&quot;#6db6ff&quot;</span>,<span class="st">&quot;#b6dbff&quot;</span>,
+             <span class="st">&quot;#920000&quot;</span>,<span class="st">&quot;#924900&quot;</span>,<span class="st">&quot;#db6d00&quot;</span>,<span class="st">&quot;#24ff24&quot;</span>,<span class="st">&quot;#ffff6d&quot;</span>)
+csg_palette &lt;-<span class="st"> </span>palette[csg<span class="op">$</span>membership]</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;csg&#39; not found</code></pre>
+<p>Here, we used the <em>Fruchterman-Reingold layout algorithm</em> (<code>layout = 'fr'</code>), which is appropriate for large (but still with less than 1,000 nodes), potentially disconnected networks.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggraph)</code></pre>
+<pre><code>## Error in library(ggraph): there is no package called &#39;ggraph&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gridExtra)</code></pre>
+<pre><code>## Error in library(gridExtra): there is no package called &#39;gridExtra&#39;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_randomly &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;randomly&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;randomly&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_mds &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;mds&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;mds&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_fr &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;fr&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;fr&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_drl &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;drl&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;drl&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_kk &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;kk&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;kk&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">layout_sugiyama &lt;-<span class="st"> </span>giant_cluster <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">create_layout</span>(<span class="dt">layout=</span><span class="st">&#39;sugiyama&#39;</span>)</code></pre>
+<pre><code>## Error in giant_cluster %&gt;% create_layout(layout = &quot;sugiyama&quot;): could not find function &quot;%&gt;%&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## Additional layout algorithms to try:</span>
+<span class="co">#layout_auto &lt;- giant_cluster %&gt;% create_layout(layout=&#39;nicely&#39;)</span>
+<span class="co">#layout_lgl &lt;- giant_cluster %&gt;% create_layout(layout=&#39;lgl&#39;)</span>
+<span class="co">#layout_dh &lt;- giant_cluster %&gt;% create_layout(layout=&#39;dh&#39;)</span>
+<span class="co">#layout_graphopt &lt;- giant_cluster %&gt;% create_layout(layout=&#39;graphopt&#39;)</span>
+
+viz_random &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_randomly) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_randomly): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">viz_mds &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_mds) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_mds): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">viz_fr &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_fr) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_fr): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">viz_drl &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_drl) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_drl): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">viz_kk &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_kk) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_kk): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">viz_sugiyama &lt;-<span class="st"> </span><span class="kw">ggraph</span>(layout_sugiyama) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_edge_link</span>(<span class="dt">width=</span>.<span class="dv">1</span>, <span class="dt">arrow =</span> <span class="kw">arrow</span>(<span class="dt">length=</span><span class="kw">unit</span>(<span class="dv">1</span>, <span class="st">&#39;mm&#39;</span>))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_node_point</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>, <span class="dt">size=</span><span class="dv">4</span>, <span class="dt">color=</span>csg_palette) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_bw</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.background =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.border =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_blank</span>(), <span class="dt">panel.grid.minor =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.title =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(), <span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>
+    )</code></pre>
+<pre><code>## Error in ggraph(layout_sugiyama): could not find function &quot;ggraph&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">grid.arrange</span>(viz_random, viz_mds, viz_fr,
+             viz_drl, viz_kk, viz_sugiyama, 
+             <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre>
+<pre><code>## Error in grid.arrange(viz_random, viz_mds, viz_fr, viz_drl, viz_kk, viz_sugiyama, : could not find function &quot;grid.arrange&quot;</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="head.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

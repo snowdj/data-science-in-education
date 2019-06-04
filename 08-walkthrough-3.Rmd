@@ -198,7 +198,7 @@ The same tuning parameter values seem to be found with this method. Let's check 
 
 Let's create our own grid of values to test. We'll stick with the default bootstrap resampling method to choose the best model.
 
-```{r}
+```{r error = TRUE}
 tune_grid <- expand.grid(mtry = c(2, 22, 42),
                          splitrule = c("variance", "extratrees"),
                          min.node.size = c(1, 5, 10, 15, 20))
@@ -215,7 +215,7 @@ The model with the same values as identified before but with **min.node.size** e
 
 Let's take a look at this model. We will first note the large number of independent variables: this is due to the factors being treated as dummy codes. We can also note the *OOB prediction error (MSE)`, of 0.351, and the proportion of the variance explained, or R squared, of 0.658.
 
-```{r}
+```{r error = TRUE}
 rf_fit2$finalModel
 ```
 
@@ -227,7 +227,7 @@ In particular, let's explore predicted values. In particular, we can see how pre
 
 First, let's calculte the Root Mean Square Error (RMSE), just to gain practice working with the model output.
 
-```{r}
+```{r error = TRUE}
 d_train_augmented <- mutate(d_train, 
                   pred = predict(rf_fit, d_train),
                   obs = final_grade, # this is to calculate summmary statistics using caret
@@ -241,7 +241,7 @@ d_train_augmented %>%
 
 We can calculate these automatically using the **caret** `defaultSummary()` function (which just requires columns with `obs` and `pred` in it in a data frame):
 
-```{r}
+```{r error = TRUE}
 # install.packages("MLmetrics")
 defaultSummary(as.data.frame(d_train))
 ```
@@ -256,7 +256,7 @@ Why use RMSE, though, over MAE? [Note: don't kow why].
 
 What if we use the test data set - data not used to train the model?
 
-```{r, eval = FALSE}
+```{r, eval = FALSE, error = TRUE}
 # NOT RUN AS I WAS HAVING TROUBLE GETTING THIS TO WORK BEACUSE OF A FACTOR LEVEL NOT IN D_TEST - we've had this issue before and there are workarounds
 d_test_augmented <- mutate(d_test,
                            pred = predict(rf_fit, d_test),
@@ -275,7 +275,7 @@ Note that importance values are not calcultaed automatically, but that "impurity
 
 We'll re-run the model, but will add an argument to call the variable importance metric.
 
-```{r}
+```{r error = TRUE}
 rf_fit_imp <- train(final_grade ~ .,
                 data = d_train,
                 method = "ranger",
@@ -286,7 +286,7 @@ varImp(rf_fit_imp)
 
 We can visualize these:
 
-```{r}
+```{r error = TRUE}
 varImp(rf_fit_imp) %>%
     pluck(1) %>%
     rownames_to_column("var") %>%
@@ -297,7 +297,7 @@ varImp(rf_fit_imp) %>%
 
 We can see whether these change with the different importance measures.
 
-```{r}
+```{r error = TRUE}
 rf_fit_imp_permutation <- train(final_grade ~ .,
                 data = d_train,
                 method = "ranger",
@@ -317,7 +317,7 @@ They are similar but somewhat different. One takeaway from this analysis is that
 
 You may be curious about comparing the predictive accuracy of the model to a linear model (a regression).
 
-```{r, warning = FALSE}
+```{r, warning = FALSE, error = TRUE}
 d_train_lm <- mutate_if(d_train, is.character, as.factor) # may want to move this earlier; it seems important for method = lm but not ranger, for some reason
 
 lm_fit <- train(final_grade ~ .,

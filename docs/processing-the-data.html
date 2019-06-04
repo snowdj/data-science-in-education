@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Processing the data | Data Science in Education</title>
+  <meta name="description" content="proof of concept" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Processing the data | Data Science in Education" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="proof of concept" />
+  <meta name="github-repo" content="data-edu/data-science-in-education" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Processing the data | Data Science in Education" />
+  
+  <meta name="twitter:description" content="proof of concept" />
+  
+
+<meta name="author" content="multiple" />
+
+
+<meta name="date" content="2019-06-04" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="background.html">
+<link rel="next" href="visualizations-and-models.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Data Science in Education</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.0.1" data-path="introduction.html"><a href="introduction.html#the-challenge-of-data-science-in-education"><i class="fa fa-check"></i><b>1.0.1</b> The Challenge of Data Science in Education</a></li>
+<li class="chapter" data-level="1.0.2" data-path="introduction.html"><a href="introduction.html#meeting-the-challenge"><i class="fa fa-check"></i><b>1.0.2</b> Meeting the Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="how-to-use-this-book.html"><a href="how-to-use-this-book.html"><i class="fa fa-check"></i><b>2</b> How to Use This Book</a></li>
+<li class="chapter" data-level="3" data-path="a-reproducible-approach.html"><a href="a-reproducible-approach.html"><i class="fa fa-check"></i><b>3</b> A Reproducible Approach</a></li>
+<li class="chapter" data-level="4" data-path="a-self-driven-analytic-approach.html"><a href="a-self-driven-analytic-approach.html"><i class="fa fa-check"></i><b>4</b> A Self-Driven Analytic Approach</a></li>
+<li class="chapter" data-level="5" data-path="unique-challenges.html"><a href="unique-challenges.html"><i class="fa fa-check"></i><b>5</b> Unique challenges</a><ul>
+<li class="chapter" data-level="5.1" data-path="unique-challenges.html"><a href="unique-challenges.html#challenges-common-to-doing-data-science-in-any-domain"><i class="fa fa-check"></i><b>5.1</b> Challenges common to doing data science in any domain</a></li>
+<li class="chapter" data-level="5.2" data-path="unique-challenges.html"><a href="unique-challenges.html#lack-of-processes-and-procedures"><i class="fa fa-check"></i><b>5.2</b> Lack of processes and procedures</a></li>
+<li class="chapter" data-level="5.3" data-path="unique-challenges.html"><a href="unique-challenges.html#few-guidelines-from-research-and-evaluation"><i class="fa fa-check"></i><b>5.3</b> Few guidelines from research and evaluation</a></li>
+<li class="chapter" data-level="5.4" data-path="unique-challenges.html"><a href="unique-challenges.html#limited-training-and-educational-opportunities-for-educational-data-science"><i class="fa fa-check"></i><b>5.4</b> Limited training and educational opportunities for educational data science</a></li>
+<li class="chapter" data-level="5.5" data-path="unique-challenges.html"><a href="unique-challenges.html#the-complex-and-messy-nature-of-educational-data"><i class="fa fa-check"></i><b>5.5</b> The complex and messy nature of educational data</a></li>
+<li class="chapter" data-level="5.6" data-path="unique-challenges.html"><a href="unique-challenges.html#ethical-and-legal-concerns"><i class="fa fa-check"></i><b>5.6</b> Ethical and legal concerns</a></li>
+<li class="chapter" data-level="5.7" data-path="unique-challenges.html"><a href="unique-challenges.html#analytic-challenges"><i class="fa fa-check"></i><b>5.7</b> Analytic challenges</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="foundational-skills.html"><a href="foundational-skills.html"><i class="fa fa-check"></i><b>6</b> Foundational Skills</a><ul>
+<li class="chapter" data-level="6.1" data-path="foundational-skills.html"><a href="foundational-skills.html#track-one-getting-started"><i class="fa fa-check"></i><b>6.1</b> Track One: Getting Started</a></li>
+<li class="chapter" data-level="6.2" data-path="foundational-skills.html"><a href="foundational-skills.html#downloading-r-and-r-studio"><i class="fa fa-check"></i><b>6.2</b> Downloading R and R Studio</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="foundational-skills.html"><a href="foundational-skills.html#to-download-r"><i class="fa fa-check"></i><b>6.2.1</b> To download R:</a></li>
+<li class="chapter" data-level="6.2.2" data-path="foundational-skills.html"><a href="foundational-skills.html#to-download-r-studio"><i class="fa fa-check"></i><b>6.2.2</b> To download R Studio:</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="foundational-skills.html"><a href="foundational-skills.html#check-that-it-worked"><i class="fa fa-check"></i><b>6.3</b> Check that it worked</a></li>
+<li class="chapter" data-level="6.4" data-path="foundational-skills.html"><a href="foundational-skills.html#help-im-completely-new-to-using-r-r-studio"><i class="fa fa-check"></i><b>6.4</b> Help, I’m completely new to using R / R Studio!</a></li>
+<li class="chapter" data-level="6.5" data-path="foundational-skills.html"><a href="foundational-skills.html#creating-projects"><i class="fa fa-check"></i><b>6.5</b> Creating Projects</a></li>
+<li class="chapter" data-level="6.6" data-path="foundational-skills.html"><a href="foundational-skills.html#packages"><i class="fa fa-check"></i><b>6.6</b> Packages</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="foundational-skills.html"><a href="foundational-skills.html#installing-and-loading-packages"><i class="fa fa-check"></i><b>6.6.1</b> Installing and Loading Packages</a></li>
+<li class="chapter" data-level="6.6.2" data-path="foundational-skills.html"><a href="foundational-skills.html#running-functions-from-packages"><i class="fa fa-check"></i><b>6.6.2</b> Running Functions from Packages</a></li>
+<li class="chapter" data-level="6.6.3" data-path="foundational-skills.html"><a href="foundational-skills.html#track-two-welcome-to-the-tidyverse"><i class="fa fa-check"></i><b>6.6.3</b> Track Two: Welcome to the Tidyverse</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-data-from-various-sources"><i class="fa fa-check"></i><b>6.7</b> Loading Data from Various Sources</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="foundational-skills.html"><a href="foundational-skills.html#saving-a-file-from-the-web"><i class="fa fa-check"></i><b>6.7.1</b> Saving a File from the Web</a></li>
+<li class="chapter" data-level="6.7.2" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-a-csv-file"><i class="fa fa-check"></i><b>6.7.2</b> Loading a CSV File</a></li>
+<li class="chapter" data-level="6.7.3" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-excel-files"><i class="fa fa-check"></i><b>6.7.3</b> Loading Excel files</a></li>
+<li class="chapter" data-level="6.7.4" data-path="foundational-skills.html"><a href="foundational-skills.html#loading-sav-files"><i class="fa fa-check"></i><b>6.7.4</b> Loading SAV files</a></li>
+<li class="chapter" data-level="6.7.5" data-path="foundational-skills.html"><a href="foundational-skills.html#google-sheets"><i class="fa fa-check"></i><b>6.7.5</b> Google Sheets</a></li>
+<li class="chapter" data-level="6.7.6" data-path="foundational-skills.html"><a href="foundational-skills.html#saving-files"><i class="fa fa-check"></i><b>6.7.6</b> Saving Files</a></li>
+<li class="chapter" data-level="6.7.7" data-path="foundational-skills.html"><a href="foundational-skills.html#conclusion"><i class="fa fa-check"></i><b>6.7.7</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="foundational-skills.html"><a href="foundational-skills.html#processing-data"><i class="fa fa-check"></i><b>6.8</b> Processing Data</a></li>
+<li class="chapter" data-level="6.9" data-path="foundational-skills.html"><a href="foundational-skills.html#communicating-sharing-results"><i class="fa fa-check"></i><b>6.9</b> Communicating / sharing results</a></li>
+<li class="chapter" data-level="6.10" data-path="foundational-skills.html"><a href="foundational-skills.html#other-foundational-notes"><i class="fa fa-check"></i><b>6.10</b> Other foundational notes</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="foundational-skills.html"><a href="foundational-skills.html#configuring-r-studio"><i class="fa fa-check"></i><b>6.10.1</b> Configuring R Studio</a></li>
+<li class="chapter" data-level="6.10.2" data-path="foundational-skills.html"><a href="foundational-skills.html#getting-data-in-and-out"><i class="fa fa-check"></i><b>6.10.2</b> Getting data in and out</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="background.html"><a href="background.html"><i class="fa fa-check"></i><b>7</b> Background</a><ul>
+<li class="chapter" data-level="7.1" data-path="background.html"><a href="background.html#self-report-survey"><i class="fa fa-check"></i><b>7.1</b> 1. Self-report survey</a></li>
+<li class="chapter" data-level="7.2" data-path="background.html"><a href="background.html#log-trace-data"><i class="fa fa-check"></i><b>7.2</b> 2. Log-trace data</a></li>
+<li class="chapter" data-level="7.3" data-path="background.html"><a href="background.html#achievement-related-and-gradebook-data"><i class="fa fa-check"></i><b>7.3</b> 3. Achievement-related and gradebook data</a></li>
+<li class="chapter" data-level="7.4" data-path="background.html"><a href="background.html#discussion-board-data"><i class="fa fa-check"></i><b>7.4</b> 4. Discussion board data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="processing-the-data.html"><a href="processing-the-data.html"><i class="fa fa-check"></i><b>8</b> Processing the data</a><ul>
+<li class="chapter" data-level="8.1" data-path="processing-the-data.html"><a href="processing-the-data.html#viewing-the-data"><i class="fa fa-check"></i><b>8.1</b> Viewing the data</a></li>
+<li class="chapter" data-level="8.2" data-path="processing-the-data.html"><a href="processing-the-data.html#processing-the-pre-survey-data"><i class="fa fa-check"></i><b>8.2</b> Processing the pre-survey data</a></li>
+<li class="chapter" data-level="8.3" data-path="processing-the-data.html"><a href="processing-the-data.html#processing-the-course-data"><i class="fa fa-check"></i><b>8.3</b> Processing the course data</a></li>
+<li class="chapter" data-level="8.4" data-path="processing-the-data.html"><a href="processing-the-data.html#joining-the-data"><i class="fa fa-check"></i><b>8.4</b> Joining the data</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="visualizations-and-models.html"><a href="visualizations-and-models.html"><i class="fa fa-check"></i><b>9</b> Visualizations and Models</a><ul>
+<li class="chapter" data-level="9.1" data-path="visualizations-and-models.html"><a href="visualizations-and-models.html#visualization-of-the-relationship-between-time-spent-on-course-and-percentage-of-points-earned"><i class="fa fa-check"></i><b>9.1</b> Visualization of the relationship between time spent on course and percentage of points earned</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="linear-model-regression.html"><a href="linear-model-regression.html"><i class="fa fa-check"></i><b>10</b> Linear model (regression)</a><ul>
+<li class="chapter" data-level="10.1" data-path="linear-model-regression.html"><a href="linear-model-regression.html#but-what-about-different-courses"><i class="fa fa-check"></i><b>10.1</b> But what about different courses?</a></li>
+<li class="chapter" data-level="10.2" data-path="linear-model-regression.html"><a href="linear-model-regression.html#introduction-1"><i class="fa fa-check"></i><b>10.2</b> Introduction</a></li>
+<li class="chapter" data-level="10.3" data-path="linear-model-regression.html"><a href="linear-model-regression.html#driving-question-and-objectives"><i class="fa fa-check"></i><b>10.3</b> Driving Question and Objectives</a></li>
+<li class="chapter" data-level="10.4" data-path="linear-model-regression.html"><a href="linear-model-regression.html#data-import"><i class="fa fa-check"></i><b>10.4</b> Data Import</a></li>
+<li class="chapter" data-level="10.5" data-path="linear-model-regression.html"><a href="linear-model-regression.html#r-markdown"><i class="fa fa-check"></i><b>10.5</b> R Markdown</a></li>
+<li class="chapter" data-level="10.6" data-path="linear-model-regression.html"><a href="linear-model-regression.html#including-plots"><i class="fa fa-check"></i><b>10.6</b> Including Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="background-1.html"><a href="background-1.html"><i class="fa fa-check"></i><b>11</b> Background</a></li>
+<li class="chapter" data-level="12" data-path="information-about-the-dataset.html"><a href="information-about-the-dataset.html"><i class="fa fa-check"></i><b>12</b> Information about the dataset</a></li>
+<li class="chapter" data-level="13" data-path="background-2.html"><a href="background-2.html"><i class="fa fa-check"></i><b>13</b> Background</a></li>
+<li class="chapter" data-level="14" data-path="information-about-the-dataset-1.html"><a href="information-about-the-dataset-1.html"><i class="fa fa-check"></i><b>14</b> Information about the dataset</a></li>
+<li class="chapter" data-level="15" data-path="information-on-random-forests.html"><a href="information-on-random-forests.html"><i class="fa fa-check"></i><b>15</b> Information on random forests</a></li>
+<li class="chapter" data-level="16" data-path="analysis.html"><a href="analysis.html"><i class="fa fa-check"></i><b>16</b> Analysis</a><ul>
+<li class="chapter" data-level="16.1" data-path="analysis.html"><a href="analysis.html#use-of-caret"><i class="fa fa-check"></i><b>16.1</b> Use of caret</a></li>
+<li class="chapter" data-level="16.2" data-path="analysis.html"><a href="analysis.html#predicted-values"><i class="fa fa-check"></i><b>16.2</b> Predicted values</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html"><i class="fa fa-check"></i><b>17</b> Examining predictive accuracy on the test data set</a><ul>
+<li class="chapter" data-level="17.1" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#variable-importance-measures"><i class="fa fa-check"></i><b>17.1</b> Variable importance measures</a></li>
+<li class="chapter" data-level="17.2" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#comparing-a-random-forest-to-a-regression"><i class="fa fa-check"></i><b>17.2</b> Comparing a random forest to a regression</a></li>
+<li class="chapter" data-level="17.3" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#background-3"><i class="fa fa-check"></i><b>17.3</b> Background</a></li>
+<li class="chapter" data-level="17.4" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#creating-a-network-graph"><i class="fa fa-check"></i><b>17.4</b> Creating a network graph</a></li>
+<li class="chapter" data-level="17.5" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#clustering"><i class="fa fa-check"></i><b>17.5</b> Clustering</a><ul>
+<li class="chapter" data-level="17.5.1" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#identifying-the-typical-number-of-clusters-returned-with-the-spinglass-algorithm"><i class="fa fa-check"></i><b>17.5.1</b> Identifying the “typical” number of clusters returned with the spinglass algorithm</a></li>
+<li class="chapter" data-level="17.5.2" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#test-of-statistical-significance-for-spinglass-clusters"><i class="fa fa-check"></i><b>17.5.2</b> Test of statistical significance for spinglass clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="examining-predictive-accuracy-on-the-test-data-set.html"><a href="examining-predictive-accuracy-on-the-test-data-set.html#network-visualization-with-clusters"><i class="fa fa-check"></i><b>17.6</b> Network Visualization with Clusters</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="head.html"><a href="head.html"><i class="fa fa-check"></i><b>18</b> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</a><ul>
+<li class="chapter" data-level="18.1" data-path="head.html"><a href="head.html#selection-and-influence"><i class="fa fa-check"></i><b>18.1</b> Selection and influence</a></li>
+<li class="chapter" data-level="18.2" data-path="head.html"><a href="head.html#creating-example-data-in-the-form-of-an-edgelist"><i class="fa fa-check"></i><b>18.2</b> Creating example data in the form of an edgelist</a></li>
+<li class="chapter" data-level="18.3" data-path="head.html"><a href="head.html#an-example-of-influence"><i class="fa fa-check"></i><b>18.3</b> An example of influence</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="head.html"><a href="head.html#calculating-an-exposure-term"><i class="fa fa-check"></i><b>18.3.1</b> Calculating an exposure term</a></li>
+<li class="chapter" data-level="18.3.2" data-path="head.html"><a href="head.html#regression-linear-models"><i class="fa fa-check"></i><b>18.3.2</b> Regression (linear models)</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="head.html"><a href="head.html#selection-models"><i class="fa fa-check"></i><b>18.4</b> Selection models</a></li>
+<li class="chapter" data-level="18.5" data-path="head.html"><a href="head.html#references"><i class="fa fa-check"></i><b>18.5</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="background-4.html"><a href="background-4.html"><i class="fa fa-check"></i><b>19</b> Background</a></li>
+<li class="chapter" data-level="20" data-path="the-data.html"><a href="the-data.html"><i class="fa fa-check"></i><b>20</b> The Data</a><ul>
+<li class="chapter" data-level="20.0.1" data-path="the-data.html"><a href="the-data.html#understanding-trends"><i class="fa fa-check"></i><b>20.0.1</b> Understanding Trends</a></li>
+<li class="chapter" data-level="20.0.2" data-path="the-data.html"><a href="the-data.html#making-comparisons"><i class="fa fa-check"></i><b>20.0.2</b> Making Comparisons</a></li>
+<li class="chapter" data-level="20.0.3" data-path="the-data.html"><a href="the-data.html#finding-inequities"><i class="fa fa-check"></i><b>20.0.3</b> Finding Inequities</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="advanced-uses.html"><a href="advanced-uses.html"><i class="fa fa-check"></i><b>21</b> Advanced Uses</a><ul>
+<li class="chapter" data-level="21.1" data-path="advanced-uses.html"><a href="advanced-uses.html#multi-level-models"><i class="fa fa-check"></i><b>21.1</b> Multi-level models</a></li>
+<li class="chapter" data-level="21.2" data-path="advanced-uses.html"><a href="advanced-uses.html#text-analysis"><i class="fa fa-check"></i><b>21.2</b> Text analysis</a></li>
+<li class="chapter" data-level="21.3" data-path="advanced-uses.html"><a href="advanced-uses.html#longitudinal-analysis"><i class="fa fa-check"></i><b>21.3</b> Longitudinal analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="solutions-for-adopting-data-science-techniques-in-education.html"><a href="solutions-for-adopting-data-science-techniques-in-education.html"><i class="fa fa-check"></i><b>22</b> Solutions for Adopting Data Science Techniques in Education</a></li>
+<li class="chapter" data-level="23" data-path="students-doing-data-science.html"><a href="students-doing-data-science.html"><i class="fa fa-check"></i><b>23</b> Students doing data science</a></li>
+<li class="chapter" data-level="24" data-path="resources-used-in-the-creation-of-this-text.html"><a href="resources-used-in-the-creation-of-this-text.html"><i class="fa fa-check"></i><b>24</b> Resources used in the creation of this text</a></li>
+<li class="chapter" data-level="25" data-path="learning-more.html"><a href="learning-more.html"><i class="fa fa-check"></i><b>25</b> Learning More</a><ul>
+<li class="chapter" data-level="25.1" data-path="learning-more.html"><a href="learning-more.html#how-to-learn-more-work-in-the-open"><i class="fa fa-check"></i><b>25.1</b> How to learn more: Work in the open</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="learning-more.html"><a href="learning-more.html#welcoming-others"><i class="fa fa-check"></i><b>25.1.1</b> Welcoming others</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="learning-more.html"><a href="learning-more.html#sharing-ones-work"><i class="fa fa-check"></i><b>25.2</b> Sharing one’s work</a></li>
+<li class="chapter" data-level="25.3" data-path="learning-more.html"><a href="learning-more.html#asking-for-and-receiving-help"><i class="fa fa-check"></i><b>25.3</b> Asking for and receiving help</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="learning-more.html"><a href="learning-more.html#adopting-a-growth-mindset"><i class="fa fa-check"></i><b>25.3.1</b> Adopting a growth mindset</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="learning-more.html"><a href="learning-more.html#books-and-resources"><i class="fa fa-check"></i><b>25.4</b> Books and Resources</a></li>
+<li class="chapter" data-level="25.5" data-path="learning-more.html"><a href="learning-more.html#courses-and-communities"><i class="fa fa-check"></i><b>25.5</b> Courses and Communities</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Data Science in Education</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="processing-the-data" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Processing the data</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(here)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gradebook and log-trace data for F15 and S16 semesters</span>
+s12_course_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-course-data.csv&quot;</span>
+  )
+)
+
+<span class="co"># Pre-survey for the F15 and S16 semesters</span>
+s12_pre_survey  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-pre-survey.csv&quot;</span>
+  )
+) 
+
+<span class="co"># Log-trace data for F15 and S16 semesters - ts is for time spent</span>
+s12_time_spent &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-course-minutes.csv&quot;</span>
+  )
+)</code></pre>
+<div id="viewing-the-data" class="section level2">
+<h2><span class="header-section-number">8.1</span> Viewing the data</h2>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey </code></pre>
+<pre><code>## # A tibble: 1,102 x 16
+##    RespondentId StartDate CompletedDate LanguageCode opdata_CourseID
+##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;          
+##  1       426746 2015.08.… &lt;NA&gt;          en           FrScA-S116-01  
+##  2       426775 2015.08.… 2015.08.24 1… en           BioA-S116-01   
+##  3       427483 2015.08.… &lt;NA&gt;          en           OcnA-S116-03   
+##  4       429883 2015.09.… 2015.09.02 1… en           AnPhA-S116-01  
+##  5       430158 2015.09.… 2015.09.03 9… en           AnPhA-S116-01  
+##  6       430161 2015.09.… 2015.09.03 9… en           AnPhA-S116-02  
+##  7       430162 2015.09.… 2015.09.03 9… en           AnPhA-T116-01  
+##  8       430167 2015.09.… 2015.09.03 9… en           BioA-S116-01   
+##  9       430170 2015.09.… 2015.09.03 9… en           BioA-T116-01   
+## 10       430172 2015.09.… 2015.09.03 9… en           PhysA-S116-01  
+## # … with 1,092 more rows, and 11 more variables: opdata_username &lt;chr&gt;,
+## #   Q1MaincellgroupRow1 &lt;dbl&gt;, Q1MaincellgroupRow2 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow3 &lt;dbl&gt;, Q1MaincellgroupRow4 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow5 &lt;dbl&gt;, Q1MaincellgroupRow6 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow7 &lt;dbl&gt;, Q1MaincellgroupRow8 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow9 &lt;dbl&gt;, Q1MaincellgroupRow10 &lt;dbl&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">s12_course_data</code></pre>
+<pre><code>## # A tibble: 29,711 x 16
+##    CourseSectionOr… Bb_UserPK EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">s12_time_spent</code></pre>
+<pre><code>## # A tibble: 598 x 6
+##    CourseID CourseSectionID CourseSectionOrigID Bb_UserPK   CUPK TimeSpent
+##       &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+##  1       27           17146 OcnA-S116-01            44638 190682     1383.
+##  2       27           17146 OcnA-S116-01            54346 194259     1191.
+##  3       27           17146 OcnA-S116-01            57981 196014     3343.
+##  4       27           17146 OcnA-S116-01            66740 190463      965.
+##  5       27           17146 OcnA-S116-01            67920 191593     4095.
+##  6       27           17146 OcnA-S116-01            85355 190104      595.
+##  7       27           17146 OcnA-S116-01            85644 190685     1632.
+##  8       27           17146 OcnA-S116-01            86349 191713     1601.
+##  9       27           17146 OcnA-S116-01            86460 191887     1891.
+## 10       27           17146 OcnA-S116-01            87970 194256     3123.
+## # … with 588 more rows</code></pre>
+</div>
+<div id="processing-the-pre-survey-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Processing the pre-survey data</h2>
+<p>Often, survey data needs to be processed in order to be (most) useful. Here, we process the self-report items into three scales, for: interest, self-efficacy, and utility value. We do this by</p>
+<ul>
+<li>Renaming the question variables to something more managable</li>
+<li>Reversing the response scales on questions 4 and 7</li>
+<li>Categorizing each question into a measure</li>
+<li>Computing the mean of each measure</li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey  &lt;-<span class="st"> </span>s12_pre_survey  <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># Rename the qustions something easier to work with because R is case sensitive</span>
+<span class="st">    </span><span class="co"># and working with variable names in mix case is prone to error</span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">q1 =</span> Q1MaincellgroupRow1,
+           <span class="dt">q2 =</span> Q1MaincellgroupRow2,
+           <span class="dt">q3 =</span> Q1MaincellgroupRow3,
+           <span class="dt">q4 =</span> Q1MaincellgroupRow4,
+           <span class="dt">q5 =</span> Q1MaincellgroupRow5,
+           <span class="dt">q6 =</span> Q1MaincellgroupRow6,
+           <span class="dt">q7 =</span> Q1MaincellgroupRow7,
+           <span class="dt">q8 =</span> Q1MaincellgroupRow8,
+           <span class="dt">q9 =</span> Q1MaincellgroupRow9,
+           <span class="dt">q10 =</span> Q1MaincellgroupRow10) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># Convert all question responses to numeric</span>
+<span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(q1<span class="op">:</span>q10), <span class="kw">funs</span>(as.numeric))
+
+<span class="co"># Function for reversing scales </span>
+reverse_scale &lt;-<span class="st"> </span><span class="cf">function</span>(question) {
+    <span class="co"># Reverses the response scales for consistency </span>
+    <span class="co">#   Args: </span>
+    <span class="co">#     question: survey question </span>
+    <span class="co">#   Returns: a numeric converted response</span>
+  <span class="co"># Note: even though 3 is not transformed, case_when expects a match for all</span>
+  <span class="co"># possible conditions, so it&#39;s best practice to label each possible input</span>
+  <span class="co"># and use TRUE ~ as the final statement returning NA for unexpected inputs</span>
+  x &lt;-<span class="st"> </span><span class="kw">case_when</span>(question <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> </span><span class="dv">5</span>, 
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">4</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">5</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,
+                 <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="ot">NA_real_</span>)
+  x
+}
+
+<span class="co"># Reverse scale for questions 4 and 7</span>
+s12_pre_survey &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">q4 =</span> <span class="kw">reverse_scale</span>(q4),
+         <span class="dt">q7 =</span> <span class="kw">reverse_scale</span>(q7))
+
+<span class="co"># Add measure variable </span>
+s12_measure_mean &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># Gather questions and responses </span>
+<span class="st">    </span><span class="kw">gather</span>(question, response, <span class="kw">c</span>(q1<span class="op">:</span>q10)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(
+        <span class="dt">measure =</span> <span class="kw">case_when</span>(
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q1&quot;</span>, <span class="st">&quot;q4&quot;</span>, <span class="st">&quot;q5&quot;</span>, <span class="st">&quot;q8&quot;</span>, <span class="st">&quot;q10&quot;</span>) <span class="op">~</span><span class="st"> &quot;int&quot;</span>, 
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q2&quot;</span>, <span class="st">&quot;q6&quot;</span>, <span class="st">&quot;q9&quot;</span>) <span class="op">~</span><span class="st"> &quot;uv&quot;</span>, 
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q3&quot;</span>, <span class="st">&quot;q7&quot;</span>) <span class="op">~</span><span class="st"> &quot;pc&quot;</span>, 
+            <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="ot">NA_character_</span>
+        )) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(measure) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">summarise</span>(
+        <span class="co"># Mean response for each measure</span>
+        <span class="dt">mean_response =</span> <span class="kw">mean</span>(response, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
+        <span class="co"># Percent of each measure that had NAs in the response field</span>
+        <span class="dt">percent_NA =</span> <span class="kw">mean</span>(<span class="kw">is.na</span>(response))
+        )
+
+s12_measure_mean</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   measure mean_response percent_NA
+##   &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;
+## 1 int              4.26      0.171
+## 2 pc               3.65      0.170
+## 3 uv               3.76      0.170</code></pre>
+</div>
+<div id="processing-the-course-data" class="section level2">
+<h2><span class="header-section-number">8.3</span> Processing the course data</h2>
+<p>We also can process the course data in order to obtain more information.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># split course section into components</span>
+s12_course_data &lt;-<span class="st"> </span>s12_course_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> CourseSectionOrigId,
+           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;subject&#39;</span>, <span class="st">&#39;semester&#39;</span>, <span class="st">&#39;section&#39;</span>),
+           <span class="dt">sep =</span> <span class="st">&#39;-&#39;</span>,
+           <span class="dt">remove =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre><code>## Error in eval_tidy(enquo(var), var_env): object &#39;CourseSectionOrigId&#39; not found</code></pre>
+<p>This led to pulling out the subject, semester, and section from the course ID; variables that we can use later on.</p>
+</div>
+<div id="joining-the-data" class="section level2">
+<h2><span class="header-section-number">8.4</span> Joining the data</h2>
+<p>To join the course data and pre-survey data, we need to create similar <em>keys</em>. In other words, our goal here is to have one variable that matches across both datasets, so that we can merge the datasets on the basis of that variable.</p>
+<p>For these data, both have variables for the course and the student, though they have different names in each. Our first goal will be to rename two variables in each of our datasets so that they will match. One variable will correspond to the course, and the other will correspond to the student. We are not changing anything in the data itself at this step - instead, we are just cleaning it up so that we can look at the data all in one place.</p>
+<p>Let’s start with the pre-survey data. We will rename RespondentID and opdata_CourseID to be student_id and course_id, respectively.</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">student_id =</span> RespondentId,
+           <span class="dt">course_id =</span> opdata_CourseID)
+
+s12_pre_survey</code></pre>
+<pre><code>## # A tibble: 1,102 x 16
+##    student_id StartDate CompletedDate LanguageCode course_id
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;    
+##  1     426746 2015.08.… &lt;NA&gt;          en           FrScA-S1…
+##  2     426775 2015.08.… 2015.08.24 1… en           BioA-S11…
+##  3     427483 2015.08.… &lt;NA&gt;          en           OcnA-S11…
+##  4     429883 2015.09.… 2015.09.02 1… en           AnPhA-S1…
+##  5     430158 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  6     430161 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  7     430162 2015.09.… 2015.09.03 9… en           AnPhA-T1…
+##  8     430167 2015.09.… 2015.09.03 9… en           BioA-S11…
+##  9     430170 2015.09.… 2015.09.03 9… en           BioA-T11…
+## 10     430172 2015.09.… 2015.09.03 9… en           PhysA-S1…
+## # … with 1,092 more rows, and 11 more variables: opdata_username &lt;chr&gt;,
+## #   q1 &lt;dbl&gt;, q2 &lt;dbl&gt;, q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;,
+## #   q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;</code></pre>
+<p>Looks better now!</p>
+<p>Let’s proceed to the course data. Our goal is to rename two variables that correspond to the course and the student so that we can match with the other variables we just created for the pre-survey data.</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_course_data &lt;-<span class="st"> </span>s12_course_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">student_id =</span> Bb_UserPK,
+           <span class="dt">course_id =</span> CourseSectionOrigID)
+
+s12_course_data</code></pre>
+<pre><code>## # A tibble: 29,711 x 16
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;</code></pre>
+<p>Now that we have two variables that are consistent across both datasets - we have called them “course_id” and “student_id” - we can join these using the <strong>dplyr</strong> function, <code>left_join()</code>.
+Let’s save our joined data as a new object called “dat.”</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(s12_course_data, 
+                 s12_pre_survey, 
+                 <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;student_id&quot;</span>, <span class="st">&quot;course_id&quot;</span>))
+
+dat</code></pre>
+<pre><code>## # A tibble: 29,711 x 30
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 25 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;, StartDate &lt;chr&gt;, CompletedDate &lt;chr&gt;,
+## #   LanguageCode &lt;chr&gt;, opdata_username &lt;chr&gt;, q1 &lt;dbl&gt;, q2 &lt;dbl&gt;,
+## #   q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;,
+## #   q10 &lt;dbl&gt;</code></pre>
+<p>Just one more data frame to merge:</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_time_spent &lt;-<span class="st"> </span>s12_time_spent <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">student_id =</span> Bb_UserPK, 
+         <span class="dt">course_id =</span> CourseSectionOrigID)
+s12_time_spent &lt;-<span class="st"> </span>s12_time_spent <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">student_id =</span> <span class="kw">as.integer</span>(student_id))
+dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(s12_time_spent, 
+            <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;student_id&quot;</span>, <span class="st">&quot;course_id&quot;</span>))</code></pre>
+<p>Note that they’re now combined, even though the course data has many more rows: The pre_survey data has been joined for each student by course combination.</p>
+<p>We have a pretty large data frame! Let’s take a quick look.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat</code></pre>
+<pre><code>## # A tibble: 29,711 x 34
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 29 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;, StartDate &lt;chr&gt;, CompletedDate &lt;chr&gt;,
+## #   LanguageCode &lt;chr&gt;, opdata_username &lt;chr&gt;, q1 &lt;dbl&gt;, q2 &lt;dbl&gt;,
+## #   q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;,
+## #   q10 &lt;dbl&gt;, CourseID &lt;dbl&gt;, CourseSectionID &lt;dbl&gt;, CUPK &lt;dbl&gt;,
+## #   TimeSpent &lt;dbl&gt;</code></pre>
+<p>It looks like we have neary 30,000 observations from 30 variables.</p>
+<p>Now that our data are ready to go, we can start to ask some questions of the data.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="background.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizations-and-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
