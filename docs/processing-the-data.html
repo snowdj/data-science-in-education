@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 How to Use This Book | Data Science in Education</title>
+  <title>Chapter 8 Processing the data | Data Science in Education</title>
   <meta name="description" content="proof of concept" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta property="og:title" content="Chapter 8 Processing the data | Data Science in Education" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://data-edu.github.io/data-science-in-education/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="data-edu/data-science-in-education" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta name="twitter:title" content="Chapter 8 Processing the data | Data Science in Education" />
   
   <meta name="twitter:description" content="proof of concept" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="a-reproducible-approach.html">
+<link rel="prev" href="background.html">
+<link rel="next" href="visualizations-and-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,72 +273,309 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> How to Use This Book</h1>
-<p>It is really hard to draw clean boundaries around the topic of data science in
-education because people are educated in all kinds of settings and in all kinds
-of age groups. Education organizations require different kinds of staff to
-make it work, which means different kinds of data science uses. A teacher’s
-approach to learning from data is different from an administrator’s or an
-opeartions manager.</p>
-<p>Since there are many different readers, we believe there should be
-different ways to use the book, both as a reader and as a contributor. Here are
-some ways to use this book:</p>
-<p><strong>Read the Book Cover to Cover</strong></p>
-<p>Reading the book all the way through will give a nice high level view of data
-science in education, starting from the unique challenges of using data science
-in education and ending with code for example analyses.</p>
-<p><strong>Pick a Chapter That is Useful for Your Level of Experience and Start There</strong></p>
-<p>If you are a student or if you work in education, you may be trying to solve a
-very specific problem with data, like analyzing student quiz scores, projecting
-classroom sizes, or pitching a new data analysis method. In this case it might
-be useful to jump ahead to a chapter or section that discusses your area of
-interest.</p>
-<p><strong>Read Through the Walkthroughs and Run the Code</strong></p>
-<p>If you are here to learn and practice coding in R, you can work through the
-example analyses. We wrote these based on typical data problems you might find
-as a student or staff in education, so it is worthwhile to copy or type the code,
-run it in your console, and change it to experiment with the results.</p>
-<p><strong>Contribute to the Book</strong></p>
-<p>We quickly learned when planning the book that there are many ways to approach
-this topic and still we wanted to write in a way that is directly useful and
-practical for our readers in education. One way to meet this goal is to build
-procedures into the work for readers to directly contribute. We hope that as the
-book evolves it grows to reflect the observable needs of data scientists in
-education. Here are some ways readers can contribute:</p>
+<div id="processing-the-data" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Processing the data</h1>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(here)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Gradebook and log-trace data for F15 and S16 semesters</span>
+s12_course_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-course-data.csv&quot;</span>
+  )
+)
+
+<span class="co"># Pre-survey for the F15 and S16 semesters</span>
+s12_pre_survey  &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-pre-survey.csv&quot;</span>
+  )
+) 
+
+<span class="co"># Log-trace data for F15 and S16 semesters - ts is for time spent</span>
+s12_time_spent &lt;-<span class="st"> </span><span class="kw">read_csv</span>(
+  <span class="kw">here</span>(
+    <span class="st">&quot;data&quot;</span>, 
+    <span class="st">&quot;online-science-motivation&quot;</span>, 
+    <span class="st">&quot;raw&quot;</span>, 
+    <span class="st">&quot;s12-course-minutes.csv&quot;</span>
+  )
+)</code></pre>
+<div id="viewing-the-data" class="section level2">
+<h2><span class="header-section-number">8.1</span> Viewing the data</h2>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey </code></pre>
+<pre><code>## # A tibble: 1,102 x 16
+##    RespondentId StartDate CompletedDate LanguageCode opdata_CourseID
+##           &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;          
+##  1       426746 2015.08.… &lt;NA&gt;          en           FrScA-S116-01  
+##  2       426775 2015.08.… 2015.08.24 1… en           BioA-S116-01   
+##  3       427483 2015.08.… &lt;NA&gt;          en           OcnA-S116-03   
+##  4       429883 2015.09.… 2015.09.02 1… en           AnPhA-S116-01  
+##  5       430158 2015.09.… 2015.09.03 9… en           AnPhA-S116-01  
+##  6       430161 2015.09.… 2015.09.03 9… en           AnPhA-S116-02  
+##  7       430162 2015.09.… 2015.09.03 9… en           AnPhA-T116-01  
+##  8       430167 2015.09.… 2015.09.03 9… en           BioA-S116-01   
+##  9       430170 2015.09.… 2015.09.03 9… en           BioA-T116-01   
+## 10       430172 2015.09.… 2015.09.03 9… en           PhysA-S116-01  
+## # … with 1,092 more rows, and 11 more variables: opdata_username &lt;chr&gt;,
+## #   Q1MaincellgroupRow1 &lt;dbl&gt;, Q1MaincellgroupRow2 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow3 &lt;dbl&gt;, Q1MaincellgroupRow4 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow5 &lt;dbl&gt;, Q1MaincellgroupRow6 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow7 &lt;dbl&gt;, Q1MaincellgroupRow8 &lt;dbl&gt;,
+## #   Q1MaincellgroupRow9 &lt;dbl&gt;, Q1MaincellgroupRow10 &lt;dbl&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">s12_course_data</code></pre>
+<pre><code>## # A tibble: 29,711 x 16
+##    CourseSectionOr… Bb_UserPK EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;                &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S116-01        60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">s12_time_spent</code></pre>
+<pre><code>## # A tibble: 598 x 6
+##    CourseID CourseSectionID CourseSectionOrigID Bb_UserPK   CUPK TimeSpent
+##       &lt;dbl&gt;           &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+##  1       27           17146 OcnA-S116-01            44638 190682     1383.
+##  2       27           17146 OcnA-S116-01            54346 194259     1191.
+##  3       27           17146 OcnA-S116-01            57981 196014     3343.
+##  4       27           17146 OcnA-S116-01            66740 190463      965.
+##  5       27           17146 OcnA-S116-01            67920 191593     4095.
+##  6       27           17146 OcnA-S116-01            85355 190104      595.
+##  7       27           17146 OcnA-S116-01            85644 190685     1632.
+##  8       27           17146 OcnA-S116-01            86349 191713     1601.
+##  9       27           17146 OcnA-S116-01            86460 191887     1891.
+## 10       27           17146 OcnA-S116-01            87970 194256     3123.
+## # … with 588 more rows</code></pre>
+</div>
+<div id="processing-the-pre-survey-data" class="section level2">
+<h2><span class="header-section-number">8.2</span> Processing the pre-survey data</h2>
+<p>Often, survey data needs to be processed in order to be (most) useful. Here, we process the self-report items into three scales, for: interest, self-efficacy, and utility value. We do this by</p>
 <ul>
-<li>Submit a pull request to our
-<a href="https://github.com/jrosen48/data-science-in-education">GitHub site</a> that
-describes a data science problem that is unique to the education setting</li>
-<li>Submit a pull request to share a solution for the problems discussed in the
-book
-to the education setting</li>
-<li>Share an anonymized dataset</li>
+<li>Renaming the question variables to something more managable</li>
+<li>Reversing the response scales on questions 4 and 7</li>
+<li>Categorizing each question into a measure</li>
+<li>Computing the mean of each measure</li>
 </ul>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey  &lt;-<span class="st"> </span>s12_pre_survey  <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="co"># Rename the qustions something easier to work with because R is case sensitive</span>
+<span class="st">    </span><span class="co"># and working with variable names in mix case is prone to error</span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">q1 =</span> Q1MaincellgroupRow1,
+           <span class="dt">q2 =</span> Q1MaincellgroupRow2,
+           <span class="dt">q3 =</span> Q1MaincellgroupRow3,
+           <span class="dt">q4 =</span> Q1MaincellgroupRow4,
+           <span class="dt">q5 =</span> Q1MaincellgroupRow5,
+           <span class="dt">q6 =</span> Q1MaincellgroupRow6,
+           <span class="dt">q7 =</span> Q1MaincellgroupRow7,
+           <span class="dt">q8 =</span> Q1MaincellgroupRow8,
+           <span class="dt">q9 =</span> Q1MaincellgroupRow9,
+           <span class="dt">q10 =</span> Q1MaincellgroupRow10) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># Convert all question responses to numeric</span>
+<span class="st">    </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(q1<span class="op">:</span>q10), <span class="kw">funs</span>(as.numeric))
 
-<p>What is a Data Scientist in Education?</p>
-<p>One way to define data science is to think of it as <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">combining three skills</a> to do data analysis: programming, statistics, and content knowledge. Though if you Google “what is a data scientist” you’ll won’t find a simple answer.</p>
-<p>But for this book’s exploration, thinking of data science as a combination of these three skills is useful because we can try substituting the field of education in for “content knowledge.” Even then, we still face a broad field of possibilities when imagining what a data scientist in education actually does on a day-to-day basis.</p>
-<p>While having no established data science identity makes it hard for educators to explain their data work to the layperson, it does allow them to take on a variety of data-related activities and, ultimately, build the definition of the role. So rather than grapple with defining this role, let’s share some examples of what data scientists do in the field of education.</p>
-<p><em>Leading Office Culture Toward a Data-Driven Approach</em></p>
-<p>Jesse, a director at an education non-profit in Texas, is setting up a database to house student achievement data. This project requires a number of data science skills we’ll discuss in chapter five, including cleaning data into a consistent format. Once the data is prepared, Jesse builds dashboards to help her teammates explore the data.</p>
-<p>But not all of Jesse’s work can be found in a how-to manual for data scientists. She manages a team and serves as the de facto project manager for IT initiatives. And given her expertise and experience in data science, she’s leading the charge towards a more data-driven approach within the organization.</p>
-<p><em>Helping School Districts Plan to Meet Their Goals</em></p>
-<p>Ryan, a special education administrator in California, uses data science to reproduce the state department of education’s special education compliance metrics, then uses the results to build an early warning system for compliance based on local datasets. In this case, Ryan uses foundational data science skills like data cleaning, visualization, and modeling to help school districts monitor and meet their compliance requirements.</p>
-<p><em>Doing and Empowering Research On Data Scienctists in Education</em></p>
-<p>Joshua, Assistant Professor of STEM Education at University of Tennessee in Knoxville, researches how students do data science and helps teachers teach the next generation of data-informed citizens. He makes this work possible by building R packages—self-contained groups of data tools—that he and other researchers use to analyze datasets efficiently.</p>
-<p>The data scientists in these examples apply statistics and programming to create new knowledge in the education field. But that’s as far as we can go when looking for commonalities in their day-to-day work. Maybe the education community will develop common norms and expectations for how it all works together as the relationship between data science and education grows.</p>
-<p>But because this relationship is still young, it is important that the people growing data science within education understand the culture and unique challenges in their education job. Afterall, the defining feature that will differentiate data science in education from data science in general will be doing data science that meets the unique needs of students, staff, and administration in education.</p>
+<span class="co"># Function for reversing scales </span>
+reverse_scale &lt;-<span class="st"> </span><span class="cf">function</span>(question) {
+    <span class="co"># Reverses the response scales for consistency </span>
+    <span class="co">#   Args: </span>
+    <span class="co">#     question: survey question </span>
+    <span class="co">#   Returns: a numeric converted response</span>
+  <span class="co"># Note: even though 3 is not transformed, case_when expects a match for all</span>
+  <span class="co"># possible conditions, so it&#39;s best practice to label each possible input</span>
+  <span class="co"># and use TRUE ~ as the final statement returning NA for unexpected inputs</span>
+  x &lt;-<span class="st"> </span><span class="kw">case_when</span>(question <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">~</span><span class="st"> </span><span class="dv">5</span>, 
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">2</span> <span class="op">~</span><span class="st"> </span><span class="dv">4</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">4</span> <span class="op">~</span><span class="st"> </span><span class="dv">2</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">5</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
+                 question <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">~</span><span class="st"> </span><span class="dv">3</span>,
+                 <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="ot">NA_real_</span>)
+  x
+}
 
-<p>Because data science in the school setting is a relatively new phenomena, it’s understandable that school staff may be wary of how data is collected and analyzed. It’s common for school staff to question how data is used, particularly if the data is used to describe staff and student performance. School systems that want to evolve their data analysis processes into something practical and meaningful to student progress will need to do the difficult work of addressing these worries.</p>
+<span class="co"># Reverse scale for questions 4 and 7</span>
+s12_pre_survey &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">q4 =</span> <span class="kw">reverse_scale</span>(q4),
+         <span class="dt">q7 =</span> <span class="kw">reverse_scale</span>(q7))
+
+<span class="co"># Add measure variable </span>
+s12_measure_mean &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co"># Gather questions and responses </span>
+<span class="st">    </span><span class="kw">gather</span>(question, response, <span class="kw">c</span>(q1<span class="op">:</span>q10)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(
+        <span class="dt">measure =</span> <span class="kw">case_when</span>(
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q1&quot;</span>, <span class="st">&quot;q4&quot;</span>, <span class="st">&quot;q5&quot;</span>, <span class="st">&quot;q8&quot;</span>, <span class="st">&quot;q10&quot;</span>) <span class="op">~</span><span class="st"> &quot;int&quot;</span>, 
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q2&quot;</span>, <span class="st">&quot;q6&quot;</span>, <span class="st">&quot;q9&quot;</span>) <span class="op">~</span><span class="st"> &quot;uv&quot;</span>, 
+            question <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;q3&quot;</span>, <span class="st">&quot;q7&quot;</span>) <span class="op">~</span><span class="st"> &quot;pc&quot;</span>, 
+            <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="ot">NA_character_</span>
+        )) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(measure) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">summarise</span>(
+        <span class="co"># Mean response for each measure</span>
+        <span class="dt">mean_response =</span> <span class="kw">mean</span>(response, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
+        <span class="co"># Percent of each measure that had NAs in the response field</span>
+        <span class="dt">percent_NA =</span> <span class="kw">mean</span>(<span class="kw">is.na</span>(response))
+        )
+
+s12_measure_mean</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   measure mean_response percent_NA
+##   &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt;
+## 1 int              4.26      0.171
+## 2 pc               3.65      0.170
+## 3 uv               3.76      0.170</code></pre>
+</div>
+<div id="processing-the-course-data" class="section level2">
+<h2><span class="header-section-number">8.3</span> Processing the course data</h2>
+<p>We also can process the course data in order to obtain more information.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># split course section into components</span>
+s12_course_data &lt;-<span class="st"> </span>s12_course_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> CourseSectionOrigId,
+           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&#39;subject&#39;</span>, <span class="st">&#39;semester&#39;</span>, <span class="st">&#39;section&#39;</span>),
+           <span class="dt">sep =</span> <span class="st">&#39;-&#39;</span>,
+           <span class="dt">remove =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre><code>## Error in eval_tidy(enquo(var), var_env): object &#39;CourseSectionOrigId&#39; not found</code></pre>
+<p>This led to pulling out the subject, semester, and section from the course ID; variables that we can use later on.</p>
+</div>
+<div id="joining-the-data" class="section level2">
+<h2><span class="header-section-number">8.4</span> Joining the data</h2>
+<p>To join the course data and pre-survey data, we need to create similar <em>keys</em>. In other words, our goal here is to have one variable that matches across both datasets, so that we can merge the datasets on the basis of that variable.</p>
+<p>For these data, both have variables for the course and the student, though they have different names in each. Our first goal will be to rename two variables in each of our datasets so that they will match. One variable will correspond to the course, and the other will correspond to the student. We are not changing anything in the data itself at this step - instead, we are just cleaning it up so that we can look at the data all in one place.</p>
+<p>Let’s start with the pre-survey data. We will rename RespondentID and opdata_CourseID to be student_id and course_id, respectively.</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_pre_survey &lt;-<span class="st"> </span>s12_pre_survey <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">student_id =</span> RespondentId,
+           <span class="dt">course_id =</span> opdata_CourseID)
+
+s12_pre_survey</code></pre>
+<pre><code>## # A tibble: 1,102 x 16
+##    student_id StartDate CompletedDate LanguageCode course_id
+##         &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;    
+##  1     426746 2015.08.… &lt;NA&gt;          en           FrScA-S1…
+##  2     426775 2015.08.… 2015.08.24 1… en           BioA-S11…
+##  3     427483 2015.08.… &lt;NA&gt;          en           OcnA-S11…
+##  4     429883 2015.09.… 2015.09.02 1… en           AnPhA-S1…
+##  5     430158 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  6     430161 2015.09.… 2015.09.03 9… en           AnPhA-S1…
+##  7     430162 2015.09.… 2015.09.03 9… en           AnPhA-T1…
+##  8     430167 2015.09.… 2015.09.03 9… en           BioA-S11…
+##  9     430170 2015.09.… 2015.09.03 9… en           BioA-T11…
+## 10     430172 2015.09.… 2015.09.03 9… en           PhysA-S1…
+## # … with 1,092 more rows, and 11 more variables: opdata_username &lt;chr&gt;,
+## #   q1 &lt;dbl&gt;, q2 &lt;dbl&gt;, q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;,
+## #   q8 &lt;dbl&gt;, q9 &lt;dbl&gt;, q10 &lt;dbl&gt;</code></pre>
+<p>Looks better now!</p>
+<p>Let’s proceed to the course data. Our goal is to rename two variables that correspond to the course and the student so that we can match with the other variables we just created for the pre-survey data.</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_course_data &lt;-<span class="st"> </span>s12_course_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">student_id =</span> Bb_UserPK,
+           <span class="dt">course_id =</span> CourseSectionOrigID)
+
+s12_course_data</code></pre>
+<pre><code>## # A tibble: 29,711 x 16
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 11 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;</code></pre>
+<p>Now that we have two variables that are consistent across both datasets - we have called them “course_id” and “student_id” - we can join these using the <strong>dplyr</strong> function, <code>left_join()</code>.
+Let’s save our joined data as a new object called “dat.”</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat &lt;-<span class="st"> </span><span class="kw">left_join</span>(s12_course_data, 
+                 s12_pre_survey, 
+                 <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;student_id&quot;</span>, <span class="st">&quot;course_id&quot;</span>))
+
+dat</code></pre>
+<pre><code>## # A tibble: 29,711 x 30
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 25 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;, StartDate &lt;chr&gt;, CompletedDate &lt;chr&gt;,
+## #   LanguageCode &lt;chr&gt;, opdata_username &lt;chr&gt;, q1 &lt;dbl&gt;, q2 &lt;dbl&gt;,
+## #   q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;,
+## #   q10 &lt;dbl&gt;</code></pre>
+<p>Just one more data frame to merge:</p>
+<pre class="sourceCode r"><code class="sourceCode r">s12_time_spent &lt;-<span class="st"> </span>s12_time_spent <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">student_id =</span> Bb_UserPK, 
+         <span class="dt">course_id =</span> CourseSectionOrigID)
+s12_time_spent &lt;-<span class="st"> </span>s12_time_spent <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">student_id =</span> <span class="kw">as.integer</span>(student_id))
+dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(s12_time_spent, 
+            <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;student_id&quot;</span>, <span class="st">&quot;course_id&quot;</span>))</code></pre>
+<p>Note that they’re now combined, even though the course data has many more rows: The pre_survey data has been joined for each student by course combination.</p>
+<p>We have a pretty large data frame! Let’s take a quick look.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dat</code></pre>
+<pre><code>## # A tibble: 29,711 x 34
+##    course_id student_id EnrollmentStatus EnrollmentReason Gender
+##    &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;            &lt;chr&gt; 
+##  1 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  2 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  3 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  4 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  5 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  6 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  7 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  8 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+##  9 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## 10 AnPhA-S1…      60186 Approved/Enroll… Course Unavaila… M     
+## # … with 29,701 more rows, and 29 more variables: FinalGradeCEMS &lt;dbl&gt;,
+## #   Gradebook_Item &lt;chr&gt;, Item_Position &lt;dbl&gt;, Gradebook_Type &lt;chr&gt;,
+## #   Gradebook_Date &lt;chr&gt;, Grade_Category &lt;chr&gt;, Status &lt;lgl&gt;,
+## #   Points_Earned &lt;chr&gt;, Points_Attempted &lt;dbl&gt;, Points_Possible &lt;dbl&gt;,
+## #   last_access_date &lt;drtn&gt;, StartDate &lt;chr&gt;, CompletedDate &lt;chr&gt;,
+## #   LanguageCode &lt;chr&gt;, opdata_username &lt;chr&gt;, q1 &lt;dbl&gt;, q2 &lt;dbl&gt;,
+## #   q3 &lt;dbl&gt;, q4 &lt;dbl&gt;, q5 &lt;dbl&gt;, q6 &lt;dbl&gt;, q7 &lt;dbl&gt;, q8 &lt;dbl&gt;, q9 &lt;dbl&gt;,
+## #   q10 &lt;dbl&gt;, CourseID &lt;dbl&gt;, CourseSectionID &lt;dbl&gt;, CUPK &lt;dbl&gt;,
+## #   TimeSpent &lt;dbl&gt;</code></pre>
+<p>It looks like we have neary 30,000 observations from 30 variables.</p>
+<p>Now that our data are ready to go, we can start to ask some questions of the data.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-reproducible-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="background.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="visualizations-and-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

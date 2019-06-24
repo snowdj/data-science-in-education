@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 How to Use This Book | Data Science in Education</title>
+  <title>Chapter 20 The Data | Data Science in Education</title>
   <meta name="description" content="proof of concept" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta property="og:title" content="Chapter 20 The Data | Data Science in Education" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://data-edu.github.io/data-science-in-education/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="data-edu/data-science-in-education" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta name="twitter:title" content="Chapter 20 The Data | Data Science in Education" />
   
   <meta name="twitter:description" content="proof of concept" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="a-reproducible-approach.html">
+<link rel="prev" href="background-4.html">
+<link rel="next" href="advanced-uses.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,72 +273,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> How to Use This Book</h1>
-<p>It is really hard to draw clean boundaries around the topic of data science in
-education because people are educated in all kinds of settings and in all kinds
-of age groups. Education organizations require different kinds of staff to
-make it work, which means different kinds of data science uses. A teacher’s
-approach to learning from data is different from an administrator’s or an
-opeartions manager.</p>
-<p>Since there are many different readers, we believe there should be
-different ways to use the book, both as a reader and as a contributor. Here are
-some ways to use this book:</p>
-<p><strong>Read the Book Cover to Cover</strong></p>
-<p>Reading the book all the way through will give a nice high level view of data
-science in education, starting from the unique challenges of using data science
-in education and ending with code for example analyses.</p>
-<p><strong>Pick a Chapter That is Useful for Your Level of Experience and Start There</strong></p>
-<p>If you are a student or if you work in education, you may be trying to solve a
-very specific problem with data, like analyzing student quiz scores, projecting
-classroom sizes, or pitching a new data analysis method. In this case it might
-be useful to jump ahead to a chapter or section that discusses your area of
-interest.</p>
-<p><strong>Read Through the Walkthroughs and Run the Code</strong></p>
-<p>If you are here to learn and practice coding in R, you can work through the
-example analyses. We wrote these based on typical data problems you might find
-as a student or staff in education, so it is worthwhile to copy or type the code,
-run it in your console, and change it to experiment with the results.</p>
-<p><strong>Contribute to the Book</strong></p>
-<p>We quickly learned when planning the book that there are many ways to approach
-this topic and still we wanted to write in a way that is directly useful and
-practical for our readers in education. One way to meet this goal is to build
-procedures into the work for readers to directly contribute. We hope that as the
-book evolves it grows to reflect the observable needs of data scientists in
-education. Here are some ways readers can contribute:</p>
-<ul>
-<li>Submit a pull request to our
-<a href="https://github.com/jrosen48/data-science-in-education">GitHub site</a> that
-describes a data science problem that is unique to the education setting</li>
-<li>Submit a pull request to share a solution for the problems discussed in the
-book
-to the education setting</li>
-<li>Share an anonymized dataset</li>
-</ul>
+<div id="the-data" class="section level1">
+<h1><span class="header-section-number">Chapter 20</span> The Data</h1>
+<div id="understanding-trends" class="section level3">
+<h3><span class="header-section-number">20.0.1</span> Understanding Trends</h3>
+</div>
+<div id="making-comparisons" class="section level3">
+<h3><span class="header-section-number">20.0.2</span> Making Comparisons</h3>
+</div>
+<div id="finding-inequities" class="section level3">
+<h3><span class="header-section-number">20.0.3</span> Finding Inequities</h3>
 
-<p>What is a Data Scientist in Education?</p>
-<p>One way to define data science is to think of it as <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">combining three skills</a> to do data analysis: programming, statistics, and content knowledge. Though if you Google “what is a data scientist” you’ll won’t find a simple answer.</p>
-<p>But for this book’s exploration, thinking of data science as a combination of these three skills is useful because we can try substituting the field of education in for “content knowledge.” Even then, we still face a broad field of possibilities when imagining what a data scientist in education actually does on a day-to-day basis.</p>
-<p>While having no established data science identity makes it hard for educators to explain their data work to the layperson, it does allow them to take on a variety of data-related activities and, ultimately, build the definition of the role. So rather than grapple with defining this role, let’s share some examples of what data scientists do in the field of education.</p>
-<p><em>Leading Office Culture Toward a Data-Driven Approach</em></p>
-<p>Jesse, a director at an education non-profit in Texas, is setting up a database to house student achievement data. This project requires a number of data science skills we’ll discuss in chapter five, including cleaning data into a consistent format. Once the data is prepared, Jesse builds dashboards to help her teammates explore the data.</p>
-<p>But not all of Jesse’s work can be found in a how-to manual for data scientists. She manages a team and serves as the de facto project manager for IT initiatives. And given her expertise and experience in data science, she’s leading the charge towards a more data-driven approach within the organization.</p>
-<p><em>Helping School Districts Plan to Meet Their Goals</em></p>
-<p>Ryan, a special education administrator in California, uses data science to reproduce the state department of education’s special education compliance metrics, then uses the results to build an early warning system for compliance based on local datasets. In this case, Ryan uses foundational data science skills like data cleaning, visualization, and modeling to help school districts monitor and meet their compliance requirements.</p>
-<p><em>Doing and Empowering Research On Data Scienctists in Education</em></p>
-<p>Joshua, Assistant Professor of STEM Education at University of Tennessee in Knoxville, researches how students do data science and helps teachers teach the next generation of data-informed citizens. He makes this work possible by building R packages—self-contained groups of data tools—that he and other researchers use to analyze datasets efficiently.</p>
-<p>The data scientists in these examples apply statistics and programming to create new knowledge in the education field. But that’s as far as we can go when looking for commonalities in their day-to-day work. Maybe the education community will develop common norms and expectations for how it all works together as the relationship between data science and education grows.</p>
-<p>But because this relationship is still young, it is important that the people growing data science within education understand the culture and unique challenges in their education job. Afterall, the defining feature that will differentiate data science in education from data science in general will be doing data science that meets the unique needs of students, staff, and administration in education.</p>
-
-<p>Because data science in the school setting is a relatively new phenomena, it’s understandable that school staff may be wary of how data is collected and analyzed. It’s common for school staff to question how data is used, particularly if the data is used to describe staff and student performance. School systems that want to evolve their data analysis processes into something practical and meaningful to student progress will need to do the difficult work of addressing these worries.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-reproducible-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="background-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="advanced-uses.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

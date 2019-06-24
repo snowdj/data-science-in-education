@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 How to Use This Book | Data Science in Education</title>
+  <title>Chapter 18 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD | Data Science in Education</title>
   <meta name="description" content="proof of concept" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta property="og:title" content="Chapter 18 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD | Data Science in Education" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://data-edu.github.io/data-science-in-education/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="data-edu/data-science-in-education" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta name="twitter:title" content="Chapter 18 &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD | Data Science in Education" />
   
   <meta name="twitter:description" content="proof of concept" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="a-reproducible-approach.html">
+<link rel="prev" href="examining-predictive-accuracy-on-the-test-data-set.html">
+<link rel="next" href="background-4.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,72 +273,306 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> How to Use This Book</h1>
-<p>It is really hard to draw clean boundaries around the topic of data science in
-education because people are educated in all kinds of settings and in all kinds
-of age groups. Education organizations require different kinds of staff to
-make it work, which means different kinds of data science uses. A teacher’s
-approach to learning from data is different from an administrator’s or an
-opeartions manager.</p>
-<p>Since there are many different readers, we believe there should be
-different ways to use the book, both as a reader and as a contributor. Here are
-some ways to use this book:</p>
-<p><strong>Read the Book Cover to Cover</strong></p>
-<p>Reading the book all the way through will give a nice high level view of data
-science in education, starting from the unique challenges of using data science
-in education and ending with code for example analyses.</p>
-<p><strong>Pick a Chapter That is Useful for Your Level of Experience and Start There</strong></p>
-<p>If you are a student or if you work in education, you may be trying to solve a
-very specific problem with data, like analyzing student quiz scores, projecting
-classroom sizes, or pitching a new data analysis method. In this case it might
-be useful to jump ahead to a chapter or section that discusses your area of
-interest.</p>
-<p><strong>Read Through the Walkthroughs and Run the Code</strong></p>
-<p>If you are here to learn and practice coding in R, you can work through the
-example analyses. We wrote these based on typical data problems you might find
-as a student or staff in education, so it is worthwhile to copy or type the code,
-run it in your console, and change it to experiment with the results.</p>
-<p><strong>Contribute to the Book</strong></p>
-<p>We quickly learned when planning the book that there are many ways to approach
-this topic and still we wanted to write in a way that is directly useful and
-practical for our readers in education. One way to meet this goal is to build
-procedures into the work for readers to directly contribute. We hope that as the
-book evolves it grows to reflect the observable needs of data scientists in
-education. Here are some ways readers can contribute:</p>
+<div id="head" class="section level1">
+<h1><span class="header-section-number">Chapter 18</span> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1>
+<p>The layouts above are as follows: the first row has 1.) a <em>random</em> plotting of nodes and 2.) the <em>MDS</em> algorithm. The second row has 3.) the <em>FR</em> algorithm and 4.) the <em>DRL</em> algorithm. The third row as 5.) the <em>KK</em> algorithm, and 6.) the <em>Sugiyama</em> algorithm. Each of these is appropriate in different situations; if unsure of which to use, the <em>nicely</em> option automatically selects an algorithm based on the network size.</p>
+<div id="selection-and-influence" class="section level2">
+<h2><span class="header-section-number">18.1</span> Selection and influence</h2>
+<p>Behind these visualizations, though, there are also statistical models and methods that can help to understand what is going on with respect to particular relationships in a network in additional ways.</p>
+<p>One way to consider these models and methods is in terms of two <em>processes</em> at play in our relationships (cite). These two processes are commonly (though not exclusively) the focus of statistical analyses of networks. In addition to not being exclusive, they do not interact independently: they affect each other reciprocally (Xu, Frank, &amp; Penuel, 2018). They are:</p>
 <ul>
-<li>Submit a pull request to our
-<a href="https://github.com/jrosen48/data-science-in-education">GitHub site</a> that
-describes a data science problem that is unique to the education setting</li>
-<li>Submit a pull request to share a solution for the problems discussed in the
-book
-to the education setting</li>
-<li>Share an anonymized dataset</li>
+<li><em>Selection</em>: the processes regarding who chooses to have a relationship with whom</li>
+<li><em>Infuence</em>: the processes regarding how who we have relationships with affects our behavior</li>
 </ul>
+<p>While these are complex, they can be studied with the type of data collected from asking people about their relationships (and possibly asking them about or studying their behavior–or measuring some outcome). Happily, the use of these methods has expanded along with <strong>R</strong>: many of the best tools for studying social networks are in the form of long-standing R packages. Additionally, while there are many potential naunces to studying selection and influence, these are models that can fundamentally be carried out with regression, or the linear model (or extensions of it).</p>
+<p>In this walkthrough, the influence model is the focus. Nevertheless, we provide some direction for how to carry out selection modeling, too, at the end.</p>
+</div>
+<div id="creating-example-data-in-the-form-of-an-edgelist" class="section level2">
+<h2><span class="header-section-number">18.2</span> Creating example data in the form of an edgelist</h2>
+<p>First, let’s create three different data frames. Here is what they should contain:</p>
+<ul>
+<li>A data frame indicating who the <em>nominator</em> and <em>nominee</em> for the relation (i.e., if Stefanie says that José is her friend, then Stefanie is the nominator and José the nominee) - as well as an optional variable indicating the weight, or strength, of their relation.</li>
+<li>This data frame and its type can be considered the basis for many types of social network analysis and is a common structure for network data: it is an <em>edgelist</em>.</li>
+<li>Data frames indicating the values of some behavior - an outcome - at two different time points.</li>
+</ul>
+</div>
+<div id="an-example-of-influence" class="section level2">
+<h2><span class="header-section-number">18.3</span> An example of influence</h2>
+<p>In this example, we create some example data that can be used to explore questions about how influence works. Note that Joshua Rosenberg and Sarah Galey initially wrote the following code for a walkthrough shared on Ken Frank’s website <a href="https://msu.edu/~kenfrank/resources.htm">here</a>.</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>58d1f3d32df76c709efd19069c532b125f465a3d
+Let’s take a look at the merged data. What this data now contains is the first data frame, <code>data1</code>, with each nominees’ outcome at time 1 (<code>yvar1</code>). Note that we will find each nominators’ outcome at time 2 later on.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(data)</code></pre>
+<pre><code>## Error in as_tibble(data): could not find function &quot;as_tibble&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">data</code></pre>
+<pre><code>## function (..., list = character(), package = NULL, lib.loc = NULL, 
+##     verbose = getOption(&quot;verbose&quot;), envir = .GlobalEnv, overwrite = TRUE) 
+## {
+##     fileExt &lt;- function(x) {
+##         db &lt;- grepl(&quot;\\.[^.]+\\.(gz|bz2|xz)$&quot;, x)
+##         ans &lt;- sub(&quot;.*\\.&quot;, &quot;&quot;, x)
+##         ans[db] &lt;- sub(&quot;.*\\.([^.]+\\.)(gz|bz2|xz)$&quot;, &quot;\\1\\2&quot;, 
+##             x[db])
+##         ans
+##     }
+##     names &lt;- c(as.character(substitute(list(...))[-1L]), list)
+##     if (!is.null(package)) {
+##         if (!is.character(package)) 
+##             stop(&quot;&#39;package&#39; must be a character string or NULL&quot;)
+##         if (any(package %in% &quot;base&quot;)) 
+##             warning(&quot;datasets have been moved from package &#39;base&#39; to package &#39;datasets&#39;&quot;)
+##         if (any(package %in% &quot;stats&quot;)) 
+##             warning(&quot;datasets have been moved from package &#39;stats&#39; to package &#39;datasets&#39;&quot;)
+##         package[package %in% c(&quot;base&quot;, &quot;stats&quot;)] &lt;- &quot;datasets&quot;
+##     }
+##     paths &lt;- find.package(package, lib.loc, verbose = verbose)
+##     if (is.null(lib.loc)) 
+##         paths &lt;- c(path.package(package, TRUE), if (!length(package)) getwd(), 
+##             paths)
+##     paths &lt;- unique(normalizePath(paths[file.exists(paths)]))
+##     paths &lt;- paths[dir.exists(file.path(paths, &quot;data&quot;))]
+##     dataExts &lt;- tools:::.make_file_exts(&quot;data&quot;)
+##     if (length(names) == 0L) {
+##         db &lt;- matrix(character(), nrow = 0L, ncol = 4L)
+##         for (path in paths) {
+##             entries &lt;- NULL
+##             packageName &lt;- if (file_test(&quot;-f&quot;, file.path(path, 
+##                 &quot;DESCRIPTION&quot;))) 
+##                 basename(path)
+##             else &quot;.&quot;
+##             if (file_test(&quot;-f&quot;, INDEX &lt;- file.path(path, &quot;Meta&quot;, 
+##                 &quot;data.rds&quot;))) {
+##                 entries &lt;- readRDS(INDEX)
+##             }
+##             else {
+##                 dataDir &lt;- file.path(path, &quot;data&quot;)
+##                 entries &lt;- tools::list_files_with_type(dataDir, 
+##                   &quot;data&quot;)
+##                 if (length(entries)) {
+##                   entries &lt;- unique(tools::file_path_sans_ext(basename(entries)))
+##                   entries &lt;- cbind(entries, &quot;&quot;)
+##                 }
+##             }
+##             if (NROW(entries)) {
+##                 if (is.matrix(entries) &amp;&amp; ncol(entries) == 2L) 
+##                   db &lt;- rbind(db, cbind(packageName, dirname(path), 
+##                     entries))
+##                 else warning(gettextf(&quot;data index for package %s is invalid and will be ignored&quot;, 
+##                   sQuote(packageName)), domain = NA, call. = FALSE)
+##             }
+##         }
+##         colnames(db) &lt;- c(&quot;Package&quot;, &quot;LibPath&quot;, &quot;Item&quot;, &quot;Title&quot;)
+##         footer &lt;- if (missing(package)) 
+##             paste0(&quot;Use &quot;, sQuote(paste(&quot;data(package =&quot;, &quot;.packages(all.available = TRUE))&quot;)), 
+##                 &quot;\n&quot;, &quot;to list the data sets in all *available* packages.&quot;)
+##         else NULL
+##         y &lt;- list(title = &quot;Data sets&quot;, header = NULL, results = db, 
+##             footer = footer)
+##         class(y) &lt;- &quot;packageIQR&quot;
+##         return(y)
+##     }
+##     paths &lt;- file.path(paths, &quot;data&quot;)
+##     for (name in names) {
+##         found &lt;- FALSE
+##         for (p in paths) {
+##             tmp_env &lt;- if (overwrite) 
+##                 envir
+##             else new.env()
+##             if (file_test(&quot;-f&quot;, file.path(p, &quot;Rdata.rds&quot;))) {
+##                 rds &lt;- readRDS(file.path(p, &quot;Rdata.rds&quot;))
+##                 if (name %in% names(rds)) {
+##                   found &lt;- TRUE
+##                   if (verbose) 
+##                     message(sprintf(&quot;name=%s:\t found in Rdata.rds&quot;, 
+##                       name), domain = NA)
+##                   thispkg &lt;- sub(&quot;.*/([^/]*)/data$&quot;, &quot;\\1&quot;, p)
+##                   thispkg &lt;- sub(&quot;_.*$&quot;, &quot;&quot;, thispkg)
+##                   thispkg &lt;- paste0(&quot;package:&quot;, thispkg)
+##                   objs &lt;- rds[[name]]
+##                   lazyLoad(file.path(p, &quot;Rdata&quot;), envir = tmp_env, 
+##                     filter = function(x) x %in% objs)
+##                   break
+##                 }
+##                 else if (verbose) 
+##                   message(sprintf(&quot;name=%s:\t NOT found in names() of Rdata.rds, i.e.,\n\t%s\n&quot;, 
+##                     name, paste(names(rds), collapse = &quot;,&quot;)), 
+##                     domain = NA)
+##             }
+##             if (file_test(&quot;-f&quot;, file.path(p, &quot;Rdata.zip&quot;))) {
+##                 warning(&quot;zipped data found for package &quot;, sQuote(basename(dirname(p))), 
+##                   &quot;.\nThat is defunct, so please re-install the package.&quot;, 
+##                   domain = NA)
+##                 if (file_test(&quot;-f&quot;, fp &lt;- file.path(p, &quot;filelist&quot;))) 
+##                   files &lt;- file.path(p, scan(fp, what = &quot;&quot;, quiet = TRUE))
+##                 else {
+##                   warning(gettextf(&quot;file &#39;filelist&#39; is missing for directory %s&quot;, 
+##                     sQuote(p)), domain = NA)
+##                   next
+##                 }
+##             }
+##             else {
+##                 files &lt;- list.files(p, full.names = TRUE)
+##             }
+##             files &lt;- files[grep(name, files, fixed = TRUE)]
+##             if (length(files) &gt; 1L) {
+##                 o &lt;- match(fileExt(files), dataExts, nomatch = 100L)
+##                 paths0 &lt;- dirname(files)
+##                 paths0 &lt;- factor(paths0, levels = unique(paths0))
+##                 files &lt;- files[order(paths0, o)]
+##             }
+##             if (length(files)) {
+##                 for (file in files) {
+##                   if (verbose) 
+##                     message(&quot;name=&quot;, name, &quot;:\t file= ...&quot;, .Platform$file.sep, 
+##                       basename(file), &quot;::\t&quot;, appendLF = FALSE, 
+##                       domain = NA)
+##                   ext &lt;- fileExt(file)
+##                   if (basename(file) != paste0(name, &quot;.&quot;, ext)) 
+##                     found &lt;- FALSE
+##                   else {
+##                     found &lt;- TRUE
+##                     zfile &lt;- file
+##                     zipname &lt;- file.path(dirname(file), &quot;Rdata.zip&quot;)
+##                     if (file.exists(zipname)) {
+##                       Rdatadir &lt;- tempfile(&quot;Rdata&quot;)
+##                       dir.create(Rdatadir, showWarnings = FALSE)
+##                       topic &lt;- basename(file)
+##                       rc &lt;- .External(C_unzip, zipname, topic, 
+##                         Rdatadir, FALSE, TRUE, FALSE, FALSE)
+##                       if (rc == 0L) 
+##                         zfile &lt;- file.path(Rdatadir, topic)
+##                     }
+##                     if (zfile != file) 
+##                       on.exit(unlink(zfile))
+##                     switch(ext, R = , r = {
+##                       library(&quot;utils&quot;)
+##                       sys.source(zfile, chdir = TRUE, envir = tmp_env)
+##                     }, RData = , rdata = , rda = load(zfile, 
+##                       envir = tmp_env), TXT = , txt = , tab = , 
+##                       tab.gz = , tab.bz2 = , tab.xz = , txt.gz = , 
+##                       txt.bz2 = , txt.xz = assign(name, read.table(zfile, 
+##                         header = TRUE, as.is = FALSE), envir = tmp_env), 
+##                       CSV = , csv = , csv.gz = , csv.bz2 = , 
+##                       csv.xz = assign(name, read.table(zfile, 
+##                         header = TRUE, sep = &quot;;&quot;, as.is = FALSE), 
+##                         envir = tmp_env), found &lt;- FALSE)
+##                   }
+##                   if (found) 
+##                     break
+##                 }
+##                 if (verbose) 
+##                   message(if (!found) 
+##                     &quot;*NOT* &quot;, &quot;found&quot;, domain = NA)
+##             }
+##             if (found) 
+##                 break
+##         }
+##         if (!found) {
+##             warning(gettextf(&quot;data set %s not found&quot;, sQuote(name)), 
+##                 domain = NA)
+##         }
+##         else if (!overwrite) {
+##             for (o in ls(envir = tmp_env, all.names = TRUE)) {
+##                 if (exists(o, envir = envir, inherits = FALSE)) 
+##                   warning(gettextf(&quot;an object named %s already exists and will not be overwritten&quot;, 
+##                     sQuote(o)))
+##                 else assign(o, get(o, envir = tmp_env, inherits = FALSE), 
+##                   envir = envir)
+##             }
+##             rm(tmp_env)
+##         }
+##     }
+##     invisible(names)
+## }
+## &lt;bytecode: 0x7f9a35cb0af0&gt;
+## &lt;environment: namespace:utils&gt;</code></pre>
+<div id="calculating-an-exposure-term" class="section level3">
+<h3><span class="header-section-number">18.3.1</span> Calculating an exposure term</h3>
+<p>This is the key step that makes this model - a regression, or linear, model - one that is special. It is creating an exposure term. The idea is that the exposure term “captures” how your interactions with someone, over some period of time (between the first and second time points) impact some outcome. This model accounts for an individual’s initial report of the outcome, i.e., their time 1 prior value, so it is a model for <em>change</em> in some outcome.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculating exposure</span>
+data<span class="op">$</span>exposure &lt;-<span class="st"> </span>data<span class="op">$</span>relate <span class="op">*</span><span class="st"> </span>data<span class="op">$</span>yvar1
 
-<p>What is a Data Scientist in Education?</p>
-<p>One way to define data science is to think of it as <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">combining three skills</a> to do data analysis: programming, statistics, and content knowledge. Though if you Google “what is a data scientist” you’ll won’t find a simple answer.</p>
-<p>But for this book’s exploration, thinking of data science as a combination of these three skills is useful because we can try substituting the field of education in for “content knowledge.” Even then, we still face a broad field of possibilities when imagining what a data scientist in education actually does on a day-to-day basis.</p>
-<p>While having no established data science identity makes it hard for educators to explain their data work to the layperson, it does allow them to take on a variety of data-related activities and, ultimately, build the definition of the role. So rather than grapple with defining this role, let’s share some examples of what data scientists do in the field of education.</p>
-<p><em>Leading Office Culture Toward a Data-Driven Approach</em></p>
-<p>Jesse, a director at an education non-profit in Texas, is setting up a database to house student achievement data. This project requires a number of data science skills we’ll discuss in chapter five, including cleaning data into a consistent format. Once the data is prepared, Jesse builds dashboards to help her teammates explore the data.</p>
-<p>But not all of Jesse’s work can be found in a how-to manual for data scientists. She manages a team and serves as the de facto project manager for IT initiatives. And given her expertise and experience in data science, she’s leading the charge towards a more data-driven approach within the organization.</p>
-<p><em>Helping School Districts Plan to Meet Their Goals</em></p>
-<p>Ryan, a special education administrator in California, uses data science to reproduce the state department of education’s special education compliance metrics, then uses the results to build an early warning system for compliance based on local datasets. In this case, Ryan uses foundational data science skills like data cleaning, visualization, and modeling to help school districts monitor and meet their compliance requirements.</p>
-<p><em>Doing and Empowering Research On Data Scienctists in Education</em></p>
-<p>Joshua, Assistant Professor of STEM Education at University of Tennessee in Knoxville, researches how students do data science and helps teachers teach the next generation of data-informed citizens. He makes this work possible by building R packages—self-contained groups of data tools—that he and other researchers use to analyze datasets efficiently.</p>
-<p>The data scientists in these examples apply statistics and programming to create new knowledge in the education field. But that’s as far as we can go when looking for commonalities in their day-to-day work. Maybe the education community will develop common norms and expectations for how it all works together as the relationship between data science and education grows.</p>
-<p>But because this relationship is still young, it is important that the people growing data science within education understand the culture and unique challenges in their education job. Afterall, the defining feature that will differentiate data science in education from data science in general will be doing data science that meets the unique needs of students, staff, and administration in education.</p>
+<span class="co"># Calculating mean exposure</span>
+mean_exposure &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(nominator) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">exposure_mean =</span> <span class="kw">mean</span>(exposure))
+<span class="op">&lt;</span><span class="er">&lt;&lt;&lt;&lt;&lt;&lt;</span><span class="st"> </span>HEAD
 
-<p>Because data science in the school setting is a relatively new phenomena, it’s understandable that school staff may be wary of how data is collected and analyzed. It’s common for school staff to question how data is used, particularly if the data is used to describe staff and student performance. School systems that want to evolve their data analysis processes into something practical and meaningful to student progress will need to do the difficult work of addressing these worries.</p>
+<span class="op">==</span><span class="er">=====</span>
+<span class="er">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span><span class="st"> </span>58d1f3d32df76c709efd19069c532b125f465a3d</code></pre>
+<pre><code>## Error: &lt;text&gt;:8:1: unexpected input
+## 7:     summarize(exposure_mean = mean(exposure))
+## 8: &lt;&lt;
+##    ^</code></pre>
+<p>What this data frame - <code>mean_exposure</code> - contains is the mean of the outcome (in this case, <code>yvar1</code>) for all of the individuals the nominator had a relation with.</p>
+<p>As we need a final data set with <code>mean_exposure</code>, <code>mean_exposure_plus</code>, <code>degree</code>, <code>yvar1</code>, and <code>yvar2</code> added, we’ll process the data a bit more.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mean_exposure_terms &lt;-<span class="st"> </span><span class="kw">left_join</span>(mean_exposure, mean_exposure_plus, <span class="dt">by =</span> <span class="st">&quot;nominator&quot;</span>)</code></pre>
+<pre><code>## Error in left_join(mean_exposure, mean_exposure_plus, by = &quot;nominator&quot;): could not find function &quot;left_join&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(data2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;nominator&quot;</span>, <span class="st">&quot;yvar1&quot;</span>) <span class="co"># rename nominee as nominator to merge these</span></code></pre>
+<pre><code>## Error in names(data2) &lt;- c(&quot;nominator&quot;, &quot;yvar1&quot;): object &#39;data2&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">final_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(mean_exposure_terms, data2, <span class="dt">by =</span> <span class="st">&quot;nominator&quot;</span>)</code></pre>
+<pre><code>## Error in left_join(mean_exposure_terms, data2, by = &quot;nominator&quot;): could not find function &quot;left_join&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">final_data &lt;-<span class="st"> </span><span class="kw">left_join</span>(final_data, data3, <span class="dt">by =</span> <span class="st">&quot;nominator&quot;</span>) <span class="co"># data3 already has nominator, so no need to change</span></code></pre>
+<pre><code>## Error in left_join(final_data, data3, by = &quot;nominator&quot;): could not find function &quot;left_join&quot;</code></pre>
+</div>
+<div id="regression-linear-models" class="section level3">
+<h3><span class="header-section-number">18.3.2</span> Regression (linear models)</h3>
+<p>Calculating the exposure term is the most distinctive and important step in carrying out influence models. Now, we can simply use a linear model to find out how much relations - as captured by the influence term - affect some outcome.</p>
+<pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lm</span>(yvar2 <span class="op">~</span><span class="st"> </span>yvar1 <span class="op">+</span><span class="st"> </span>exposure_mean, <span class="dt">data =</span> final_data)</code></pre>
+<pre><code>## Error in is.data.frame(data): object &#39;final_data&#39; not found</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model1)</code></pre>
+<pre><code>## Error in summary(model1): object &#39;model1&#39; not found</code></pre>
+<p>Note that these models show … [add]</p>
+<p>So, the influence model is used to study a key process for social network analysis, but it is one that is useful, because you can quantify, given what you measure and how you measure it, <em>the network effect</em>, something that is sometimes not considered, especially in education (Sweet, 2017). It’s also fundamentally a regression. That’s really it, as the majority of the work goes into calculating the exposure term.</p>
+</div>
+</div>
+<div id="selection-models" class="section level2">
+<h2><span class="header-section-number">18.4</span> Selection models</h2>
+<p>While this tutorial focused on influence models, selection models are also commonly used - and are commonly of interest not only to researchers but also to administrators and teachers (and even to youth and students).</p>
+<p>Here, we briefly describe a few possible approaches for using a selection model.</p>
+<p>At its core, the selection model is a regression - albeit, one that is a generalization of one, namely, a logistic regression (sometimes termed a generalized linear model, because it is <em>basically</em> a regression but is one with an outcome that consists just of 0’s and 1’s). Thus, the most straight-away way to use a selection model is to use a logistic regression where all of the relations (note the <code>relate</code> variable in <code>data1</code> above) are indicated with a 1. But, here is the important and challenging step: all of the <em>possible relations</em> (i.e., all of the relations that are possible between all of the individuals in a network) are indicated with a 0 in an edgelist. Note that, again, an edgelist is the preferred data structure for carrying out this analysis. This step involves some data wrangling, especially the idea of widening or lengthening a data frame.</p>
+<!-- May want to add a short bit of code on this using `gather()` and `spread()` -->
+<p>Once all of the relations are indicated with a 1 or a 0, then a simple linear regression can be used. Imagine that we are interested in whether individuals from the <em>same</em> group are more or less likely to interact than those from different groups; same could be created in the data frame based upon knowing which group both nominator and nominee are from:</p>
+<pre class="sourceCode r"><code class="sourceCode r">m_selection &lt;-<span class="st"> </span><span class="kw">glm</span>(relate <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>same, <span class="dt">data =</span> edgelist1)</code></pre>
+<p>While this is a straightforward way to carry out a selection model, there are some limitations to it. Namely, it does not account for individuals who send more (or less) nominations overall–and not considering this may mean other effects, like the one associated with being from the <em>same</em> group, are not accurate. A few extensions of the linear model - including those that can use data for which relationships are indicated with weights, not just 1’s and 0’s, have been developed.</p>
+<p>One type of model extends the logistic regression. It can be used for data that is not only 1’s and 0’s but also data that is normally distributed or has fixed-ranks. It is the <strong>amen</strong> package available <a href="https://cran.r-project.org/web/packages/amen/index.html">here</a>.</p>
+<p>A particularly common one is an Exponential Random Graph Model, or an ERGM. An R package that makes estimating these easy is available <a href="https://cran.r-project.org/web/packages/ergm/index.html">here</a>. That R package, <strong>ergm</strong>, is part of a powerful and often-used collection of packages, including those for working with network data (data that can begin with an edgelist, but may need additional processing that is challenging to do with edgelist data), <strong>statnet</strong>. A link to the statnet packages is <a href="https://statnet.org/">here</a>.</p>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">18.5</span> References</h2>
+<p>Bates, D., Maechler, M., Bolker, B., &amp; Walker, S. (2018). lme4: Linear mixed-effects models using ‘Eigen’ and S4 (Version 1.1-19) [R package]. Retrieved from <a href="https://cran.r-project.org/package=lme4" class="uri">https://cran.r-project.org/package=lme4</a></p>
+<p>Csardi, G. (2018). igraph: Network analysis and visualization (Version 1.2.2) [R package]. Retrieved from <a href="https://CRAN.R-project.org/package=igraph" class="uri">https://CRAN.R-project.org/package=igraph</a></p>
+<p>Csardi, G., Nepusz, T., &amp; Airoldi, E. M. (2016). <em>Statistical network analysis with igraph</em>. New York, NY: Springer. Retrieved from <a href="https://sites.fas.harvard.edu/~airoldi/pub/books/BookDraft-CsardiNepuszAiroldi2016.pdf" class="uri">https://sites.fas.harvard.edu/~airoldi/pub/books/BookDraft-CsardiNepuszAiroldi2016.pdf</a></p>
+<p>Hogan, B. (2017). Online social networks: Concepts for data collection and analysis. In N. G. Fielding, R. M. Lee, &amp; G. Blank (Eds.), <em>The SAGE handbook of online research methods</em> (2nd ed., pp. ). London, UK: SAGE.</p>
+<p>Kadushin, C. (2012). <em>Understanding social networks: Theories, concepts, and findings.</em> New York, NY: Oxford University Press.</p>
+<p>Pedersen, T. L. (2018). ggraph: An implementation of grammar of graphics for graphs and networks (Version 1.0.2) [R package]. Retrieved from <a href="https://CRAN.R-project.org/package=ggraph" class="uri">https://CRAN.R-project.org/package=ggraph</a></p>
+<p>R Core Team. (2018). R: A language and environment for statistical computing (Version 3.5.0) [Computer software]. Vienna, Austria: R Foundation for Statistical Computing. Retrieved from <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a></p>
+<p>Reichardt, J., &amp; Bornholdt, S. (2006). Statistical mechanics of community detection. <em>Physical Review E, 74</em>(1), 016110. Retrieved from <a href="https://arxiv.org/abs/cond-mat/0603718" class="uri">https://arxiv.org/abs/cond-mat/0603718</a></p>
+<p>Wickham, H., Chang, W., &amp; RStudio. (2016). ggplot2: Create elegant data visualisations using the grammar of graphics (Version 2.2.1) [R package]. Retrieved from <a href="https://CRAN.R-project.org/package=ggplot2" class="uri">https://CRAN.R-project.org/package=ggplot2</a></p>
+<p>Wickham, H., Francois, R., Henry, L., Muller, K., &amp; RStudio. (2018). dplyr: A grammar of data manipulation (Version 0.7.6) [R package]. Retrieved from <a href="https://CRAN.R-project.org/package=dplyr" class="uri">https://CRAN.R-project.org/package=dplyr</a></p>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-reproducible-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="examining-predictive-accuracy-on-the-test-data-set.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="background-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

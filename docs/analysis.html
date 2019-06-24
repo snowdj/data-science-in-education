@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 How to Use This Book | Data Science in Education</title>
+  <title>Chapter 16 Analysis | Data Science in Education</title>
   <meta name="description" content="proof of concept" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta property="og:title" content="Chapter 16 Analysis | Data Science in Education" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://data-edu.github.io/data-science-in-education/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="data-edu/data-science-in-education" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 How to Use This Book | Data Science in Education" />
+  <meta name="twitter:title" content="Chapter 16 Analysis | Data Science in Education" />
   
   <meta name="twitter:description" content="proof of concept" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html">
-<link rel="next" href="a-reproducible-approach.html">
+<link rel="prev" href="information-on-random-forests.html">
+<link rel="next" href="examining-predictive-accuracy-on-the-test-data-set.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -273,72 +273,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="how-to-use-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> How to Use This Book</h1>
-<p>It is really hard to draw clean boundaries around the topic of data science in
-education because people are educated in all kinds of settings and in all kinds
-of age groups. Education organizations require different kinds of staff to
-make it work, which means different kinds of data science uses. A teacher’s
-approach to learning from data is different from an administrator’s or an
-opeartions manager.</p>
-<p>Since there are many different readers, we believe there should be
-different ways to use the book, both as a reader and as a contributor. Here are
-some ways to use this book:</p>
-<p><strong>Read the Book Cover to Cover</strong></p>
-<p>Reading the book all the way through will give a nice high level view of data
-science in education, starting from the unique challenges of using data science
-in education and ending with code for example analyses.</p>
-<p><strong>Pick a Chapter That is Useful for Your Level of Experience and Start There</strong></p>
-<p>If you are a student or if you work in education, you may be trying to solve a
-very specific problem with data, like analyzing student quiz scores, projecting
-classroom sizes, or pitching a new data analysis method. In this case it might
-be useful to jump ahead to a chapter or section that discusses your area of
-interest.</p>
-<p><strong>Read Through the Walkthroughs and Run the Code</strong></p>
-<p>If you are here to learn and practice coding in R, you can work through the
-example analyses. We wrote these based on typical data problems you might find
-as a student or staff in education, so it is worthwhile to copy or type the code,
-run it in your console, and change it to experiment with the results.</p>
-<p><strong>Contribute to the Book</strong></p>
-<p>We quickly learned when planning the book that there are many ways to approach
-this topic and still we wanted to write in a way that is directly useful and
-practical for our readers in education. One way to meet this goal is to build
-procedures into the work for readers to directly contribute. We hope that as the
-book evolves it grows to reflect the observable needs of data scientists in
-education. Here are some ways readers can contribute:</p>
-<ul>
-<li>Submit a pull request to our
-<a href="https://github.com/jrosen48/data-science-in-education">GitHub site</a> that
-describes a data science problem that is unique to the education setting</li>
-<li>Submit a pull request to share a solution for the problems discussed in the
-book
-to the education setting</li>
-<li>Share an anonymized dataset</li>
-</ul>
-
-<p>What is a Data Scientist in Education?</p>
-<p>One way to define data science is to think of it as <a href="http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram">combining three skills</a> to do data analysis: programming, statistics, and content knowledge. Though if you Google “what is a data scientist” you’ll won’t find a simple answer.</p>
-<p>But for this book’s exploration, thinking of data science as a combination of these three skills is useful because we can try substituting the field of education in for “content knowledge.” Even then, we still face a broad field of possibilities when imagining what a data scientist in education actually does on a day-to-day basis.</p>
-<p>While having no established data science identity makes it hard for educators to explain their data work to the layperson, it does allow them to take on a variety of data-related activities and, ultimately, build the definition of the role. So rather than grapple with defining this role, let’s share some examples of what data scientists do in the field of education.</p>
-<p><em>Leading Office Culture Toward a Data-Driven Approach</em></p>
-<p>Jesse, a director at an education non-profit in Texas, is setting up a database to house student achievement data. This project requires a number of data science skills we’ll discuss in chapter five, including cleaning data into a consistent format. Once the data is prepared, Jesse builds dashboards to help her teammates explore the data.</p>
-<p>But not all of Jesse’s work can be found in a how-to manual for data scientists. She manages a team and serves as the de facto project manager for IT initiatives. And given her expertise and experience in data science, she’s leading the charge towards a more data-driven approach within the organization.</p>
-<p><em>Helping School Districts Plan to Meet Their Goals</em></p>
-<p>Ryan, a special education administrator in California, uses data science to reproduce the state department of education’s special education compliance metrics, then uses the results to build an early warning system for compliance based on local datasets. In this case, Ryan uses foundational data science skills like data cleaning, visualization, and modeling to help school districts monitor and meet their compliance requirements.</p>
-<p><em>Doing and Empowering Research On Data Scienctists in Education</em></p>
-<p>Joshua, Assistant Professor of STEM Education at University of Tennessee in Knoxville, researches how students do data science and helps teachers teach the next generation of data-informed citizens. He makes this work possible by building R packages—self-contained groups of data tools—that he and other researchers use to analyze datasets efficiently.</p>
-<p>The data scientists in these examples apply statistics and programming to create new knowledge in the education field. But that’s as far as we can go when looking for commonalities in their day-to-day work. Maybe the education community will develop common norms and expectations for how it all works together as the relationship between data science and education grows.</p>
-<p>But because this relationship is still young, it is important that the people growing data science within education understand the culture and unique challenges in their education job. Afterall, the defining feature that will differentiate data science in education from data science in general will be doing data science that meets the unique needs of students, staff, and administration in education.</p>
-
-<p>Because data science in the school setting is a relatively new phenomena, it’s understandable that school staff may be wary of how data is collected and analyzed. It’s common for school staff to question how data is used, particularly if the data is used to describe staff and student performance. School systems that want to evolve their data analysis processes into something practical and meaningful to student progress will need to do the difficult work of addressing these worries.</p>
+<div id="analysis" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> Analysis</h1>
+<p>First, we will load the data, <em>filter</em> the data to include only the data from one year, and <em>select</em> variables of interest.</p>
+<div id="use-of-caret" class="section level2">
+<h2><span class="header-section-number">16.1</span> Use of caret</h2>
+<p>Here, we remove observations with missing data (per our note above about random forests requiring complete cases).</p>
+<p>First, machine learning methods often involve using a large number of variables. Oftentimes, some of these variables will not be suitable to use: they may be highly correlated with other variables, for instance, or may have very little - or no - variability. Indeed, for the data set used in this study, one variables has the same (character string) value for all of the observations. We can detect this variable and any others using the following function:</p>
+<p>If we look at <code>enrollment_status</code>, we will see that it is “Approved/Enrolled” for <em>all</em> of the students. When we use this in certian models, t may cause some problems, and so we remove it first.</p>
+<p>Note that many times you may wish to pre-process the variables, such as by centering or scaling them; we could this with code like the following, which is not run here, as we will first try this out with the variables’ original values.</p>
+<p>We will want to make character string variables into factors.</p>
+<p>Now, we will prepare the <strong>train</strong> and <strong>test</strong> datasets, using the caret function for creating data partitions. Here, the <strong>p</strong> argument specifies what proportion of the data we want to be in the <strong>training</strong> partition. Note that this function splits the data based upon the outcome, so that the training and test data sets will both have comparable values for the outcome. Note the <code>times = 1</code> argument; this function can be used to create <em>multiple</em> train and test sets, something we will describe in more detail later.</p>
+<p>Finally, we will estimate the models.</p>
+<p>Here, we will use the train function, passing <em>all</em> of the variables in the data frame (except for the outcome, or dependent variable, <code>final_grade</code>) as predictors. NOte that you can read more about the specific random forest implementation chosen <a href="http://topepo.github.io/caret/train-models-by-tag.html#random-forest">here</a>.</p>
+<pre><code>## Error: Required package is missing</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;rf_fit&#39; not found</code></pre>
+<p>We have some results! First, we see that we have 400 samples, or 400 observations, the number in the train data set. No pre-processing steps were specified in the model fitting (note that) these the output of <code>preProcess</code> can be passed to <code>train()</code> to center, scale, and transform the data in many other ways. Next, note that a resampling technique has been used: this is not for validating the model (per se), but is rather for selecting tuning parameters, or options that need to be specified as a part of the modeling. These parameters can be manually provided, or can be estimated via strategies such as the bootstrap resample (or <em>k</em>-folds cross validation).</p>
+<p>It appears that the model with the value of the <strong>mtry</strong> tuning parameter equal to 42 seemed to explain the data best, the <strong>splirule* being “extratrees”, and </strong>min.node.size** held constant at a value of 5.</p>
+<p>Let’s see if we end up with slightly different values if we change the resampling technique to cross-validation, instead of bootstrap resampling.</p>
+<pre><code>## Error: Required package is missing</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;rf_fit1&#39; not found</code></pre>
+<p>The same tuning parameter values seem to be found with this method. Let’s check just one last thing - what if we do not fix <strong>min.node.size</strong> to five?</p>
+<p>Let’s create our own grid of values to test. We’ll stick with the default bootstrap resampling method to choose the best model.</p>
+<pre><code>## Error: Required package is missing</code></pre>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;rf_fit2&#39; not found</code></pre>
+<p>The model with the same values as identified before but with <strong>min.node.size</strong> equal to 1 seems to fit best, though the improvement seems to be fairly small relative to the difference the other tuning parameters seem to make.</p>
+<p>Let’s take a look at this model. We will first note the large number of independent variables: this is due to the factors being treated as dummy codes. We can also note the *OOB prediction error (MSE)`, of 0.351, and the proportion of the variance explained, or R squared, of 0.658.</p>
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;rf_fit2&#39; not found</code></pre>
+</div>
+<div id="predicted-values" class="section level2">
+<h2><span class="header-section-number">16.2</span> Predicted values</h2>
+<p>Using the simpler model without treating <code>min.node.size</code> as a tuning paramete</p>
+<p>In particular, let’s explore predicted values. In particular, we can see how predicted values compare to those in the test set to understand predictive accuracy.</p>
+<p>First, let’s calculte the Root Mean Square Error (RMSE), just to gain practice working with the model output.</p>
+<pre><code>## Error in predict(rf_fit, d_train): object &#39;rf_fit&#39; not found</code></pre>
+<pre><code>## Error in eval(lhs, parent, parent): object &#39;d_train_augmented&#39; not found</code></pre>
+<p>We can calculate these automatically using the <strong>caret</strong> <code>defaultSummary()</code> function (which just requires columns with <code>obs</code> and <code>pred</code> in it in a data frame):</p>
+<pre><code>## Error in `[.data.frame`(data, , &quot;pred&quot;): undefined columns selected</code></pre>
+<p>The RMSE and MAE values correspond to those we calculated manually. Note that an <span class="math inline">\(R^2\)</span> value is also calculated as the square of the correlation between the observed and predicted values.</p>
+<p>So, what do these values tell us? On average, our predictions are around 4 percentage points away from their actual values. Not so bad!</p>
+<p>Why use RMSE, though, over MAE? [Note: don’t kow why].</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="a-reproducible-approach.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="information-on-random-forests.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="examining-predictive-accuracy-on-the-test-data-set.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
