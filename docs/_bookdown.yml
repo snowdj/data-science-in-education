@@ -1,6 +1,0 @@
-book_filename: "ds-in-education"
-chapter_name: "Chapter "
-repo: https://github.com/data-edu/data-science-in-education
-output_dir: docs
-clean: [packages.bib, bookdown.bbl]
-new_session: yes

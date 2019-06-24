@@ -8,6 +8,6 @@ documentclass: book
 #biblio-style: apalike
 link-citations: yes
 github-repo: data-edu/data-science-in-education
-url: "https://data-edu.github.io/data-science-in-education/"
+#url: 'http\://seankross.com/bookdown-start/'
 description: "proof of concept"
 ---
