@@ -7,21 +7,22 @@ output: html_document
 
 # Vocabulary 
 
-Read in
-Aggregate data 
-Vector 
-List
-Tidy format
-Subset
-`select_at`
-`mutate`
-Statistical model 
-Aggregate data
-Student level data
+ - Read in
+ - Aggregate data 
+ - Vector 
+ - List
+ - Tidy format
+ - Subset
+ - `select`
+ - `select_at`
+ - `mutate`
+ - Statistical model 
+ - Aggregate data
+ - Student-level data
 
 # 11.1 Introduction 
 
-The authors chose to use a publicly available dataset for this walkthrough. Like most publicly available datasets, this one contains aggregate data, or data that is not at the level of individuals (individual students).
+We chose to use a publicly available dataset for this walkthrough. Like most publicly available datasets, this one contains aggregate data, or data that is not at the level of individuals (individual students).
 
 # 11.2 Special Education Child Count and Environment Data
 
@@ -66,17 +67,17 @@ Imagine a widget-making machine that works by acting on raw materials it receive
  - *Widget-making instructions*: `read_csv(path, skip = 4) 
  - *Expected widgets*: a list of datasets
 
-Let's create the raw materials first. Use `list.files` to make a list of filenames and their paths and name that list `filenames`: 
+Let's create the raw materials first. Our raw materials will be file paths to each of the CSVs we want to read in. Use `list.files` to make a vector of filenames and their paths and name that vector `filenames`. `list.files` returns a vector of file names that exist in the folder you point to in the `path` argument. When we set the `full.names` argument to "TRUE", we get a full path of the filenames. This will be useful later when we need the file names and their paths to read our data in. 
 
 ```{r get filenames}
 # Get filenames from the data folder 
-filenames <- list.files("10a-walkthrough-6-data", full.names = TRUE)
+filenames <- list.files(path = "10a-walkthrough-6-data", full.names = TRUE)
 
 # A list of filenames and paths
 filenames
 ```
 
-That made a list of six filenames, one for each year of child count data stored in the data folder. Now pass our raw materials, the list called `filenames`, to our widget-making machine called `map` and give the machine the instructions `read_csv(., skip = 4)`. Name the list of widgets it cranks out `all_files`:
+That made a vector of six filenames, one for each year of child count data stored in the data folder. Now pass our raw materials, the vector called `filenames`, to our widget-making machine called `map` and give the machine the instructions `read_csv(., skip = 4)`. Name the list of widgets it cranks out `all_files`:
 
 ```{r read list of CSVs}
 # Pass filenames to map and read_csv
@@ -128,8 +129,8 @@ Since we're demonstrating one example of a cleaning process, we've worked throug
 1. Filter for the desired categories
 3. Rename the variables 
 3. Standardized the state names
-5. Gather columns
-3. Convert classes
+5. Transform the column formats from wide to narrow using `gather`
+3. Change the data types of variables 
 3. Explore NAs
 
 But in real life, data scientists often don't know the steps they'll need to take to prepare a dataset until they dive into the work. Learning what data transformations are needed requires exploration, trial and error, and clarity on the analytic questions you want to answer. 
@@ -158,7 +159,7 @@ all_files[[5]] <- read_csv(filenames[[5]], skip = 3)
 
 Try printing `all_files` now. You can confirm we fixed the problem by verifying that all variable names are correct. 
 
-## Select variables 
+## Pick variables 
 
 Now that we know all our datasets have variable names, we can start simplifying our datasets by picking the variables. This is a good place to think carefully about which variables we pick. This usually requires a fair amount of trial and error, but here is what we found we needed: 
 
@@ -166,11 +167,11 @@ Now that we know all our datasets have variable names, we can start simplifying 
  - Later, we'll need to filter our dataset by disability category and program location so we'll want `SEA Education Environment` and `SEA Disability Category`
  - We want to make comparisons by state and reporting year so we'll also pick `State Name` and `Year`
 
-Combining `select_at` and `contains` is a convenient way to pick these variables without writing a lot of code. Knowing that we want variables that contain the acronym "SEA" and variables that contain "male" in their names, we can pass those characters to `contains`:
+Combining `select` and `contains` is a convenient way to pick these variables without writing a lot of code. Knowing that we want variables that contain the acronym "SEA" and variables that contain "male" in their names, we can pass those characters to `contains`:
 
 ```{r}
 all_files[[1]] %>% 
-    select_at(vars(Year, contains("State", ignore.case = FALSE), contains("SEA", ignore.case = FALSE), contains("male"))) 
+    select(Year, contains("State", ignore.case = FALSE), contains("SEA", ignore.case = FALSE), contains("male")) 
 ```
 
 That code chunk verifies that we got the variables we want, so now we will turn the code chunk into a function called `pick_vars`. We will then use `map` to feed our list of datasets, `all_files`, to the function. This will result in a newly transformed `all_files` list that contains six datasets, all with the desired variables. 
@@ -245,7 +246,8 @@ You might have noticed that some state names in our dataset are in upper case le
 
 ```{r}
 child_counts %>% 
-    count(state) %>% head()
+    count(state) %>% 
+    head()
 ```
 
 If we leave it like this, R will treat the upper case states and lower case states of the same name as different states. We can use `mutate` and `tolower` to transform all the state names to lowercase letters. 
@@ -257,7 +259,7 @@ child_counts <- child_counts %>%
 
 ## Tidy the dataset 
 
-Visualizing and modeling our data will be much easier if our dataset is in a "tidy" format. In his paper *Tidy Data*, Hadley Wickham defines tidy datasets where
+Visualizing and modeling our data will be much easier if our dataset is in a "tidy" format. In his paper *Tidy Data* (2014), Hadley Wickham defines tidy datasets where
 
 >1. Each variable forms a column.
 >2. Each observation forms a row.
@@ -265,7 +267,7 @@ Visualizing and modeling our data will be much easier if our dataset is in a "ti
 
 *A note on the gender variable in this dataset*
 
-*This dataset uses a binary approach to data collection about gender. Students are described as either male or female. The need for an inclusive approach to documenting gender identity is discussed in a document by Andrew Park of The Williams Institute at UCLA [authored a document](https://williamsinstitute.law.ucla.edu/wp-content/uploads/Reachable-Data-collection-methods-for-sexual-orientation-gender-identity-March-2016.pdf).*
+*This dataset uses a binary approach to data collection about gender. Students are described as either male or female. The need for an inclusive approach to documenting gender identity is discussed in a document by Andrew Park (2016) of The Williams Institute at UCLA.*
 
 The gender variables in our dataset are spread across four columns, one representing a combination of gender and age range. We can use `gather` to bring the gender variable into one column. In this transformation, we create two new columns: a `gender` column and a `total` column. The `total` column will contain the number of students in each row's gender and age category.  
 
@@ -287,7 +289,7 @@ child_counts <- child_counts %>%
     ))
 ```
 
-## Convert classes
+## Convert data types
 
 The values in the `total` column represent the number of students from a specific year, state, gender, and age group. We know from the `chr` under their variable names that R is treating these values like characters instead of numbers. While R does a decent job of treating numbers like numbers when needed, it's much safer to prepare the dataset by changing these character columns to number columns. We'll use `dplyr::mutate_at` to conveniently change the count columns. 
 
@@ -456,7 +458,7 @@ By visually inspecting, we can hypothesize that there was not significant change
 
 # 11.3.3 Model the Dataset 
 
-When you visualize your datasets, you are exploring possible relationships between variables. But sometimes visualizations can be misleading because of the way we perceive graphics. In his book *Data Visuzliation: A Practical Introduction* Kieran Healy teaches us that 
+When you visualize your datasets, you are exploring possible relationships between variables. But sometimes visualizations can be misleading because of the way we perceive graphics. In his book *Data Visuzliation: A Practical Introduction* Kieran Healy (2019) teaches us that 
 
 >Visualizations encode numbers in lines, shapes, and colors. That means that our interpretation of these encodings is partly conditional on how we perceive geometric shapes and relationships generally.
 
@@ -552,7 +554,7 @@ Each model object is filled with all sorts of model information. We can look at 
 summary(ratio_year)
 ```
 
-Here's how we can interpret the estimate column: The estimate of the `Intercept` is 2.03356, which is the estimated value of the `ratio` variable when the `year` variable is 2012. The remaining rows of the model output show how much each year differs from 2012. Fot example, `year2013` has an estimate of -0.01205, which suggests that on average the value of `ratio` is .01205 less than 2.03356. On average, the ratio of `year2014` is .02372 less than 2.03356. The `t value` column tells us the size of difference between the estimated value of the ratio for each year and the estiamted value of the ratio of the intercept. Generally speaking, the larger the t value the larger the chance that any difference is not random. 
+Here's how we can interpret the `Estimate` column: The estimate of the `(Intercept)` is 2.03356, which is the estimated value of the `ratio` variable when the `year` variable is "2012". Note that the value `year2012` isn't present in the in the list of rownames. That's because the `(Intercept)` row represents `year2012`. In linear regression models that use factor variables as predictors, the first level of the factor is the intercept. Sometimes this level is called a "dummy variable". The remaining rows of the model output show how much each year differs from the intercept, 2012. For example, `year2013` has an estimate of -0.01205, which suggests that on average the value of `ratio` is .01205 less than 2.03356. On average, the ratio of `year2014` is .02372 less than 2.03356. The `t value` column tells us the size of difference between the estimated value of the ratio for each year and the estimated value of the ratio of the intercept. Generally speaking, the larger the t value, the larger the chance that any difference between the coefficient of a factor level and the intercept are significant. 
 
 Though the relationship between `year` as a preditor of `ratio` is not linear (recall our previous plot), the linear regression model still gives us useful information. When you fit a simple linear regression model to a factor variable like `year` as a predictor of a continuous variable like `ratio`, you get the average `ratio` at every value of `year`. We can verify this by taking the mean `ratio` of ever `year`: 
 
@@ -632,14 +634,14 @@ Once we learned from our model that male to female ratios did not change in any 
 
 # 11.4 Aggregate Data as Context for Student Data 
 
-Education data science is about using data science tools to learn about and improve the lives of our students. So why choose a publicly available aggregate dataset to analyze instead of a student level dataset? We chose to build this analysis walkthrough using an aggregate dataset because it reflects an analysis that an education data scientist would typically do. Using student level data requires that the education data scientist is either an employee of the school agency that serves the students or that she works under a memorandum of understanding (MOU) that allows her to access this data. Without either of these conditions, the education data scientist learns about the student experience by working on publicly available datasets, almost all of which are aggregated student level datasets.
+Education data science is about using data science tools to learn about and improve the lives of our students. So why choose a publicly available aggregate dataset to analyze instead of a student-level dataset? We chose to build this analysis walkthrough using an aggregate dataset because it reflects an analysis that an education data scientist would typically do. Using student-level data requires that the education data scientist is either an employee of the school agency that serves the students or that she works under a memorandum of understanding (MOU) that allows her to access this data. Without either of these conditions, the education data scientist learns about the student experience by working on publicly available datasets, almost all of which are aggregated student-level datasets.
 
-Before we discuss the benefits of aggregate data, let's take some time to understand the differences between aggregat and student level data. Publicly available data--like the US Federal Government special education student count we used in this walkthrough--is a summary of student level data. That means that student level data is totaled up to protect the identities of students before making them publicly available. We can use R to demonstrate this concept. 
+Before we discuss the benefits of aggregate data, let's take some time to understand the differences between aggregat and student-level data. Publicly available data--like the US Federal Government special education student count we used in this walkthrough--is a summary of student-level data. That means that student-level data is totaled up to protect the identities of students before making them publicly available. We can use R to demonstrate this concept. 
 
-Rows in a student level dataset represent an individual student:
+Rows in a student-level dataset represent an individual student:
 
 ```{r student level data example}
-# Student level data 
+# student-level data 
 tibble(
     student = letters[1:10], 
     school = rep(letters[11:15], 2), 
@@ -647,7 +649,7 @@ tibble(
 )
 ```
 
-Aggregate data totals up a variable--the varibable `test_score` in this case--to "hide" the student level information. The rows of the resulting dataset represent a group. The group our example is the `school` variable:
+Aggregate data totals up a variable--the varibable `test_score` in this case--to "hide" the student-level information. The rows of the resulting dataset represent a group. The group our example is the `school` variable:
 
 ```{r aggregate level data example}
 tibble(
@@ -662,16 +664,26 @@ tibble(
 
 Notice here that this dataset no longer identifies individual students. 
 
-*Student level data for analysis of local populations. Aggregate data for base rate and context.*
+*student-level data for analysis of local populations. Aggregate data for base rate and context.*
 
-Longitudinal analysis is typically done with student level data because educators are interested in what happens to students over time. So if you cannot access student level data, how do we use aggregate data to offer value to the analytic conversation?
+Longitudinal analysis is typically done with student-level data because educators are interested in what happens to students over time. So if you cannot access student-level data, how do we use aggregate data to offer value to the analytic conversation?
 
-Aggregate data is valuable because it allows us to learn from populations that are larger or different from the local student level population. Think of it as an opportunity to learn from totaled up student data from other states or the whole country.
+Aggregate data is valuable because it allows us to learn from populations that are larger or different from the local student-level population. Think of it as an opportunity to learn from totaled up student data from other states or the whole country.
 
-In his book *Thinking Fast and Slow*, Daniel Kahneman discusses the importance of learning from larger populations, a context he refers to as the base rate. The base rate fallacy is the tendency to focus on conclusions we can draw from immediately available information and to ignore analysis of the larger context. It's the difference between computing how often a student at one school is identified for special education services (student level data) and how often a students are identified for special educations services nationally (base rate data). We can use aggregate data to combat the baserate fallacy by putting what we learn from local student data in the context of surrounding populations. 
+In his book *Thinking Fast and Slow*, Daniel Kahneman (2011) discusses the importance of learning from larger populations, a context he refers to as the base rate. The base rate fallacy is the tendency to focus on conclusions we can draw from immediately available information and to ignore analysis of the larger context. It's the difference between computing how often a student at one school is identified for special education services (student-level data) and how often a students are identified for special educations services nationally (base rate data). We can use aggregate data to combat the baserate fallacy by putting what we learn from local student data in the context of surrounding populations. 
 
-For example, consider an analysis of student level data in a school district over time. Student level data allows us to ask questions about our local population: One such question is: Are the rates of special education identification for male students different from other gender identitites *in our district*? This style of question looks *inward* at your own educational system. 
+For example, consider an analysis of student-level data in a school district over time. student-level data allows us to ask questions about our local population: One such question is: Are the rates of special education identification for male students different from other gender identitites *in our district*? This style of question looks *inward* at your own educational system. 
 
-Taking a cue from Daniel Khneman, we should also ask what this pattern looks like in other states or in the country. Aggregate data allows us to ask questions about a different or larger population: One such question is Are the reates of special education identification for male students different from other gender identities *in the United States*? This style of question looks for answers *outside* your own educational system. The combination of these two lines of inquiry are powerful way to generate new knowledge about the student experience. 
+Taking a cue from Daniel Kahneman, we should also ask what this pattern looks like in other states or in the country. Aggregate data allows us to ask questions about a different or larger population: One such question is Are the reates of special education identification for male students different from other gender identities *in the United States*? This style of question looks for answers *outside* your own educational system. The combination of these two lines of inquiry are powerful way to generate new knowledge about the student experience. 
 
-So education data scientists should not despair in situations where they cannot access student level data. Aggregate data is a powerful way to learn from state level or national level data without an MOU that gives access to student level data. In situations where student level data *is* available, including aggregate level data acts as an excellent way to combat the base rate fallacy. 
+So education data scientists should not despair in situations where they cannot access student-level data. Aggregate data is a powerful way to learn from state level or national level data without an MOU that gives access to student-level data. In situations where student-level data *is* available, including aggregate level data acts as an excellent way to combat the base rate fallacy. 
+
+# 11.5 References 
+
+Wickham, H. (2014). Tidy data. *Journal of Statistical Software*, 59(10).  Retrieved from [https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf](https://www.jstatsoft.org/article/view/v059i10/v59i10.pdf)
+
+Park, A. (2016). Reachable: data collection methods for sexual orientation and gender identity. Retrieved from [https://williamsinstitute.law.ucla.edu/wp-content/uploads/Reachable-Data-collection-methods-for-sexual-orientation-gender-identity-March-2016.pdf](https://williamsinstitute.law.ucla.edu/wp-content/uploads/Reachable-Data-collection-methods-for-sexual-orientation-gender-identity-March-2016.pdf)
+
+Healy, K. (2018). *Data visualization: A practical introduction*. Princeton, NJ: Princeton University Press.
+
+Kahneman, D. (2011). Thinking, fast and slow. New York :Farrar, Straus and Giroux. 
