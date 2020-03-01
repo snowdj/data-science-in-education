@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>13 Walkthrough 7: The Role (and Usefulness) of Multi-Level Models | Data Science in Education Using R</title>
   <meta name="description" content="Bookdown for ‘Data Science in Education Using R’ by Emily A. Bovee, Ryan A. Estrellado, Jesse Mostipak, Joshua M. Rosenberg, and Isabella C. Velásquez to be published by Routledge in 2020" />
-  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="13 Walkthrough 7: The Role (and Usefulness) of Multi-Level Models | Data Science in Education Using R" />
   <meta property="og:type" content="book" />
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <link rel="prev" href="c12.html"/>
 <link rel="next" href="c14.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -139,9 +139,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Data Science in Education Using R</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction: Data Science in Education–You’re Invited!</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction: Data Science in Education - You’re Invited!</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#c01"><i class="fa fa-check"></i><b>1.1</b> Learning Data Science in Education</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#making-the-path-a-little-clearer"><i class="fa fa-check"></i><b>1.2</b> Making the Path a Little Clearer</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#about-the-book"><i class="fa fa-check"></i><b>1.3</b> About the Book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="c02.html"><a href="c02.html"><i class="fa fa-check"></i><b>2</b> How to Use this Book</a><ul>
 <li class="chapter" data-level="2.1" data-path="c02.html"><a href="c02.html#different-strokes-for-different-data-scientists-in-education"><i class="fa fa-check"></i><b>2.1</b> Different Strokes for Different Data Scientists in Education</a><ul>
@@ -151,7 +152,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="c02.html"><a href="c02.html#a-note-on-statistics"><i class="fa fa-check"></i><b>2.2</b> A Note on Statistics</a></li>
 <li class="chapter" data-level="2.3" data-path="c02.html"><a href="c02.html#what-this-book-is-not-about"><i class="fa fa-check"></i><b>2.3</b> What This Book Is Not About</a></li>
-<li class="chapter" data-level="2.4" data-path="c02.html"><a href="c02.html#contributing-to-the-book"><i class="fa fa-check"></i><b>2.4</b> Contributing to the Book</a></li>
+<li class="chapter" data-level="2.4" data-path="c02.html"><a href="c02.html#supporting-the-book"><i class="fa fa-check"></i><b>2.4</b> Supporting the Book</a></li>
+<li class="chapter" data-level="2.5" data-path="c02.html"><a href="c02.html#contributing-to-the-book"><i class="fa fa-check"></i><b>2.5</b> Contributing to the Book</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="c03.html"><a href="c03.html"><i class="fa fa-check"></i><b>3</b> What is a Data Scientist in Education?</a><ul>
 <li class="chapter" data-level="3.1" data-path="c03.html"><a href="c03.html#data-roles-in-education"><i class="fa fa-check"></i><b>3.1</b> Data Roles in Education</a><ul>
@@ -170,15 +172,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="c04.html"><a href="c04.html"><i class="fa fa-check"></i><b>4</b> Special Considerations</a><ul>
 <li class="chapter" data-level="4.1" data-path="c04.html"><a href="c04.html#things-to-consider-when-doing-data-science-in-any-domain"><i class="fa fa-check"></i><b>4.1</b> Things to Consider when Doing Data Science in any Domain</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="c04.html"><a href="c04.html#a-new-field"><i class="fa fa-check"></i><b>4.1.1</b> A New Field</a></li>
+<li class="chapter" data-level="4.1.1" data-path="c04.html"><a href="c04.html#learning-to-code"><i class="fa fa-check"></i><b>4.1.1</b> Learning to Code</a></li>
 <li class="chapter" data-level="4.1.2" data-path="c04.html"><a href="c04.html#addressing-ambiguity-a-reproducible-approach"><i class="fa fa-check"></i><b>4.1.2</b> Addressing Ambiguity: A Reproducible Approach</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="c04.html"><a href="c04.html#things-to-consider-when-doing-data-science-in-education"><i class="fa fa-check"></i><b>4.2</b> Things to Consider when Doing Data Science in Education</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="c04.html"><a href="c04.html#addressing-organizational-resistance-a-self-driven-analytic-approach"><i class="fa fa-check"></i><b>4.2.1</b> Addressing organizational resistance: A self-driven analytic approach</a></li>
+<li class="chapter" data-level="4.2.1" data-path="c04.html"><a href="c04.html#addressing-organizational-resistance-a-self-driven-analytic-approach"><i class="fa fa-check"></i><b>4.2.1</b> Addressing Organizational Resistance: A Self-Driven Analytic Approach</a></li>
 <li class="chapter" data-level="4.2.2" data-path="c04.html"><a href="c04.html#lack-of-processes-and-guidelines"><i class="fa fa-check"></i><b>4.2.2</b> Lack of Processes and Guidelines</a></li>
 <li class="chapter" data-level="4.2.3" data-path="c04.html"><a href="c04.html#limited-training-and-educational-opportunities"><i class="fa fa-check"></i><b>4.2.3</b> Limited Training and Educational Opportunities</a></li>
 <li class="chapter" data-level="4.2.4" data-path="c04.html"><a href="c04.html#advancing-equity"><i class="fa fa-check"></i><b>4.2.4</b> Advancing Equity</a></li>
-<li class="chapter" data-level="4.2.5" data-path="c04.html"><a href="c04.html#the-complex-and-messy-nature-of-education-data"><i class="fa fa-check"></i><b>4.2.5</b> The Complex and Messy Nature of Education Data</a></li>
+<li class="chapter" data-level="4.2.5" data-path="c04.html"><a href="c04.html#the-complex-nature-of-education-data"><i class="fa fa-check"></i><b>4.2.5</b> The Complex Nature of Education Data</a></li>
 <li class="chapter" data-level="4.2.6" data-path="c04.html"><a href="c04.html#ethical-and-legal-concerns"><i class="fa fa-check"></i><b>4.2.6</b> Ethical and Legal Concerns</a></li>
 <li class="chapter" data-level="4.2.7" data-path="c04.html"><a href="c04.html#analytic-considerations"><i class="fa fa-check"></i><b>4.2.7</b> Analytic Considerations</a></li>
 </ul></li>
@@ -192,12 +194,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3.2" data-path="c05.html"><a href="c05.html#to-download-rstudio"><i class="fa fa-check"></i><b>5.3.2</b> To download RStudio:</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="c05.html"><a href="c05.html#getting-to-know-r-through-rstudio"><i class="fa fa-check"></i><b>5.4</b> Getting to know R through RStudio</a></li>
-<li class="chapter" data-level="5.5" data-path="c05.html"><a href="c05.html#diving-a-little-deeper-into-r-with-swirl"><i class="fa fa-check"></i><b>5.5</b> Diving a little deeper into R with <code>swirl</code></a></li>
-<li class="chapter" data-level="5.6" data-path="c05.html"><a href="c05.html#introduction-to-help-documentation"><i class="fa fa-check"></i><b>5.6</b> Introduction to Help Documentation</a></li>
-<li class="chapter" data-level="5.7" data-path="c05.html"><a href="c05.html#downloading-and-accessing-the-data-sets-used-in-this-book"><i class="fa fa-check"></i><b>5.7</b> Downloading and accessing the data sets used in this book</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="c06.html"><a href="c06.html"><i class="fa fa-check"></i><b>6</b> Foundational Skills</a><ul>
-<li class="chapter" data-level="6.1" data-path="c06.html"><a href="c06.html#chapter-overview-1"><i class="fa fa-check"></i><b>6.1</b> Chapter overview</a></li>
+<li class="chapter" data-level="6.1" data-path="c06.html"><a href="c06.html#chapter-overview-1"><i class="fa fa-check"></i><b>6.1</b> Chapter Overview</a></li>
 <li class="chapter" data-level="6.2" data-path="c06.html"><a href="c06.html#foundational-skills-framework"><i class="fa fa-check"></i><b>6.2</b> Foundational Skills Framework</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="c06.html"><a href="c06.html#data"><i class="fa fa-check"></i><b>6.2.1</b> Data</a></li>
 </ul></li>
@@ -205,107 +204,119 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.3.1" data-path="c06.html"><a href="c06.html#setting-up-your-project"><i class="fa fa-check"></i><b>6.3.1</b> Setting up your Project</a></li>
 </ul></li>
 <li class="chapter" data-level="6.4" data-path="c06.html"><a href="c06.html#packages"><i class="fa fa-check"></i><b>6.4</b> Packages</a></li>
-<li class="chapter" data-level="6.5" data-path="c06.html"><a href="c06.html#code-for-foundational-skills"><i class="fa fa-check"></i><b>6.5</b> Code for Foundational Skills</a></li>
-<li class="chapter" data-level="6.6" data-path="c06.html"><a href="c06.html#packages-and-functions"><i class="fa fa-check"></i><b>6.6</b> Packages and Functions</a></li>
-<li class="chapter" data-level="6.7" data-path="c06.html"><a href="c06.html#installing-and-loading-a-package"><i class="fa fa-check"></i><b>6.7</b> Installing and loading a package</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="c06.html"><a href="c06.html#recognizing-a-function"><i class="fa fa-check"></i><b>6.7.1</b> Recognizing a function</a></li>
-<li class="chapter" data-level="6.7.2" data-path="c06.html"><a href="c06.html#running-code-in-r"><i class="fa fa-check"></i><b>6.7.2</b> Running code in R</a></li>
-<li class="chapter" data-level="6.7.3" data-path="c06.html"><a href="c06.html#run-this-code"><i class="fa fa-check"></i><b>6.7.3</b> Run this code</a></li>
-<li class="chapter" data-level="6.7.4" data-path="c06.html"><a href="c06.html#function-conflicts-between-packages"><i class="fa fa-check"></i><b>6.7.4</b> Function conflicts between packages</a></li>
-<li class="chapter" data-level="6.7.5" data-path="c06.html"><a href="c06.html#how-to-find-a-package"><i class="fa fa-check"></i><b>6.7.5</b> How to find a package</a></li>
-<li class="chapter" data-level="6.7.6" data-path="c06.html"><a href="c06.html#how-to-learn-more-about-a-package"><i class="fa fa-check"></i><b>6.7.6</b> How to learn more about a package</a></li>
-<li class="chapter" data-level="6.7.7" data-path="c06.html"><a href="c06.html#commenting-in-r"><i class="fa fa-check"></i><b>6.7.7</b> Commenting in R</a></li>
+<li class="chapter" data-level="6.5" data-path="c06.html"><a href="c06.html#exploring-r-quickly-with-swirl"><i class="fa fa-check"></i><b>6.5</b> Exploring R quickly with <code>swirl</code></a></li>
+<li class="chapter" data-level="6.6" data-path="c06.html"><a href="c06.html#introduction-to-help-documentation"><i class="fa fa-check"></i><b>6.6</b> Introduction to Help Documentation</a></li>
+<li class="chapter" data-level="6.7" data-path="c06.html"><a href="c06.html#code-for-foundational-skills"><i class="fa fa-check"></i><b>6.7</b> Code for Foundational Skills</a></li>
+<li class="chapter" data-level="6.8" data-path="c06.html"><a href="c06.html#packages-and-functions"><i class="fa fa-check"></i><b>6.8</b> Packages and Functions</a></li>
+<li class="chapter" data-level="6.9" data-path="c06.html"><a href="c06.html#installing-and-loading-a-package"><i class="fa fa-check"></i><b>6.9</b> Installing and loading a package</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="c06.html"><a href="c06.html#recognizing-a-function"><i class="fa fa-check"></i><b>6.9.1</b> Recognizing a function</a></li>
+<li class="chapter" data-level="6.9.2" data-path="c06.html"><a href="c06.html#running-code-in-r"><i class="fa fa-check"></i><b>6.9.2</b> Running code in R</a></li>
+<li class="chapter" data-level="6.9.3" data-path="c06.html"><a href="c06.html#run-this-code"><i class="fa fa-check"></i><b>6.9.3</b> Run this code</a></li>
+<li class="chapter" data-level="6.9.4" data-path="c06.html"><a href="c06.html#function-conflicts-between-packages"><i class="fa fa-check"></i><b>6.9.4</b> Function conflicts between packages</a></li>
+<li class="chapter" data-level="6.9.5" data-path="c06.html"><a href="c06.html#how-to-find-a-package"><i class="fa fa-check"></i><b>6.9.5</b> How to find a package</a></li>
+<li class="chapter" data-level="6.9.6" data-path="c06.html"><a href="c06.html#how-to-learn-more-about-a-package"><i class="fa fa-check"></i><b>6.9.6</b> How to learn more about a package</a></li>
+<li class="chapter" data-level="6.9.7" data-path="c06.html"><a href="c06.html#commenting-in-r"><i class="fa fa-check"></i><b>6.9.7</b> Commenting in R</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="c06.html"><a href="c06.html#using-functions-to-import-data"><i class="fa fa-check"></i><b>6.8</b> Using functions to import data</a><ul>
-<li class="chapter" data-level="6.8.1" data-path="c06.html"><a href="c06.html#run-this-code-1"><i class="fa fa-check"></i><b>6.8.1</b> Run this code</a></li>
-<li class="chapter" data-level="6.8.2" data-path="c06.html"><a href="c06.html#the-assignment-operator"><i class="fa fa-check"></i><b>6.8.2</b> The assignment operator</a></li>
-<li class="chapter" data-level="6.8.3" data-path="c06.html"><a href="c06.html#the-here-package"><i class="fa fa-check"></i><b>6.8.3</b> The <code>here</code> package</a></li>
-<li class="chapter" data-level="6.8.4" data-path="c06.html"><a href="c06.html#data-types"><i class="fa fa-check"></i><b>6.8.4</b> Data types</a></li>
+<li class="chapter" data-level="6.10" data-path="c06.html"><a href="c06.html#using-functions-to-import-data"><i class="fa fa-check"></i><b>6.10</b> Using functions to import data</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="c06.html"><a href="c06.html#downloading-and-accessing-the-data-sets-used-in-this-book"><i class="fa fa-check"></i><b>6.10.1</b> Downloading and accessing the data sets used in this book</a></li>
+<li class="chapter" data-level="6.10.2" data-path="c06.html"><a href="c06.html#run-this-code-1"><i class="fa fa-check"></i><b>6.10.2</b> Run this code</a></li>
+<li class="chapter" data-level="6.10.3" data-path="c06.html"><a href="c06.html#the-assignment-operator"><i class="fa fa-check"></i><b>6.10.3</b> The assignment operator</a></li>
+<li class="chapter" data-level="6.10.4" data-path="c06.html"><a href="c06.html#the-here-package"><i class="fa fa-check"></i><b>6.10.4</b> The <code>here</code> package</a></li>
+<li class="chapter" data-level="6.10.5" data-path="c06.html"><a href="c06.html#data-types"><i class="fa fa-check"></i><b>6.10.5</b> Data types</a></li>
 </ul></li>
-<li class="chapter" data-level="6.9" data-path="c06.html"><a href="c06.html#reading-code-and-writing-functions"><i class="fa fa-check"></i><b>6.9</b> Reading code and writing functions</a><ul>
-<li class="chapter" data-level="6.9.1" data-path="c06.html"><a href="c06.html#run-this-code-2"><i class="fa fa-check"></i><b>6.9.1</b> Run this code</a></li>
-<li class="chapter" data-level="6.9.2" data-path="c06.html"><a href="c06.html#common-errors"><i class="fa fa-check"></i><b>6.9.2</b> Common errors</a></li>
-<li class="chapter" data-level="6.9.3" data-path="c06.html"><a href="c06.html#the-operator"><i class="fa fa-check"></i><b>6.9.3</b> The <code>$</code> operator</a></li>
+<li class="chapter" data-level="6.11" data-path="c06.html"><a href="c06.html#reading-code-and-writing-functions"><i class="fa fa-check"></i><b>6.11</b> Reading code and writing functions</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="c06.html"><a href="c06.html#run-this-code-2"><i class="fa fa-check"></i><b>6.11.1</b> Run this code</a></li>
+<li class="chapter" data-level="6.11.2" data-path="c06.html"><a href="c06.html#common-errors"><i class="fa fa-check"></i><b>6.11.2</b> Common errors</a></li>
+<li class="chapter" data-level="6.11.3" data-path="c06.html"><a href="c06.html#the-operator"><i class="fa fa-check"></i><b>6.11.3</b> The <code>$</code> operator</a></li>
 </ul></li>
-<li class="chapter" data-level="6.10" data-path="c06.html"><a href="c06.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.10</b> The pipe operator</a><ul>
-<li class="chapter" data-level="6.10.1" data-path="c06.html"><a href="c06.html#run-this-code-3"><i class="fa fa-check"></i><b>6.10.1</b> Run this code</a></li>
-<li class="chapter" data-level="6.10.2" data-path="c06.html"><a href="c06.html#piping-practices"><i class="fa fa-check"></i><b>6.10.2</b> Piping practices</a></li>
-<li class="chapter" data-level="6.10.3" data-path="c06.html"><a href="c06.html#closing-your-parentheses"><i class="fa fa-check"></i><b>6.10.3</b> Closing your parentheses</a></li>
+<li class="chapter" data-level="6.12" data-path="c06.html"><a href="c06.html#the-pipe-operator"><i class="fa fa-check"></i><b>6.12</b> The pipe operator</a><ul>
+<li class="chapter" data-level="6.12.1" data-path="c06.html"><a href="c06.html#run-this-code-3"><i class="fa fa-check"></i><b>6.12.1</b> Run this code</a></li>
+<li class="chapter" data-level="6.12.2" data-path="c06.html"><a href="c06.html#piping-practices"><i class="fa fa-check"></i><b>6.12.2</b> Piping practices</a></li>
+<li class="chapter" data-level="6.12.3" data-path="c06.html"><a href="c06.html#closing-your-parentheses"><i class="fa fa-check"></i><b>6.12.3</b> Closing your parentheses</a></li>
 </ul></li>
-<li class="chapter" data-level="6.11" data-path="c06.html"><a href="c06.html#functions-and-equality"><i class="fa fa-check"></i><b>6.11</b> Functions and equality</a><ul>
-<li class="chapter" data-level="6.11.1" data-path="c06.html"><a href="c06.html#run-this-code-4"><i class="fa fa-check"></i><b>6.11.1</b> Run this code</a></li>
-<li class="chapter" data-level="6.11.2" data-path="c06.html"><a href="c06.html#reading-code"><i class="fa fa-check"></i><b>6.11.2</b> “Reading” code</a></li>
-<li class="chapter" data-level="6.11.3" data-path="c06.html"><a href="c06.html#verb-based-functions"><i class="fa fa-check"></i><b>6.11.3</b> Verb-based functions</a></li>
-<li class="chapter" data-level="6.11.4" data-path="c06.html"><a href="c06.html#when-functions-need-arguments-and-when-they-dont"><i class="fa fa-check"></i><b>6.11.4</b> When functions need arguments and when they don’t</a></li>
-<li class="chapter" data-level="6.11.5" data-path="c06.html"><a href="c06.html#functions-within-functions"><i class="fa fa-check"></i><b>6.11.5</b> Functions within functions</a></li>
-<li class="chapter" data-level="6.11.6" data-path="c06.html"><a href="c06.html#the-difference-between-and"><i class="fa fa-check"></i><b>6.11.6</b> The difference between <code>=</code> and <code>==</code></a></li>
-<li class="chapter" data-level="6.11.7" data-path="c06.html"><a href="c06.html#writing-your-own-functions"><i class="fa fa-check"></i><b>6.11.7</b> Writing your own functions</a></li>
+<li class="chapter" data-level="6.13" data-path="c06.html"><a href="c06.html#functions-and-equality"><i class="fa fa-check"></i><b>6.13</b> Functions and equality</a><ul>
+<li class="chapter" data-level="6.13.1" data-path="c06.html"><a href="c06.html#run-this-code-4"><i class="fa fa-check"></i><b>6.13.1</b> Run this code</a></li>
+<li class="chapter" data-level="6.13.2" data-path="c06.html"><a href="c06.html#reading-code"><i class="fa fa-check"></i><b>6.13.2</b> “Reading” code</a></li>
+<li class="chapter" data-level="6.13.3" data-path="c06.html"><a href="c06.html#verb-based-functions"><i class="fa fa-check"></i><b>6.13.3</b> Verb-based functions</a></li>
+<li class="chapter" data-level="6.13.4" data-path="c06.html"><a href="c06.html#when-functions-need-arguments-and-when-they-dont"><i class="fa fa-check"></i><b>6.13.4</b> When functions need arguments and when they don’t</a></li>
+<li class="chapter" data-level="6.13.5" data-path="c06.html"><a href="c06.html#functions-within-functions"><i class="fa fa-check"></i><b>6.13.5</b> Functions within functions</a></li>
+<li class="chapter" data-level="6.13.6" data-path="c06.html"><a href="c06.html#the-difference-between-and"><i class="fa fa-check"></i><b>6.13.6</b> The difference between <code>=</code> and <code>==</code></a></li>
+<li class="chapter" data-level="6.13.7" data-path="c06.html"><a href="c06.html#writing-your-own-functions"><i class="fa fa-check"></i><b>6.13.7</b> Writing your own functions</a></li>
 </ul></li>
-<li class="chapter" data-level="6.12" data-path="c06.html"><a href="c06.html#basics-of-names"><i class="fa fa-check"></i><b>6.12</b> Basics of names</a><ul>
-<li class="chapter" data-level="6.12.1" data-path="c06.html"><a href="c06.html#run-this-code-5"><i class="fa fa-check"></i><b>6.12.1</b> Run this code</a></li>
+<li class="chapter" data-level="6.14" data-path="c06.html"><a href="c06.html#basics-of-names"><i class="fa fa-check"></i><b>6.14</b> Basics of names</a><ul>
+<li class="chapter" data-level="6.14.1" data-path="c06.html"><a href="c06.html#run-this-code-5"><i class="fa fa-check"></i><b>6.14.1</b> Run this code</a></li>
 </ul></li>
-<li class="chapter" data-level="6.13" data-path="c06.html"><a href="c06.html#conclusion-1"><i class="fa fa-check"></i><b>6.13</b> Conclusion</a><ul>
-<li class="chapter" data-level="6.13.1" data-path="c06.html"><a href="c06.html#still-need-to-incorporate-the-following"><i class="fa fa-check"></i><b>6.13.1</b> STILL NEED TO INCORPORATE THE FOLLOWING</a></li>
-<li class="chapter" data-level="6.13.2" data-path="c06.html"><a href="c06.html#track-two-welcome-to-the-tidyverse"><i class="fa fa-check"></i><b>6.13.2</b> Track Two: Welcome to the Tidyverse</a></li>
+<li class="chapter" data-level="6.15" data-path="c06.html"><a href="c06.html#conclusion-1"><i class="fa fa-check"></i><b>6.15</b> Conclusion</a><ul>
+<li class="chapter" data-level="6.15.1" data-path="c06.html"><a href="c06.html#still-need-to-incorporate-the-following"><i class="fa fa-check"></i><b>6.15.1</b> STILL NEED TO INCORPORATE THE FOLLOWING</a></li>
+<li class="chapter" data-level="6.15.2" data-path="c06.html"><a href="c06.html#track-two-welcome-to-the-tidyverse"><i class="fa fa-check"></i><b>6.15.2</b> Track Two: Welcome to the Tidyverse</a></li>
 </ul></li>
-<li class="chapter" data-level="6.14" data-path="c06.html"><a href="c06.html#include-at-end-of-chapter"><i class="fa fa-check"></i><b>6.14</b> Include at end of chapter!</a></li>
-<li class="chapter" data-level="6.15" data-path="c06.html"><a href="c06.html#loading-data-from-excel-sav-and-google-sheets"><i class="fa fa-check"></i><b>6.15</b> Loading Data from Excel, SAV, and Google Sheets</a><ul>
-<li class="chapter" data-level="6.15.1" data-path="c06.html"><a href="c06.html#loading-excel-files"><i class="fa fa-check"></i><b>6.15.1</b> Loading Excel Files</a></li>
-<li class="chapter" data-level="6.15.2" data-path="c06.html"><a href="c06.html#loading-sav-files"><i class="fa fa-check"></i><b>6.15.2</b> Loading SAV Files</a></li>
-<li class="chapter" data-level="6.15.3" data-path="c06.html"><a href="c06.html#google-sheets"><i class="fa fa-check"></i><b>6.15.3</b> Google Sheets</a></li>
-<li class="chapter" data-level="6.15.4" data-path="c06.html"><a href="c06.html#saving-a-file-from-the-web"><i class="fa fa-check"></i><b>6.15.4</b> Saving a File from the Web</a></li>
-<li class="chapter" data-level="6.15.5" data-path="c06.html"><a href="c06.html#loading-a-.csv-file"><i class="fa fa-check"></i><b>6.15.5</b> Loading a <code>.csv</code> File</a></li>
-<li class="chapter" data-level="6.15.6" data-path="c06.html"><a href="c06.html#saving-files"><i class="fa fa-check"></i><b>6.15.6</b> Saving Files</a></li>
-<li class="chapter" data-level="6.15.7" data-path="c06.html"><a href="c06.html#conclusion-2"><i class="fa fa-check"></i><b>6.15.7</b> Conclusion</a></li>
+<li class="chapter" data-level="6.16" data-path="c06.html"><a href="c06.html#include-at-end-of-chapter"><i class="fa fa-check"></i><b>6.16</b> Include at end of chapter!</a></li>
+<li class="chapter" data-level="6.17" data-path="c06.html"><a href="c06.html#loading-data-from-excel-sav-and-google-sheets"><i class="fa fa-check"></i><b>6.17</b> Loading Data from Excel, SAV, and Google Sheets</a><ul>
+<li class="chapter" data-level="6.17.1" data-path="c06.html"><a href="c06.html#loading-excel-files"><i class="fa fa-check"></i><b>6.17.1</b> Loading Excel Files</a></li>
+<li class="chapter" data-level="6.17.2" data-path="c06.html"><a href="c06.html#loading-sav-files"><i class="fa fa-check"></i><b>6.17.2</b> Loading SAV Files</a></li>
+<li class="chapter" data-level="6.17.3" data-path="c06.html"><a href="c06.html#google-sheets"><i class="fa fa-check"></i><b>6.17.3</b> Google Sheets</a></li>
+<li class="chapter" data-level="6.17.4" data-path="c06.html"><a href="c06.html#saving-a-file-from-the-web"><i class="fa fa-check"></i><b>6.17.4</b> Saving a File from the Web</a></li>
+<li class="chapter" data-level="6.17.5" data-path="c06.html"><a href="c06.html#loading-a-.csv-file"><i class="fa fa-check"></i><b>6.17.5</b> Loading a <code>.csv</code> File</a></li>
+<li class="chapter" data-level="6.17.6" data-path="c06.html"><a href="c06.html#saving-files"><i class="fa fa-check"></i><b>6.17.6</b> Saving Files</a></li>
+<li class="chapter" data-level="6.17.7" data-path="c06.html"><a href="c06.html#conclusion-2"><i class="fa fa-check"></i><b>6.17.7</b> Conclusion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.16" data-path="c06.html"><a href="c06.html#processing-data-1"><i class="fa fa-check"></i><b>6.16</b> Processing Data</a></li>
-<li class="chapter" data-level="6.17" data-path="c06.html"><a href="c06.html#communicating-sharing-results"><i class="fa fa-check"></i><b>6.17</b> Communicating / Sharing Results</a></li>
-<li class="chapter" data-level="6.18" data-path="c06.html"><a href="c06.html#may-not-need"><i class="fa fa-check"></i><b>6.18</b> May not need</a></li>
+<li class="chapter" data-level="6.18" data-path="c06.html"><a href="c06.html#processing-data-1"><i class="fa fa-check"></i><b>6.18</b> Processing Data</a></li>
+<li class="chapter" data-level="6.19" data-path="c06.html"><a href="c06.html#communicating-sharing-results"><i class="fa fa-check"></i><b>6.19</b> Communicating / Sharing Results</a></li>
+<li class="chapter" data-level="6.20" data-path="c06.html"><a href="c06.html#may-not-need"><i class="fa fa-check"></i><b>6.20</b> May not need</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="c07.html"><a href="c07.html"><i class="fa fa-check"></i><b>7</b> Walkthrough 1: The Education Dataset Science Pipeline With Online Science Class Data</a><ul>
 <li class="chapter" data-level="7.1" data-path="c07.html"><a href="c07.html#vocabulary"><i class="fa fa-check"></i><b>7.1</b> Vocabulary</a></li>
 <li class="chapter" data-level="7.2" data-path="c07.html"><a href="c07.html#introduction"><i class="fa fa-check"></i><b>7.2</b> Introduction</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="c07.html"><a href="c07.html#background"><i class="fa fa-check"></i><b>7.2.1</b> Background</a></li>
 <li class="chapter" data-level="7.2.2" data-path="c07.html"><a href="c07.html#data-sources"><i class="fa fa-check"></i><b>7.2.2</b> Data Sources</a></li>
-<li class="chapter" data-level="7.2.3" data-path="c07.html"><a href="c07.html#data-source-2-log-trace-data"><i class="fa fa-check"></i><b>7.2.3</b> Data source #2: Log-trace data</a></li>
-<li class="chapter" data-level="7.2.4" data-path="c07.html"><a href="c07.html#data-source-3-achievement-related-and-gradebook-data"><i class="fa fa-check"></i><b>7.2.4</b> Data source #3: Achievement-related and gradebook data</a></li>
-<li class="chapter" data-level="7.2.5" data-path="c07.html"><a href="c07.html#data-source-4-discussion-board-data"><i class="fa fa-check"></i><b>7.2.5</b> Data source #4: Discussion board data</a></li>
+<li class="chapter" data-level="7.2.3" data-path="c07.html"><a href="c07.html#data-source-2-log-trace-data"><i class="fa fa-check"></i><b>7.2.3</b> Data source #2: Log-Trace Data</a></li>
+<li class="chapter" data-level="7.2.4" data-path="c07.html"><a href="c07.html#data-source-3-achievement-related-and-gradebook-data"><i class="fa fa-check"></i><b>7.2.4</b> Data source #3: Achievement-Related and Gradebook Data</a></li>
+<li class="chapter" data-level="7.2.5" data-path="c07.html"><a href="c07.html#data-source-4-discussion-board-data"><i class="fa fa-check"></i><b>7.2.5</b> Data source #4: Discussion Board Data</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="c07.html"><a href="c07.html#methods"><i class="fa fa-check"></i><b>7.3</b> Methods</a></li>
 <li class="chapter" data-level="7.4" data-path="c07.html"><a href="c07.html#load-packages"><i class="fa fa-check"></i><b>7.4</b> Load Packages</a></li>
 <li class="chapter" data-level="7.5" data-path="c07.html"><a href="c07.html#import-data"><i class="fa fa-check"></i><b>7.5</b> Import Data</a></li>
-<li class="chapter" data-level="7.6" data-path="c07.html"><a href="c07.html#view-data"><i class="fa fa-check"></i><b>7.6</b> View data</a></li>
-<li class="chapter" data-level="7.7" data-path="c07.html"><a href="c07.html#process-data"><i class="fa fa-check"></i><b>7.7</b> Process data</a><ul>
-<li class="chapter" data-level="7.7.1" data-path="c07.html"><a href="c07.html#processing-the-course-data"><i class="fa fa-check"></i><b>7.7.1</b> Processing the course data</a></li>
-<li class="chapter" data-level="7.7.2" data-path="c07.html"><a href="c07.html#joining-the-data"><i class="fa fa-check"></i><b>7.7.2</b> Joining the data</a></li>
-<li class="chapter" data-level="7.7.3" data-path="c07.html"><a href="c07.html#finding-distinct-cases-at-the-student-level"><i class="fa fa-check"></i><b>7.7.3</b> Finding distinct cases at the student-level</a></li>
+<li class="chapter" data-level="7.6" data-path="c07.html"><a href="c07.html#view-data"><i class="fa fa-check"></i><b>7.6</b> View Data</a></li>
+<li class="chapter" data-level="7.7" data-path="c07.html"><a href="c07.html#process-data"><i class="fa fa-check"></i><b>7.7</b> Process Data</a><ul>
+<li class="chapter" data-level="7.7.1" data-path="c07.html"><a href="c07.html#processing-the-course-data"><i class="fa fa-check"></i><b>7.7.1</b> Processing the Course Data</a></li>
+<li class="chapter" data-level="7.7.2" data-path="c07.html"><a href="c07.html#joining-the-data"><i class="fa fa-check"></i><b>7.7.2</b> Joining the Data</a></li>
+<li class="chapter" data-level="7.7.3" data-path="c07.html"><a href="c07.html#finding-distinct-cases-at-the-student-level"><i class="fa fa-check"></i><b>7.7.3</b> Finding Distinct Cases at the Student-Level</a></li>
 </ul></li>
 <li class="chapter" data-level="7.8" data-path="c07.html"><a href="c07.html#analysis"><i class="fa fa-check"></i><b>7.8</b> Analysis</a><ul>
-<li class="chapter" data-level="7.8.1" data-path="c07.html"><a href="c07.html#the-relationship-between-time-spent-on-course-and-percentage-of-points-earned"><i class="fa fa-check"></i><b>7.8.1</b> The relationship between time spent on course and percentage of points earned</a></li>
-<li class="chapter" data-level="7.8.2" data-path="c07.html"><a href="c07.html#linear-model-regression"><i class="fa fa-check"></i><b>7.8.2</b> Linear model (regression)</a></li>
+<li class="chapter" data-level="7.8.1" data-path="c07.html"><a href="c07.html#about-ggplot2"><i class="fa fa-check"></i><b>7.8.1</b> About {ggplot2}</a></li>
+<li class="chapter" data-level="7.8.2" data-path="c07.html"><a href="c07.html#the-relationship-between-time-spent-on-course-and-percentage-of-points-earned"><i class="fa fa-check"></i><b>7.8.2</b> The Relationship between Time Spent on Course and Percentage of Points Earned</a></li>
+<li class="chapter" data-level="7.8.3" data-path="c07.html"><a href="c07.html#linear-model-regression"><i class="fa fa-check"></i><b>7.8.3</b> Linear Model (Regression)</a></li>
 </ul></li>
 <li class="chapter" data-level="7.9" data-path="c07.html"><a href="c07.html#results"><i class="fa fa-check"></i><b>7.9</b> Results</a></li>
 <li class="chapter" data-level="7.10" data-path="c07.html"><a href="c07.html#conclusion-3"><i class="fa fa-check"></i><b>7.10</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="c08.html"><a href="c08.html"><i class="fa fa-check"></i><b>8</b> Walkthrough 2: Approaching Gradebook Data From a Data Science Perspective</a><ul>
-<li class="chapter" data-level="8.1" data-path="c08.html"><a href="c08.html#introduction-1"><i class="fa fa-check"></i><b>8.1</b> Introduction</a></li>
-<li class="chapter" data-level="8.2" data-path="c08.html"><a href="c08.html#data-sources-1"><i class="fa fa-check"></i><b>8.2</b> Data Sources</a></li>
-<li class="chapter" data-level="8.3" data-path="c08.html"><a href="c08.html#load-packages-1"><i class="fa fa-check"></i><b>8.3</b> Load Packages</a></li>
-<li class="chapter" data-level="8.4" data-path="c08.html"><a href="c08.html#import-data-1"><i class="fa fa-check"></i><b>8.4</b> Import Data</a></li>
-<li class="chapter" data-level="8.5" data-path="c08.html"><a href="c08.html#tidy-data"><i class="fa fa-check"></i><b>8.5</b> Tidy Data</a></li>
-<li class="chapter" data-level="8.6" data-path="c08.html"><a href="c08.html#process-data-1"><i class="fa fa-check"></i><b>8.6</b> Process Data</a></li>
-<li class="chapter" data-level="8.7" data-path="c08.html"><a href="c08.html#visualize-data"><i class="fa fa-check"></i><b>8.7</b> Visualize Data</a></li>
-<li class="chapter" data-level="8.8" data-path="c08.html"><a href="c08.html#model-data"><i class="fa fa-check"></i><b>8.8</b> Model Data</a><ul>
-<li class="chapter" data-level="8.8.1" data-path="c08.html"><a href="c08.html#deciding-an-analysis"><i class="fa fa-check"></i><b>8.8.1</b> Deciding an Analysis</a></li>
-<li class="chapter" data-level="8.8.2" data-path="c08.html"><a href="c08.html#visualize-data-to-check-assumptions"><i class="fa fa-check"></i><b>8.8.2</b> Visualize Data to Check Assumptions</a></li>
-<li class="chapter" data-level="8.8.3" data-path="c08.html"><a href="c08.html#correlation-analysis"><i class="fa fa-check"></i><b>8.8.3</b> Correlation Analysis</a></li>
-<li class="chapter" data-level="8.8.4" data-path="c08.html"><a href="c08.html#building-a-linear-model"><i class="fa fa-check"></i><b>8.8.4</b> Building a Linear Model</a></li>
+<li class="chapter" data-level="8.1" data-path="c08.html"><a href="c08.html#vocabulary-1"><i class="fa fa-check"></i><b>8.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="c08.html"><a href="c08.html#introduction-1"><i class="fa fa-check"></i><b>8.2</b> Introduction</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="c08.html"><a href="c08.html#background-1"><i class="fa fa-check"></i><b>8.2.1</b> Background</a></li>
+<li class="chapter" data-level="8.2.2" data-path="c08.html"><a href="c08.html#data-sources-1"><i class="fa fa-check"></i><b>8.2.2</b> Data Sources</a></li>
+<li class="chapter" data-level="8.2.3" data-path="c08.html"><a href="c08.html#method"><i class="fa fa-check"></i><b>8.2.3</b> Method</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="c08.html"><a href="c08.html#conclusion-4"><i class="fa fa-check"></i><b>8.9</b> Conclusion</a></li>
+<li class="chapter" data-level="8.3" data-path="c08.html"><a href="c08.html#load-packages-1"><i class="fa fa-check"></i><b>8.3</b> Load Packages</a></li>
+<li class="chapter" data-level="8.4" data-path="c08.html"><a href="c08.html#import-data-1"><i class="fa fa-check"></i><b>8.4</b> Import Data</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="c08.html"><a href="c08.html#import-using-a-file-path"><i class="fa fa-check"></i><b>8.4.1</b> Import Using a File Path</a></li>
+<li class="chapter" data-level="8.4.2" data-path="c08.html"><a href="c08.html#import-using-here"><i class="fa fa-check"></i><b>8.4.2</b> Import Using <code>here()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="c08.html"><a href="c08.html#process-data-1"><i class="fa fa-check"></i><b>8.5</b> Process data</a><ul>
+<li class="chapter" data-level="8.5.1" data-path="c08.html"><a href="c08.html#tidy-data"><i class="fa fa-check"></i><b>8.5.1</b> Tidy Data</a></li>
+<li class="chapter" data-level="8.5.2" data-path="c08.html"><a href="c08.html#create-new-variables-and-further-process-the-data"><i class="fa fa-check"></i><b>8.5.2</b> Create new variables and further process the data</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="c08.html"><a href="c08.html#analysis-1"><i class="fa fa-check"></i><b>8.6</b> Analysis</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="c08.html"><a href="c08.html#visualize-data"><i class="fa fa-check"></i><b>8.6.1</b> Visualize Data</a></li>
+<li class="chapter" data-level="8.6.2" data-path="c08.html"><a href="c08.html#model-data"><i class="fa fa-check"></i><b>8.6.2</b> Model Data</a></li>
+<li class="chapter" data-level="8.6.3" data-path="c08.html"><a href="c08.html#correlation-analysis"><i class="fa fa-check"></i><b>8.6.3</b> Correlation Analysis</a></li>
+<li class="chapter" data-level="8.6.4" data-path="c08.html"><a href="c08.html#building-a-linear-model"><i class="fa fa-check"></i><b>8.6.4</b> Building a Linear Model</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="c08.html"><a href="c08.html#conclusion-4"><i class="fa fa-check"></i><b>8.7</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="c09.html"><a href="c09.html"><i class="fa fa-check"></i><b>9</b> Walkthrough 3: Introduction to Aggregate Data</a><ul>
 <li class="chapter" data-level="9.1" data-path="c09.html"><a href="c09.html#introduction-2"><i class="fa fa-check"></i><b>9.1</b> Introduction</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="c09.html"><a href="c09.html#background-1"><i class="fa fa-check"></i><b>9.1.1</b> Background</a></li>
+<li class="chapter" data-level="9.1.1" data-path="c09.html"><a href="c09.html#background-2"><i class="fa fa-check"></i><b>9.1.1</b> Background</a></li>
 </ul></li>
 <li class="chapter" data-level="9.2" data-path="c09.html"><a href="c09.html#data-sources-2"><i class="fa fa-check"></i><b>9.2</b> Data Sources</a><ul>
 <li class="chapter" data-level="9.2.1" data-path="c09.html"><a href="c09.html#methods-1"><i class="fa fa-check"></i><b>9.2.1</b> Methods</a></li>
@@ -316,35 +327,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.1" data-path="c09.html"><a href="c09.html#discovering-distributions"><i class="fa fa-check"></i><b>9.5.1</b> Discovering Distributions</a></li>
 <li class="chapter" data-level="9.5.2" data-path="c09.html"><a href="c09.html#analyzing-spread"><i class="fa fa-check"></i><b>9.5.2</b> Analyzing Spread</a></li>
 </ul></li>
-<li class="chapter" data-level="9.6" data-path="c09.html"><a href="c09.html#analysis-1"><i class="fa fa-check"></i><b>9.6</b> Analysis</a><ul>
+<li class="chapter" data-level="9.6" data-path="c09.html"><a href="c09.html#analysis-2"><i class="fa fa-check"></i><b>9.6</b> Analysis</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="c09.html"><a href="c09.html#creating-categories"><i class="fa fa-check"></i><b>9.6.1</b> Creating Categories</a></li>
 <li class="chapter" data-level="9.6.2" data-path="c09.html"><a href="c09.html#reveal-relationships"><i class="fa fa-check"></i><b>9.6.2</b> Reveal Relationships</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="c09.html"><a href="c09.html#results-1"><i class="fa fa-check"></i><b>9.7</b> Results</a></li>
 <li class="chapter" data-level="9.8" data-path="c09.html"><a href="c09.html#conclusion-5"><i class="fa fa-check"></i><b>9.8</b> Conclusion</a></li>
-<li class="chapter" data-level="9.9" data-path="c09.html"><a href="c09.html#references"><i class="fa fa-check"></i><b>9.9</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="c10.html"><a href="c10.html"><i class="fa fa-check"></i><b>10</b> Walkthrough 4: Longitudinal Analysis With Federal Students With Disabilities Data</a><ul>
-<li class="chapter" data-level="10.1" data-path="c10.html"><a href="c10.html#vocabulary-1"><i class="fa fa-check"></i><b>10.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="10.1" data-path="c10.html"><a href="c10.html#vocabulary-2"><i class="fa fa-check"></i><b>10.1</b> Vocabulary</a></li>
 <li class="chapter" data-level="10.2" data-path="c10.html"><a href="c10.html#introduction-3"><i class="fa fa-check"></i><b>10.2</b> Introduction</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="c10.html"><a href="c10.html#background-2"><i class="fa fa-check"></i><b>10.2.1</b> Background</a></li>
+<li class="chapter" data-level="10.2.1" data-path="c10.html"><a href="c10.html#background-3"><i class="fa fa-check"></i><b>10.2.1</b> Background</a></li>
 <li class="chapter" data-level="10.2.2" data-path="c10.html"><a href="c10.html#methods-2"><i class="fa fa-check"></i><b>10.2.2</b> Methods</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="c10.html"><a href="c10.html#load-packages-3"><i class="fa fa-check"></i><b>10.3</b> Load Packages</a></li>
 <li class="chapter" data-level="10.4" data-path="c10.html"><a href="c10.html#import-data-3"><i class="fa fa-check"></i><b>10.4</b> Import Data</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="c10.html"><a href="c10.html#reading-in-one-dataset"><i class="fa fa-check"></i><b>10.4.1</b> Reading In One Dataset</a></li>
-<li class="chapter" data-level="10.4.2" data-path="c10.html"><a href="c10.html#reading-in-many-datasets"><i class="fa fa-check"></i><b>10.4.2</b> Reading In Many Datasets</a></li>
+<li class="chapter" data-level="10.4.1" data-path="c10.html"><a href="c10.html#what-to-download"><i class="fa fa-check"></i><b>10.4.1</b> What to Download</a></li>
+<li class="chapter" data-level="10.4.2" data-path="c10.html"><a href="c10.html#a-note-on-file-paths"><i class="fa fa-check"></i><b>10.4.2</b> A Note on File Paths</a></li>
+<li class="chapter" data-level="10.4.3" data-path="c10.html"><a href="c10.html#reading-in-one-dataset"><i class="fa fa-check"></i><b>10.4.3</b> Reading in One Dataset</a></li>
+<li class="chapter" data-level="10.4.4" data-path="c10.html"><a href="c10.html#reading-in-many-datasets"><i class="fa fa-check"></i><b>10.4.4</b> Reading in Many Datasets</a></li>
 </ul></li>
 <li class="chapter" data-level="10.5" data-path="c10.html"><a href="c10.html#process-data-2"><i class="fa fa-check"></i><b>10.5</b> Process Data</a><ul>
-<li class="chapter" data-level="10.5.1" data-path="c10.html"><a href="c10.html#fix-the-variable-names-in-the-2016-data"><i class="fa fa-check"></i><b>10.5.1</b> Fix the variable names in the 2016 data</a></li>
-<li class="chapter" data-level="10.5.2" data-path="c10.html"><a href="c10.html#pick-variables"><i class="fa fa-check"></i><b>10.5.2</b> Pick variables</a></li>
-<li class="chapter" data-level="10.5.3" data-path="c10.html"><a href="c10.html#combine-six-datasets-into-one"><i class="fa fa-check"></i><b>10.5.3</b> Combine six datasets into one</a></li>
-<li class="chapter" data-level="10.5.4" data-path="c10.html"><a href="c10.html#filter-for-the-desired-disabilities-and-age-groups"><i class="fa fa-check"></i><b>10.5.4</b> Filter for the desired disabilities and age groups</a></li>
-<li class="chapter" data-level="10.5.5" data-path="c10.html"><a href="c10.html#rename-the-variables"><i class="fa fa-check"></i><b>10.5.5</b> Rename the variables</a></li>
-<li class="chapter" data-level="10.5.6" data-path="c10.html"><a href="c10.html#clean-state-names"><i class="fa fa-check"></i><b>10.5.6</b> Clean state names</a></li>
-<li class="chapter" data-level="10.5.7" data-path="c10.html"><a href="c10.html#tidy-the-dataset"><i class="fa fa-check"></i><b>10.5.7</b> Tidy the dataset</a></li>
-<li class="chapter" data-level="10.5.8" data-path="c10.html"><a href="c10.html#convert-data-types"><i class="fa fa-check"></i><b>10.5.8</b> Convert data types</a></li>
-<li class="chapter" data-level="10.5.9" data-path="c10.html"><a href="c10.html#explore-and-address-nas"><i class="fa fa-check"></i><b>10.5.9</b> Explore and address NAs</a></li>
+<li class="chapter" data-level="10.5.1" data-path="c10.html"><a href="c10.html#fix-the-variable-names-in-the-2016-data"><i class="fa fa-check"></i><b>10.5.1</b> Fix the Variable Names in the 2016 Data</a></li>
+<li class="chapter" data-level="10.5.2" data-path="c10.html"><a href="c10.html#pick-variables"><i class="fa fa-check"></i><b>10.5.2</b> Pick Variables</a></li>
+<li class="chapter" data-level="10.5.3" data-path="c10.html"><a href="c10.html#combine-six-datasets-into-one"><i class="fa fa-check"></i><b>10.5.3</b> Combine Six Datasets into One</a></li>
+<li class="chapter" data-level="10.5.4" data-path="c10.html"><a href="c10.html#filter-for-the-desired-disabilities-and-age-groups"><i class="fa fa-check"></i><b>10.5.4</b> Filter for the Desired Disabilities and Age Groups</a></li>
+<li class="chapter" data-level="10.5.5" data-path="c10.html"><a href="c10.html#rename-the-variables"><i class="fa fa-check"></i><b>10.5.5</b> Rename the Variables</a></li>
+<li class="chapter" data-level="10.5.6" data-path="c10.html"><a href="c10.html#clean-state-names"><i class="fa fa-check"></i><b>10.5.6</b> Clean State Names</a></li>
+<li class="chapter" data-level="10.5.7" data-path="c10.html"><a href="c10.html#tidy-the-dataset"><i class="fa fa-check"></i><b>10.5.7</b> Tidy the Dataset</a></li>
+<li class="chapter" data-level="10.5.8" data-path="c10.html"><a href="c10.html#convert-data-types"><i class="fa fa-check"></i><b>10.5.8</b> Convert Data Types</a></li>
+<li class="chapter" data-level="10.5.9" data-path="c10.html"><a href="c10.html#explore-and-address-nas"><i class="fa fa-check"></i><b>10.5.9</b> Explore and Address NAs</a></li>
 </ul></li>
 <li class="chapter" data-level="10.6" data-path="c10.html"><a href="c10.html#analysis-how-have-child-counts-changed-over-time"><i class="fa fa-check"></i><b>10.6</b> Analysis: How Have Child Counts Changed Over Time?</a><ul>
 <li class="chapter" data-level="10.6.1" data-path="c10.html"><a href="c10.html#visualize-the-dataset"><i class="fa fa-check"></i><b>10.6.1</b> Visualize the Dataset</a></li>
@@ -354,9 +366,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.8" data-path="c10.html"><a href="c10.html#conclusion-aggregate-data-as-context-for-student-data"><i class="fa fa-check"></i><b>10.8</b> Conclusion: Aggregate Data as Context for Student Data</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="c11.html"><a href="c11.html"><i class="fa fa-check"></i><b>11</b> Walkthrough 5: Text Analysis With Social Media Data</a><ul>
-<li class="chapter" data-level="11.1" data-path="c11.html"><a href="c11.html#vocabulary-2"><i class="fa fa-check"></i><b>11.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="11.1" data-path="c11.html"><a href="c11.html#vocabulary-3"><i class="fa fa-check"></i><b>11.1</b> Vocabulary</a></li>
 <li class="chapter" data-level="11.2" data-path="c11.html"><a href="c11.html#introduction-4"><i class="fa fa-check"></i><b>11.2</b> Introduction</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="c11.html"><a href="c11.html#background-3"><i class="fa fa-check"></i><b>11.2.1</b> Background</a></li>
+<li class="chapter" data-level="11.2.1" data-path="c11.html"><a href="c11.html#background-4"><i class="fa fa-check"></i><b>11.2.1</b> Background</a></li>
 <li class="chapter" data-level="11.2.2" data-path="c11.html"><a href="c11.html#data-source"><i class="fa fa-check"></i><b>11.2.2</b> Data Source</a></li>
 <li class="chapter" data-level="11.2.3" data-path="c11.html"><a href="c11.html#methods-3"><i class="fa fa-check"></i><b>11.2.3</b> Methods</a></li>
 </ul></li>
@@ -373,50 +385,78 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.8.3" data-path="c11.html"><a href="c11.html#close-read-of-randomly-selected-tweets"><i class="fa fa-check"></i><b>11.8.3</b> Close read of randomly selected tweets</a></li>
 </ul></li>
 <li class="chapter" data-level="11.9" data-path="c11.html"><a href="c11.html#conclusion-6"><i class="fa fa-check"></i><b>11.9</b> Conclusion</a></li>
+<li class="chapter" data-level="11.10" data-path="c11.html"><a href="c11.html#technical-appendix-on-accessing-twitter-data"><i class="fa fa-check"></i><b>11.10</b> Technical Appendix on Accessing Twitter data</a><ul>
+<li class="chapter" data-level="11.10.1" data-path="c11.html"><a href="c11.html#accessing-historical-twitter-data-using-already-collected-status-urls"><i class="fa fa-check"></i><b>11.10.1</b> Accessing historical Twitter data using already-collected status URLs</a></li>
+<li class="chapter" data-level="11.10.2" data-path="c11.html"><a href="c11.html#accessing-historical-data-when-you-do-not-have-access-to-status-urls"><i class="fa fa-check"></i><b>11.10.2</b> Accessing historical data when you do not have access to status URLs</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="c12.html"><a href="c12.html"><i class="fa fa-check"></i><b>12</b> Walkthrough 6: Exploring Relationships Using Social Network Analysis Models and Methods</a><ul>
-<li class="chapter" data-level="12.1" data-path="c12.html"><a href="c12.html#accessing-data"><i class="fa fa-check"></i><b>12.1</b> Accessing data</a></li>
-<li class="chapter" data-level="12.2" data-path="c12.html"><a href="c12.html#preparing-the-data-for-the-analysis"><i class="fa fa-check"></i><b>12.2</b> Preparing the data for the analysis</a></li>
-<li class="chapter" data-level="12.3" data-path="c12.html"><a href="c12.html#extracting-mentions"><i class="fa fa-check"></i><b>12.3</b> Extracting mentions</a></li>
-<li class="chapter" data-level="12.4" data-path="c12.html"><a href="c12.html#putting-the-edgelist-together"><i class="fa fa-check"></i><b>12.4</b> Putting the edgelist together</a></li>
-<li class="chapter" data-level="12.5" data-path="c12.html"><a href="c12.html#plotting-the-network"><i class="fa fa-check"></i><b>12.5</b> Plotting the network</a></li>
-<li class="chapter" data-level="12.6" data-path="c12.html"><a href="c12.html#selection-and-influence-models"><i class="fa fa-check"></i><b>12.6</b> Selection and influence models</a></li>
-<li class="chapter" data-level="12.7" data-path="c12.html"><a href="c12.html#appendix-a"><i class="fa fa-check"></i><b>12.7</b> Appendix A</a><ul>
-<li class="chapter" data-level="12.7.1" data-path="c12.html"><a href="c12.html#accessing-historical-data-using-status-urls"><i class="fa fa-check"></i><b>12.7.1</b> Accessing historical data using status URLs</a></li>
-<li class="chapter" data-level="12.7.2" data-path="c12.html"><a href="c12.html#accessing-historical-data-when-you-do-not-have-access-to-status-urls"><i class="fa fa-check"></i><b>12.7.2</b> Accessing historical data when you do not have access to status URLs</a></li>
 </ul></li>
-<li class="chapter" data-level="12.8" data-path="c12.html"><a href="c12.html#appendix-b"><i class="fa fa-check"></i><b>12.8</b> Appendix B</a><ul>
-<li class="chapter" data-level="12.8.1" data-path="c12.html"><a href="c12.html#an-example-of-influence"><i class="fa fa-check"></i><b>12.8.1</b> An example of influence</a></li>
-<li class="chapter" data-level="12.8.2" data-path="c12.html"><a href="c12.html#joining-the-data-1"><i class="fa fa-check"></i><b>12.8.2</b> Joining the data</a></li>
-<li class="chapter" data-level="12.8.3" data-path="c12.html"><a href="c12.html#an-example-of-selection"><i class="fa fa-check"></i><b>12.8.3</b> An example of selection</a></li>
+<li class="chapter" data-level="12" data-path="c12.html"><a href="c12.html"><i class="fa fa-check"></i><b>12</b> Walkthrough 6: Exploring Relationships Using Social Network Analysis With Social Media Data</a><ul>
+<li class="chapter" data-level="12.1" data-path="c12.html"><a href="c12.html#vocabulary-4"><i class="fa fa-check"></i><b>12.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="12.2" data-path="c12.html"><a href="c12.html#introduction-5"><i class="fa fa-check"></i><b>12.2</b> Introduction</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="c12.html"><a href="c12.html#background-5"><i class="fa fa-check"></i><b>12.2.1</b> Background</a></li>
+<li class="chapter" data-level="12.2.2" data-path="c12.html"><a href="c12.html#packages-data-sources-and-import-and-methods"><i class="fa fa-check"></i><b>12.2.2</b> Packages, Data Sources and Import, and Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="c12.html"><a href="c12.html#view-data-3"><i class="fa fa-check"></i><b>12.3</b> View Data</a></li>
+<li class="chapter" data-level="12.4" data-path="c12.html"><a href="c12.html#process-data-4"><i class="fa fa-check"></i><b>12.4</b> Process Data</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="c12.html"><a href="c12.html#extracting-mentions"><i class="fa fa-check"></i><b>12.4.1</b> Extracting mentions</a></li>
+<li class="chapter" data-level="12.4.2" data-path="c12.html"><a href="c12.html#putting-the-edgelist-together"><i class="fa fa-check"></i><b>12.4.2</b> Putting the edgelist together</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="c12.html"><a href="c12.html#analysis-and-results"><i class="fa fa-check"></i><b>12.5</b> Analysis and Results</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="c12.html"><a href="c12.html#plotting-the-network"><i class="fa fa-check"></i><b>12.5.1</b> Plotting the network</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="c12.html"><a href="c12.html#conclusion-7"><i class="fa fa-check"></i><b>12.6</b> Conclusion</a></li>
+<li class="chapter" data-level="12.7" data-path="c12.html"><a href="c12.html#technical-appendix-influence-and-selection-models"><i class="fa fa-check"></i><b>12.7</b> Technical Appendix: Influence and selection models</a><ul>
+<li class="chapter" data-level="12.7.1" data-path="c12.html"><a href="c12.html#an-example-of-influence"><i class="fa fa-check"></i><b>12.7.1</b> An example of influence</a></li>
+<li class="chapter" data-level="12.7.2" data-path="c12.html"><a href="c12.html#joining-the-data-1"><i class="fa fa-check"></i><b>12.7.2</b> Joining the data</a></li>
+<li class="chapter" data-level="12.7.3" data-path="c12.html"><a href="c12.html#an-example-of-selection"><i class="fa fa-check"></i><b>12.7.3</b> An example of selection</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="c13.html"><a href="c13.html"><i class="fa fa-check"></i><b>13</b> Walkthrough 7: The Role (and Usefulness) of Multi-Level Models</a><ul>
-<li class="chapter" data-level="13.1" data-path="c13.html"><a href="c13.html#but-what-about-different-courses"><i class="fa fa-check"></i><b>13.1</b> But what about different courses?</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="c13.html"><a href="c13.html#the-role-of-dummy-codes"><i class="fa fa-check"></i><b>13.1.1</b> The role of dummy codes</a></li>
-<li class="chapter" data-level="13.1.2" data-path="c13.html"><a href="c13.html#using-dummy-codes"><i class="fa fa-check"></i><b>13.1.2</b> Using dummy codes</a></li>
+<li class="chapter" data-level="13.1" data-path="c13.html"><a href="c13.html#vocabulary-5"><i class="fa fa-check"></i><b>13.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="13.2" data-path="c13.html"><a href="c13.html#introduction-6"><i class="fa fa-check"></i><b>13.2</b> Introduction</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="c13.html"><a href="c13.html#background-why-are-we-highlighting-this-what-is-the-purpose-implications"><i class="fa fa-check"></i><b>13.2.1</b> Background: why are we highlighting this? What is the purpose, implications</a></li>
+<li class="chapter" data-level="13.2.2" data-path="c13.html"><a href="c13.html#data-source-1"><i class="fa fa-check"></i><b>13.2.2</b> Data Source</a></li>
+<li class="chapter" data-level="13.2.3" data-path="c13.html"><a href="c13.html#methods-4"><i class="fa fa-check"></i><b>13.2.3</b> Methods</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="c13.html"><a href="c13.html#toward-multi-level-models"><i class="fa fa-check"></i><b>13.2</b> Toward multi-level models</a></li>
-<li class="chapter" data-level="13.3" data-path="c13.html"><a href="c13.html#other-groups"><i class="fa fa-check"></i><b>13.3</b> Other groups</a></li>
+<li class="chapter" data-level="13.3" data-path="c13.html"><a href="c13.html#load-packages-5"><i class="fa fa-check"></i><b>13.3</b> Load Packages</a></li>
+<li class="chapter" data-level="13.4" data-path="c13.html"><a href="c13.html#but-what-about-different-courses"><i class="fa fa-check"></i><b>13.4</b> But what about different courses?</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="c13.html"><a href="c13.html#the-role-of-dummy-codes"><i class="fa fa-check"></i><b>13.4.1</b> The role of dummy codes</a></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="c14.html"><a href="c14.html"><i class="fa fa-check"></i><b>14</b> Walkthrough 8: Predicting Students’ Final Grades Using Machine Learning Methods</a><ul>
-<li class="chapter" data-level="14.1" data-path="c14.html"><a href="c14.html#background-4"><i class="fa fa-check"></i><b>14.1</b> Background</a></li>
-<li class="chapter" data-level="14.2" data-path="c14.html"><a href="c14.html#information-about-the-dataset"><i class="fa fa-check"></i><b>14.2</b> Information about the dataset</a></li>
-<li class="chapter" data-level="14.3" data-path="c14.html"><a href="c14.html#selecting-an-analysis"><i class="fa fa-check"></i><b>14.3</b> Selecting an analysis</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="c14.html"><a href="c14.html#defining-our-research-question"><i class="fa fa-check"></i><b>14.3.1</b> Defining our research question</a></li>
-<li class="chapter" data-level="14.3.2" data-path="c14.html"><a href="c14.html#predictive-analytics-and-machine-learning"><i class="fa fa-check"></i><b>14.3.2</b> Predictive analytics and machine learning</a></li>
+<li class="chapter" data-level="13.5" data-path="c13.html"><a href="c13.html#import-data-5"><i class="fa fa-check"></i><b>13.5</b> Import Data</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="c13.html"><a href="c13.html#using-dummy-codes"><i class="fa fa-check"></i><b>13.5.1</b> Using dummy codes</a></li>
 </ul></li>
-<li class="chapter" data-level="14.4" data-path="c14.html"><a href="c14.html#information-on-random-forests"><i class="fa fa-check"></i><b>14.4</b> Information on random forests</a></li>
-<li class="chapter" data-level="14.5" data-path="c14.html"><a href="c14.html#analysis-2"><i class="fa fa-check"></i><b>14.5</b> Analysis</a><ul>
-<li class="chapter" data-level="14.5.1" data-path="c14.html"><a href="c14.html#use-of-caret"><i class="fa fa-check"></i><b>14.5.1</b> Use of caret</a></li>
+<li class="chapter" data-level="13.6" data-path="c13.html"><a href="c13.html#analysis-3"><i class="fa fa-check"></i><b>13.6</b> Analysis</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="c13.html"><a href="c13.html#regression-linear-model-analysis-with-dummy-codes"><i class="fa fa-check"></i><b>13.6.1</b> Regression (linear model) analysis with dummy codes</a></li>
+<li class="chapter" data-level="13.6.2" data-path="c13.html"><a href="c13.html#a-deep-dive-into-the-background-of-multi-level-models"><i class="fa fa-check"></i><b>13.6.2</b> A deep-dive into the background of multi-level models</a></li>
+<li class="chapter" data-level="13.6.3" data-path="c13.html"><a href="c13.html#multi-level-model-analysis"><i class="fa fa-check"></i><b>13.6.3</b> Multi-level model analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="14.6" data-path="c14.html"><a href="c14.html#examining-predictive-accuracy-on-the-test-data-set"><i class="fa fa-check"></i><b>14.6</b> Examining predictive accuracy on the test data set</a><ul>
-<li class="chapter" data-level="14.6.1" data-path="c14.html"><a href="c14.html#variable-importance-measures"><i class="fa fa-check"></i><b>14.6.1</b> Variable importance measures</a></li>
-<li class="chapter" data-level="14.6.2" data-path="c14.html"><a href="c14.html#comparing-a-random-forest-to-a-regression"><i class="fa fa-check"></i><b>14.6.2</b> Comparing a random forest to a regression</a></li>
+<li class="chapter" data-level="13.7" data-path="c13.html"><a href="c13.html#results-3"><i class="fa fa-check"></i><b>13.7</b> Results</a></li>
+<li class="chapter" data-level="13.8" data-path="c13.html"><a href="c13.html#conclusion-8"><i class="fa fa-check"></i><b>13.8</b> Conclusion</a></li>
 </ul></li>
+<li class="chapter" data-level="14" data-path="c14.html"><a href="c14.html"><i class="fa fa-check"></i><b>14</b> Walkthrough 8: Predicting Students’ Final Grades Using Machine Learning Methods with Online Course Data</a><ul>
+<li class="chapter" data-level="14.1" data-path="c14.html"><a href="c14.html#vocabulary-6"><i class="fa fa-check"></i><b>14.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="14.2" data-path="c14.html"><a href="c14.html#introduction-7"><i class="fa fa-check"></i><b>14.2</b> Introduction</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="c14.html"><a href="c14.html#background-6"><i class="fa fa-check"></i><b>14.2.1</b> Background</a></li>
+<li class="chapter" data-level="14.2.2" data-path="c14.html"><a href="c14.html#data-sources-3"><i class="fa fa-check"></i><b>14.2.2</b> Data Sources</a></li>
+<li class="chapter" data-level="14.2.3" data-path="c14.html"><a href="c14.html#methods-5"><i class="fa fa-check"></i><b>14.2.3</b> Methods</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="c14.html"><a href="c14.html#random-forests"><i class="fa fa-check"></i><b>14.3</b> Random forests</a></li>
+<li class="chapter" data-level="14.4" data-path="c14.html"><a href="c14.html#load-packages-6"><i class="fa fa-check"></i><b>14.4</b> Load Packages</a></li>
+<li class="chapter" data-level="14.5" data-path="c14.html"><a href="c14.html#import-and-view-data"><i class="fa fa-check"></i><b>14.5</b> Import and View Data</a></li>
+<li class="chapter" data-level="14.6" data-path="c14.html"><a href="c14.html#process-data-5"><i class="fa fa-check"></i><b>14.6</b> Process Data</a></li>
+<li class="chapter" data-level="14.7" data-path="c14.html"><a href="c14.html#analysis-4"><i class="fa fa-check"></i><b>14.7</b> Analysis</a><ul>
+<li class="chapter" data-level="14.7.1" data-path="c14.html"><a href="c14.html#use-of-caret"><i class="fa fa-check"></i><b>14.7.1</b> Use of caret</a></li>
+<li class="chapter" data-level="14.7.2" data-path="c14.html"><a href="c14.html#tuning-the-random-forest-model"><i class="fa fa-check"></i><b>14.7.2</b> Tuning the random forest model</a></li>
+<li class="chapter" data-level="14.7.3" data-path="c14.html"><a href="c14.html#examining-predictive-accuracy-on-the-test-data-set"><i class="fa fa-check"></i><b>14.7.3</b> Examining predictive accuracy on the test data set</a></li>
+</ul></li>
+<li class="chapter" data-level="14.8" data-path="c14.html"><a href="c14.html#results-4"><i class="fa fa-check"></i><b>14.8</b> Results</a><ul>
+<li class="chapter" data-level="14.8.1" data-path="c14.html"><a href="c14.html#variable-importance-measures"><i class="fa fa-check"></i><b>14.8.1</b> Variable importance measures</a></li>
+<li class="chapter" data-level="14.8.2" data-path="c14.html"><a href="c14.html#comparing-a-random-forest-to-a-regression"><i class="fa fa-check"></i><b>14.8.2</b> Comparing a random forest to a regression</a></li>
+</ul></li>
+<li class="chapter" data-level="14.9" data-path="c14.html"><a href="c14.html#conclusion-9"><i class="fa fa-check"></i><b>14.9</b> Conclusion</a></li>
 </ul></li>
 <li class="chapter" data-level="15" data-path="c15.html"><a href="c15.html"><i class="fa fa-check"></i><b>15</b> Introducing Data Science Tools To Your Education Job</a><ul>
-<li class="chapter" data-level="15.1" data-path="c15.html"><a href="c15.html#introduction-5"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.1" data-path="c15.html"><a href="c15.html#introduction-8"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
 <li class="chapter" data-level="15.2" data-path="c15.html"><a href="c15.html#the-gift-of-speed-and-scale"><i class="fa fa-check"></i><b>15.2</b> The Gift of Speed and Scale</a><ul>
 <li class="chapter" data-level="15.2.1" data-path="c15.html"><a href="c15.html#working-with-data-faster"><i class="fa fa-check"></i><b>15.2.1</b> Working With Data Faster</a></li>
 <li class="chapter" data-level="15.2.2" data-path="c15.html"><a href="c15.html#working-with-more-data"><i class="fa fa-check"></i><b>15.2.2</b> Working With More Data</a></li>
@@ -459,10 +499,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="16.4" data-path="c16.html"><a href="c16.html#summary"><i class="fa fa-check"></i><b>16.4</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="17" data-path="c17.html"><a href="c17.html"><i class="fa fa-check"></i><b>17</b> Learning More</a><ul>
-<li class="chapter" data-level="17.1" data-path="c17.html"><a href="c17.html#introduction-6"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
-<li class="chapter" data-level="17.2" data-path="c17.html"><a href="c17.html#adopt-a-growth-mindset"><i class="fa fa-check"></i><b>17.2</b> Adopt a growth mindset</a></li>
-<li class="chapter" data-level="17.3" data-path="c17.html"><a href="c17.html#discover-new-information"><i class="fa fa-check"></i><b>17.3</b> Discover new information</a></li>
-<li class="chapter" data-level="17.4" data-path="c17.html"><a href="c17.html#ask-for-help"><i class="fa fa-check"></i><b>17.4</b> Ask for help</a><ul>
+<li class="chapter" data-level="17.1" data-path="c17.html"><a href="c17.html#introduction-9"><i class="fa fa-check"></i><b>17.1</b> Introduction</a></li>
+<li class="chapter" data-level="17.2" data-path="c17.html"><a href="c17.html#adopt-a-growth-mindset"><i class="fa fa-check"></i><b>17.2</b> Adopt a Growth Mindset</a></li>
+<li class="chapter" data-level="17.3" data-path="c17.html"><a href="c17.html#discover-new-information"><i class="fa fa-check"></i><b>17.3</b> Discover New Information</a></li>
+<li class="chapter" data-level="17.4" data-path="c17.html"><a href="c17.html#ask-for-help"><i class="fa fa-check"></i><b>17.4</b> Ask for Help</a><ul>
 <li class="chapter" data-level="17.4.1" data-path="c17.html"><a href="c17.html#discussion-forums"><i class="fa fa-check"></i><b>17.4.1</b> Discussion forums</a></li>
 <li class="chapter" data-level="17.4.2" data-path="c17.html"><a href="c17.html#github-repositories"><i class="fa fa-check"></i><b>17.4.2</b> GitHub repositories</a></li>
 </ul></li>
@@ -491,8 +531,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="18.14" data-path="c18.html"><a href="c18.html#learning-communities"><i class="fa fa-check"></i><b>18.14</b> Learning communities</a></li>
 </ul></li>
 <li class="chapter" data-level="19" data-path="c19.html"><a href="c19.html"><i class="fa fa-check"></i><b>19</b> Conclusion: To where next?</a><ul>
-<li class="chapter" data-level="19.1" data-path="c19.html"><a href="c19.html#take-on-challenges"><i class="fa fa-check"></i><b>19.1</b> Take on challenges</a></li>
-<li class="chapter" data-level="19.2" data-path="c19.html"><a href="c19.html#know-when-to-turn-to-something-else"><i class="fa fa-check"></i><b>19.2</b> Know when to turn to something else</a></li>
+<li class="chapter" data-level="19.1" data-path="c19.html"><a href="c19.html#take-on-challenges"><i class="fa fa-check"></i><b>19.1</b> Take on Challenges</a></li>
+<li class="chapter" data-level="19.2" data-path="c19.html"><a href="c19.html#know-when-to-turn-to-something-else"><i class="fa fa-check"></i><b>19.2</b> Know When to Turn to Something Else</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://www.emilybovee.com/">Emily A. Bovee</a></li>
@@ -521,49 +561,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="c13" class="section level1">
 <h1><span class="header-section-number">13</span> Walkthrough 7: The Role (and Usefulness) of Multi-Level Models</h1>
-<p>This walkthrough accompanies the <a href="06-wt-multilevel-models-1">previous chapter</a>, which focused on preparing the data and beginning to viusualize and model the data. Here, we focus on an extension of the models we ran, one focused on how to address the fact that students in our dataset shared classes.</p>
 <p>As for the earlier walkthrough using the same data, the <em>purpose</em> for this walkthrough is to explore
 students’ performance in these online courses, focusing on the time spent in the
-course (made available throygh the learning management system) and the effects
+course (made available through the learning management system) and the effects
 of being in a particular class.</p>
-<p>First, let’s load the tidyverse and read the data we processed in <a href="06-wt-multilevel-models-1">walkthrough 1</a>.</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb289-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb289-2" title="2"><span class="kw">library</span>(dummies)</a>
-<a class="sourceLine" id="cb289-3" title="3"><span class="kw">library</span>(sjPlot)</a>
-<a class="sourceLine" id="cb289-4" title="4"><span class="kw">library</span>(lme4)</a>
-<a class="sourceLine" id="cb289-5" title="5"><span class="kw">library</span>(performance)</a>
-<a class="sourceLine" id="cb289-6" title="6"></a>
-<a class="sourceLine" id="cb289-7" title="7">dat &lt;-<span class="st"> </span>dataedu<span class="op">::</span>sci_mo_processed</a></code></pre></div>
+<div id="vocabulary-5" class="section level2">
+<h2><span class="header-section-number">13.1</span> Vocabulary</h2>
+<ul>
+<li>hierarchical linear model<br />
+</li>
+<li>multi-level model<br />
+</li>
+<li>dummy coding</li>
+<li>intra-class correlation</li>
+</ul>
+</div>
+<div id="introduction-6" class="section level2">
+<h2><span class="header-section-number">13.2</span> Introduction</h2>
+<div id="background-why-are-we-highlighting-this-what-is-the-purpose-implications" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> Background: why are we highlighting this? What is the purpose, implications</h3>
+<p>This walkthrough accompanies the <a href="06-wt-multilevel-models-1">previous chapter</a>,
+which focused on preparing the data and beginning to viusualize and model the
+data. Here, we focus on an extension of the models we ran, one focused on how to
+address the fact that students in our dataset shared classes.</p>
+<p>As for the earlier walkthrough using the same data, the <em>purpose</em> for this
+walkthrough is to explore students’ performance in these online courses,
+focusing on the time spent in the course (made available throygh the learning
+management system) and the effects of being in a particular class.</p>
+</div>
+<div id="data-source-1" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> Data Source</h3>
+<p>We use the same data source on students’ motivation in online science classes
+that we processed in <a href="06-wt-multilevel-models-1">walkthrough 1</a>.</p>
+</div>
+<div id="methods-4" class="section level3">
+<h3><span class="header-section-number">13.2.3</span> Methods</h3>
+</div>
+</div>
+<div id="load-packages-5" class="section level2">
+<h2><span class="header-section-number">13.3</span> Load Packages</h2>
+<p>We will load the tidyverse and a few other packages specific to multi-level models.</p>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb301-2" title="2"><span class="kw">library</span>(dummies)</a>
+<a class="sourceLine" id="cb301-3" title="3"><span class="kw">library</span>(sjPlot)</a>
+<a class="sourceLine" id="cb301-4" title="4"><span class="kw">library</span>(lme4)</a>
+<a class="sourceLine" id="cb301-5" title="5"><span class="kw">library</span>(performance)</a>
+<a class="sourceLine" id="cb301-6" title="6"><span class="kw">library</span>(dataedu)</a></code></pre></div>
+</div>
 <div id="but-what-about-different-courses" class="section level2">
-<h2><span class="header-section-number">13.1</span> But what about different courses?</h2>
+<h2><span class="header-section-number">13.4</span> But what about different courses?</h2>
 <p>Are there course-specific differences in how much time students spend on the
 course as well as in how time spent is related to the percentage of points
 students earned? There are a number of ways to approach this question. Let’s use
 our linear model.</p>
 <p>Specifically, we can dummy-code the groups. Dummy coding means transforming a variable with multiple categories into multiple, new variables, where each variable indicates the presence and absence of only one of the categories.</p>
 <div id="the-role-of-dummy-codes" class="section level3">
-<h3><span class="header-section-number">13.1.1</span> The role of dummy codes</h3>
+<h3><span class="header-section-number">13.4.1</span> The role of dummy codes</h3>
 <p>We can see how dummy coding works through using the {dummies} package, though,
 as we will see, you often do not need to manually dummy code variables like
 this.</p>
-<p>Let’s consider the <strong>iris</strong> data that comes built into R, but, since we are fans
+<p>Let’s consider the <code>iris</code> data that comes built into R, but, since we are fans
 of the {tidyverse}, we will first change it into a tibble.</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb290-1" title="1">iris &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris)</a>
-<a class="sourceLine" id="cb290-2" title="2">iris</a></code></pre></div>
-<pre><code>## # A tibble: 150 x 5
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
-##  1          5.1         3.5          1.4         0.2 setosa 
-##  2          4.9         3            1.4         0.2 setosa 
-##  3          4.7         3.2          1.3         0.2 setosa 
-##  4          4.6         3.1          1.5         0.2 setosa 
-##  5          5           3.6          1.4         0.2 setosa 
-##  6          5.4         3.9          1.7         0.4 setosa 
-##  7          4.6         3.4          1.4         0.3 setosa 
-##  8          5           3.4          1.5         0.2 setosa 
-##  9          4.4         2.9          1.4         0.2 setosa 
-## 10          4.9         3.1          1.5         0.1 setosa 
-## # … with 140 more rows</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1">iris &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(iris)</a>
+<a class="sourceLine" id="cb302-2" title="2">iris</a></code></pre></div>
+<pre><code>#&gt; # A tibble: 150 x 5
+#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
+#&gt;  1          5.1         3.5          1.4         0.2 setosa 
+#&gt;  2          4.9         3            1.4         0.2 setosa 
+#&gt;  3          4.7         3.2          1.3         0.2 setosa 
+#&gt;  4          4.6         3.1          1.5         0.2 setosa 
+#&gt;  5          5           3.6          1.4         0.2 setosa 
+#&gt;  6          5.4         3.9          1.7         0.4 setosa 
+#&gt;  7          4.6         3.4          1.4         0.3 setosa 
+#&gt;  8          5           3.4          1.5         0.2 setosa 
+#&gt;  9          4.4         2.9          1.4         0.2 setosa 
+#&gt; 10          4.9         3.1          1.5         0.1 setosa 
+#&gt; # … with 140 more rows</code></pre>
 <p>As we can see above, the <code>Species</code> variable is a factor. If we consider how we could
 include a variable such as this in a linear model, things may become a little
 confusing. <code>Species</code> seems to be made up of, well, words, such as “setosa.” The
@@ -575,53 +649,54 @@ these new variables have a value of 1 when the row is associated with that level
 <p>Let’s return to {dummies}.</p>
 <p>How many possible values are there for <code>Species</code>? We can check with the <code>levels</code>
 function.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1"><span class="kw">levels</span>(iris<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1"><span class="kw">levels</span>(iris<span class="op">$</span>Species)</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
 <p>When we run the <code>dummy()</code> function on the <code>Species</code> variable, we can see that it
 returns <em>three</em> variables, one for each of the three levels of Species -
-“setosa”, “versicolor”, and “virginica”.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1">dummies<span class="op">::</span><span class="kw">dummy</span>(iris<span class="op">$</span>Species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb294-2" title="2"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
-<pre><code>## Warning in model.matrix.default(~x - 1, model.frame(~x - 1), contrasts = FALSE):
-## non-list contrasts argument ignored</code></pre>
-<pre><code>##      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}setosa
-## [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-## [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-## [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-## [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-## [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-## [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
-##      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}versicolor
-## [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-## [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-## [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-## [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-## [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-## [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
-##      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}virginica
-## [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
-## [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
-## [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
-## [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
-## [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
-## [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0</code></pre>
+<code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>.</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">dummies<span class="op">::</span><span class="kw">dummy</span>(iris<span class="op">$</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb306-2" title="2"><span class="st">  </span><span class="kw">head</span>()</a></code></pre></div>
+<pre><code>#&gt;      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}setosa
+#&gt; [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt; [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt; [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt; [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt; [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt; [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1
+#&gt;      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}versicolor
+#&gt; [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt; [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt; [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt; [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt; [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt; [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              0
+#&gt;      {\n    args = commandArgs(TRUE)\n    out = do.call(rmarkdown::render, c(args[1], readRDS(args[2]), list(run_pandoc = FALSE, encoding = &quot;UTF-8&quot;)))\n    out_expected = xfun::with_ext(args[1], &quot;.md&quot;)\n    if (out != out_expected) {\n        file.rename(out, out_expected)\n        attributes(out_expected) = attributes(out)\n        out = out_expected\n    }\n    if (file.exists(args[3])) {\n        res = readRDS(args[3])\n        res[[args[1]]] = out\n        saveRDS(res, args[3])\n    }\n    else saveRDS(setNames(list(out), args[1]), args[3])\n}virginica
+#&gt; [1,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
+#&gt; [2,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
+#&gt; [3,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
+#&gt; [4,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
+#&gt; [5,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0
+#&gt; [6,]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             0</code></pre>
 <p>We can confirm that every row associated with a specific species has a 1 in the
 column it corresponds to. We can do this by binding together the dummy codes and
-the <strong>iris</strong> data and then counting, for each of the three species, how many of
+the <code>iris</code> data and then counting, for each of the three species, how many of
 the rows for each dummy code were coded with a “1”.</p>
 <p>For example, when the <code>Species</code> is “setosa”, the variable <code>Speciessetosa</code> always
 equals 1 - as is the case for the other species (for their respective
 variables). <code>bind_cols()</code> is a useful tidyverse function for binding together
 data frames by column.</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb297-1" title="1">species_dummy_coded &lt;-<span class="st"> </span>dummies<span class="op">::</span><span class="kw">dummy</span>(iris<span class="op">$</span>Species)</a></code></pre></div>
-<pre><code>## Warning in model.matrix.default(~x - 1, model.frame(~x - 1), contrasts = FALSE):
-## non-list contrasts argument ignored</code></pre>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb299-1" title="1">species_dummy_coded &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(species_dummy_coded)</a>
-<a class="sourceLine" id="cb299-2" title="2">iris_with_dummy_codes &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(iris, species_dummy_coded)</a></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="co"># create matrix of dummy-coded variables</span></a>
+<a class="sourceLine" id="cb308-2" title="2">species_dummy_coded &lt;-<span class="st"> </span>dummies<span class="op">::</span><span class="kw">dummy</span>(iris<span class="op">$</span>Species)</a>
+<a class="sourceLine" id="cb308-3" title="3"></a>
+<a class="sourceLine" id="cb308-4" title="4"><span class="co"># convert matrix to tibble so we can use tidyverse functions</span></a>
+<a class="sourceLine" id="cb308-5" title="5">species_dummy_coded &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(species_dummy_coded)</a>
+<a class="sourceLine" id="cb308-6" title="6"></a>
+<a class="sourceLine" id="cb308-7" title="7"><span class="co"># add dummy coded variables to iris</span></a>
+<a class="sourceLine" id="cb308-8" title="8">iris_with_dummy_codes &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(iris, species_dummy_coded)</a></code></pre></div>
 <p>Let’s look at the results.</p>
 <!-- I can't figure out why the following won't run - it runs when I run it code chunk-by-chunk, but not when I render! -->
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1">iris_with_dummy_codes <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb300-2" title="2"><span class="st">    </span><span class="kw">count</span>(Species, Speciessetosa, Speciesversicolor, Speciesvirginica)</a></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb309-1" title="1">iris_with_dummy_codes <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb309-2" title="2"><span class="st">    </span><span class="kw">count</span>(Species, Speciessetosa, Speciesversicolor, Speciesvirginica)</a></code></pre></div>
 <p>Okay, this covers how dummy codes work: but, how do they work when used in a
 model, like with the linear model we have been using (through <code>lm()</code>)?</p>
 <p>In the context of using <code>lm()</code> (and many other functions in R) is that the
@@ -640,25 +715,47 @@ in short, the dummy code would not be compared to anything else. For this
 reason, one group is typically selected as the reference group, to which every
 other group is compared.</p>
 </div>
+</div>
+<div id="import-data-5" class="section level2">
+<h2><span class="header-section-number">13.5</span> Import Data</h2>
+<p>We will load a built-in dataset from the dataedu package.</p>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">dat &lt;-<span class="st"> </span>dataedu<span class="op">::</span>sci_mo_processed</a></code></pre></div>
 <div id="using-dummy-codes" class="section level3">
-<h3><span class="header-section-number">13.1.2</span> Using dummy codes</h3>
-<p>This may be clearer with an example. Let’s return to our online science class
-data and consider the effect (for a student) of being in a specific class in the data set.
-First, let’s determine how many classes there are. We can use the <code>count()</code>
-function.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb301-1" title="1">dat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb301-2" title="2"><span class="st">  </span><span class="kw">count</span>(course_id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb301-3" title="3"><span class="st">  </span><span class="kw">nrow</span>()</a></code></pre></div>
-<pre><code>## [1] 26</code></pre>
-<p>There are 26 distinct courses.</p>
-<p>We will save this output to <code>m_linear_courses</code>, where the <code>dc</code> stands for dummy
+<h3><span class="header-section-number">13.5.1</span> Using dummy codes</h3>
+<p>Let’s return use online science class data and consider the effect (for a
+student) of being in a specific class in the data set.</p>
+<p>First, let’s determine how many classes there are. We can use the <code>count()</code>
+function to see how many courses there are.</p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1">dat <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb311-2" title="2"><span class="st">  </span><span class="kw">count</span>(course_id)</a></code></pre></div>
+<pre><code>#&gt; # A tibble: 26 x 2
+#&gt;    course_id         n
+#&gt;    &lt;chr&gt;         &lt;int&gt;
+#&gt;  1 AnPhA-S116-01    43
+#&gt;  2 AnPhA-S116-02    29
+#&gt;  3 AnPhA-S216-01    43
+#&gt;  4 AnPhA-S216-02    17
+#&gt;  5 AnPhA-T116-01    11
+#&gt;  6 BioA-S116-01     34
+#&gt;  7 BioA-S216-01      7
+#&gt;  8 BioA-T116-01      2
+#&gt;  9 FrScA-S116-01    70
+#&gt; 10 FrScA-S116-02    12
+#&gt; # … with 16 more rows</code></pre>
+</div>
+</div>
+<div id="analysis-3" class="section level2">
+<h2><span class="header-section-number">13.6</span> Analysis</h2>
+<div id="regression-linear-model-analysis-with-dummy-codes" class="section level3">
+<h3><span class="header-section-number">13.6.1</span> Regression (linear model) analysis with dummy codes</h3>
+<p>We will save this output to <code>m_linear_dc</code>, where the <code>dc</code> stands for dummy
 code. We will keep the variables we used in our last set of models - <code>TimeSpent</code>
-and <code>subject</code> - as independent variables.</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb303-1" title="1">m_linear_dc &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb303-2" title="2"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a></code></pre></div>
+and <code>course_id</code> - as independent variables.</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1">m_linear_dc &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb313-2" title="2"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a></code></pre></div>
 <p>The output will be a bit, well, long, because each group will have its own
 intercept. Here it is:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc)</a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc)</a></code></pre></div>
 <table style="border-collapse:collapse; border:none;">
 <tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
@@ -1019,20 +1116,23 @@ when it is converted to a factor, “course_idAnPhA-S116-01” (which represents
 and physiology course from semester <code>S1</code> (for the fall) of 20<code>16</code>; this is the first
 section (<code>01</code>)).</p>
 <p>We can easily choose another class to serve as a reference group. Imagine, for
-example, that we want “course_idPhysA-S116-01” (the first section of the physics class offered during this semester and year) to be the reference group. The
-<code>fct_relevel()</code> function (which is a part of the {tidyverse} suite of packages)
-makes it easy to do this. This function allows us to re-order the levels within a factor, so that the “first” level will change. We’ll also use <code>mutate</code> again here, which we introduced in the previous chapter.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">dat &lt;-</a>
-<a class="sourceLine" id="cb305-2" title="2"><span class="st">  </span>dat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb305-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">course_id =</span> <span class="kw">fct_relevel</span>(course_id, <span class="st">&quot;PhysA-S116-01&quot;</span>))</a></code></pre></div>
+example, that we want “course_idPhysA-S116-01” (the first section of the
+physics class offered during this semester and year) to be the reference group.
+The <code>fct_relevel()</code> function (which is a part of the {tidyverse} suite of
+packages) makes it easy to do this. This function allows us to re-order the
+levels within a factor, so that the “first” level will change. We’ll also use
+<code>mutate</code> again here, which we introduced in the previous chapter.</p>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1">dat &lt;-</a>
+<a class="sourceLine" id="cb315-2" title="2"><span class="st">  </span>dat <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb315-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">course_id =</span> <span class="kw">fct_relevel</span>(course_id, <span class="st">&quot;PhysA-S116-01&quot;</span>))</a></code></pre></div>
 <p>We can now see that <em>that</em> group is no longer listed as an independent variable,
 or a predictor: every coefficient in this model is now in reference to it.</p>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1"><span class="co"># Here we run a linear model again, predicting percentage earned in the course</span></a>
-<a class="sourceLine" id="cb306-2" title="2"><span class="co"># The predictor variables are the (standardized) amount of time spent and the subject of the course (course_id)</span></a>
-<a class="sourceLine" id="cb306-3" title="3">m_linear_dc_<span class="dv">1</span> &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb306-4" title="4"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a>
-<a class="sourceLine" id="cb306-5" title="5"></a>
-<a class="sourceLine" id="cb306-6" title="6">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc_<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="co"># Here we run a linear model again, predicting percentage earned in the course</span></a>
+<a class="sourceLine" id="cb316-2" title="2"><span class="co"># The predictor variables are the (standardized) amount of time spent and the subject of the course (course_id)</span></a>
+<a class="sourceLine" id="cb316-3" title="3">m_linear_dc_<span class="dv">1</span> &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb316-4" title="4"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a>
+<a class="sourceLine" id="cb316-5" title="5"></a>
+<a class="sourceLine" id="cb316-6" title="6">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc_<span class="dv">1</span>)</a></code></pre></div>
 <table style="border-collapse:collapse; border:none;">
 <tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
@@ -1396,11 +1496,11 @@ that is not taken for you is choosing which is the reference group.</p>
 other, dummy-coded groups are compared to is desired. In such cases, no
 intercept is estimated. This can be done by passing a -1 as the first value
 after the tilde, as follows:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb307-1" title="1"><span class="co"># specifying the same linear model as the previous example, but using a &quot;-1&quot; to indicate that there should not be a reference group</span></a>
-<a class="sourceLine" id="cb307-2" title="2">m_linear_dc_<span class="dv">2</span> &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb307-3" title="3"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a>
-<a class="sourceLine" id="cb307-4" title="4"></a>
-<a class="sourceLine" id="cb307-5" title="5">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc_<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="co"># specifying the same linear model as the previous example, but using a &quot;-1&quot; to indicate that there should not be a reference group</span></a>
+<a class="sourceLine" id="cb317-2" title="2">m_linear_dc_<span class="dv">2</span> &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb317-3" title="3"><span class="st">  </span><span class="kw">lm</span>(percentage_earned <span class="op">~</span><span class="st"> </span><span class="dv">-1</span> <span class="op">+</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>course_id, <span class="dt">data =</span> dat)</a>
+<a class="sourceLine" id="cb317-4" title="4"></a>
+<a class="sourceLine" id="cb317-5" title="5">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_linear_dc_<span class="dv">2</span>)</a></code></pre></div>
 <table style="border-collapse:collapse; border:none;">
 <tr>
 <th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
@@ -1754,58 +1854,46 @@ factors, and so we emphasized that in this walkthrough. However, we want you to 
 aware that it is possible (though uncommon) to estimate a model without an
 intercept.</p>
 </div>
-</div>
-<div id="toward-multi-level-models" class="section level2">
-<h2><span class="header-section-number">13.2</span> Toward multi-level models</h2>
+<div id="a-deep-dive-into-the-background-of-multi-level-models" class="section level3">
+<h3><span class="header-section-number">13.6.2</span> A deep-dive into the background of multi-level models</h3>
 <p>Dummy-coding is a very helpful strategy. It is particularly useful with a small
 number of groups (i.e., for estimating the effects of being in one of the five
-subjects in the online science data set, as in this walkthrough; we note that in addition to these five subjects, we also have multiple sections, or classes, for each subject). With effects such as being a student in a particular class, though, the output seems to be less useful: it is hard to
-interpret the 25 different effects (and to compare them to the intercept).</p>
-<p>Additionally, analysts often have the goal not of determining the effect of being in a specific class, <em>per se</em>, but rather of accounting for the fact that students share a class. This is
-important because linear models (i.e., the model we estimated using <code>lm()</code>) have
-an assumption that the data points are - apart from sharing levels of the
-variables that are used in the model - independent, or not correlated. This is
-what is meant by the “assumption of independence” or of “independently and
-identically distributed” (<em>i.i.d.</em>) residuals (Field, Miles, &amp; Field, 2012).</p>
+subjects in the online science data set, as in this walkthrough; we note that in
+addition to these five subjects, we also have multiple sections, or classes, for
+each subject). With effects such as being a student in a particular class,
+though, the output seems to be less useful: it is hard to interpret the 25
+different effects (and to compare them to the intercept).</p>
+<p>Additionally, analysts often have the goal not of determining the effect of
+being in a specific class, <em>per se</em>, but rather of accounting for the fact that
+students share a class. This is important because linear models (i.e., the model
+we estimated using <code>lm()</code>) have an assumption that the data points are - apart
+from sharing levels of the variables that are used in the model - independent,
+or not correlated. This is what is meant by the “assumption of independence” or
+of “independently and identically distributed” (<em>i.i.d.</em>) residuals (Field,
+Miles, &amp; Field, 2012).</p>
 <p>Multi-level models are a way to deal with the difficulty of interpreting the
 estimated effects for each of many groups, like classes, and to address the
 assumption of independence. Multi-level models do this by (still) estimating the
 effect of being a student in each group, but with a key distinction from linear
 models: Instead of determining how different the observations in a group are
-from those in the reference group, the multi-level model “regularizes”
-(sometimes the term “shrinks” is used) the difference based on how systematically
-different the groups are. The reason why “shrinkage” is occasionally used is that the group-level estimates (i.e., for classes) that are obtained through multi-level modeling can never be larger than those from a linear model (regression). As described earlier, when there are groups included in the model,
-a regression effectively estimates the effect for each group independent of all of the others.</p>
-<p>Through regularization, groups that are comprised of individuals who are
+from those in the reference group, the multi-level model “regularizes” (sometimes the term “shrinks” is used) the difference based on how
+systematically different the groups are. The reason why “shrinkage” is
+occasionally used is that the group-level estimates (i.e., for classes) that are
+obtained through multi-level modeling can never be larger than those from a
+linear model (regression). As described earlier, when there are groups included
+in the model, a regression effectively estimates the effect for each group
+independent of all of the others.</p>
+<p>Through regularization, groups that comprise individuals who are
 consistently different (higher or lower) than individuals on average are not
 regularized very much - their estimated difference may be close to the estimate
 from a multi-level model - whereas groups with only a few individuals, or with a
-lot of variability within individuals, would be regularized a lot. In the former
-case, the multi-level model considers there to be strong evidence for a group
-effect, whereas in the latter, the model recognizes that there is less certainty
-about a group (class) effect for that particular group, in part because that group is small. Multi-level models are
-very common in educational research for cases such as this: accounting for the
-way in which students take the same classes, or even go to the same school (see
-Raudenbush &amp; Bryk, 2002).</p>
-<p>The way that a multi-level model does this “regularizing” is by considering the
-groups (and not the data points, in this case) to be samples from a larger
-population of classes. By considering the effects of groups to be samples from a
-larger population, the model is able to use information not only particular to
-each group (as the models created using <code>lm()</code>), but also information across all
-of the data. Using multi-level models means that the assumption of independence
-can be addressed; their use also means that individual coefficients for classes
-do not need to be included (or interpreted, thankfully!), though they are still
-included in and accounted for in the model. As we describe, the way that
-information about the groups is reported is usually in the form of the
-<em>intraclass correlation coefficient</em> (ICC), which explains the proportion of
-variation in the dependent variable that the groups explain. Smaller ICCs (such
-as ICCs with values of 0.05, representing 5% of the variation in the dependent
-variable) mean that the groups are not very important; larger ICCs, such as ICCs
-with values of 0.10 or larger (values as high as 0.50 are not uncommon!). ICCs that are larger would
-indicate that groups are important and that they have to do with a lot of the
-differences observed in the dependent variable (and that not including them may
-potentially ignore the assumption of independence in a case in which it may be
-important to recognize it - and lead to bias in the results).</p>
+lot of variability within individuals, would be regularized a lot<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> In the former case, the multi-level model considers there to be
+strong evidence for a group effect, whereas in the latter, the model recognizes
+that there is less certainty about a group (class) effect for that particular
+group, in part because that group is small. Multi-level models are very common
+in educational research for cases such as this: accounting for the way in which
+students take the same classes, or even go to the same school (see Raudenbush &amp;
+Bryk, 2002).</p>
 <p>That was a lot of technical information about multi-level models; thank you for
 sticking with us through it! We wanted to include this as multi-level models
 are common: consider how often the data you collect involves students nested (or
@@ -1813,142 +1901,65 @@ grouped) in classes, or classes nested in schools (or even schools nested in
 districts - you get the picture!). Educational data is complex, and so it is
 not surprising that multi-level models may be encountered in educational data
 science analyses, reports, and articles.</p>
+</div>
+<div id="multi-level-model-analysis" class="section level3">
+<h3><span class="header-section-number">13.6.3</span> Multi-level model analysis</h3>
 <p>Fortunately, for all of the complicated details, multi-level models are very
-easy to use in R. Their requires a new package; one of the most common for
-estimating these types of models is <strong>lme4</strong>. We use it very similarly to the
-<code>lm()</code> function, but we pass it an additional argument about what the <em>groups</em>,
+easy to use in R. This requires a new package; one of the most common for
+estimating these types of models is <strong>lme4</strong>. We use it very similarly to the <code>lm()</code> function, but we pass it an additional argument about what the <em>groups</em>,
 in the data are. Such a model is often referred to as a “varying intercepts”
 multi-level model, because what is different between the groups is the effect of
 being a student in a class: the intercepts between groups vary.</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="co"># install.packages(&quot;lme4&quot;) # note that this only needs to be run one time, after which the package will be installed on your local computer</span></a>
-<a class="sourceLine" id="cb308-2" title="2">m_course &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb308-3" title="3"><span class="st">  </span>lme4<span class="op">::</span><span class="kw">lmer</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>course_id), <span class="dt">data =</span> dat)</a></code></pre></div>
-<pre><code>## Warning: Some predictor variables are on very different scales: consider
-## rescaling</code></pre>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">sjPlot<span class="op">::</span><span class="kw">tab_model</span>(m_course)</a></code></pre></div>
-<table style="border-collapse:collapse; border:none;">
-<tr>
-<th style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm;  text-align:left; ">
- 
-</th>
-<th colspan="3" style="border-top: double; text-align:center; font-style:normal; font-weight:bold; padding:0.2cm; ">
-percentage earned
-</th>
-</tr>
-<tr>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  text-align:left; ">
-Predictors
-</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
-Estimates
-</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
-CI
-</td>
-<td style=" text-align:center; border-bottom:1px solid; font-style:italic; font-weight:normal;  ">
-p
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-(Intercept)
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.76
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.74 – 0.79
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-<strong>&lt;0.001
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; ">
-TimeSpent
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-0.00
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
--0.00 – 0.00
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:center;  ">
-1.000
-</td>
-</tr>
-<tr>
-<td colspan="4" style="font-weight:bold; text-align:left; padding-top:.8em;">
-Random Effects
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
-σ<sup>2</sup>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.01
-</td>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
-τ<sub>00</sub> <sub>course_id</sub>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.00
-</td>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
-ICC
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.08
-</td>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
-N <sub>course_id</sub>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-21
-</td>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm; border-top:1px solid;">
-Observations
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left; border-top:1px solid;" colspan="3">
-148
-</td>
-</tr>
-<tr>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; text-align:left; padding-top:0.1cm; padding-bottom:0.1cm;">
-Marginal R<sup>2</sup> / Conditional R<sup>2</sup>
-</td>
-<td style=" padding:0.2cm; text-align:left; vertical-align:top; padding-top:0.1cm; padding-bottom:0.1cm; text-align:left;" colspan="3">
-0.000 / 0.076
-</td>
-</tr>
-</table>
-<p>In a way, what is going on above is straightforward (and similar to what we have seen with <code>lm()</code>), but, it is also different and potentially confusing. Parentheses are not commonly used with <code>lm()</code>; there is a term (<code>(1|course_id)</code>) in parentheses. Also, the bar symbol - <code>|</code> - is not commonly used with <code>lm()</code>.</p>
-<p>As different as these (the parentheses and bar) are, they are used for a relatively straightforward purpose: to model the group (in this case, courses) in the data. With <code>lmer()</code>, these group terms are specified in parentheses - specifically, to the right of the bar. That is what the <code>|course_id</code> part means - it is telling lmer that courses are groups in the data. The left side of the bar tells lmer that what we want to be specified are varying intercepts for each group (1 is used to denote the intercept). That is basically it!</p>
-<p>That is basically it, but there is potentially more to the story: in addition to the 1, variables which can be specified to have a different effect for each group can also be specified. These variables are referred to not as varying intercepts, but as varying slopes. We will not cover these in this walkthrough, but want you to be aware of them (we recommend the book by West, Welch, and Galecki [2014] provide an excellent walkthrough on how to specify varying slopes using lmer).</p>
+<p>You’ll only need to install {lme4} once to do the rest of this walkthrough. To install {lme4}, type this code in your console:</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;lme4&quot;</span>) </a></code></pre></div>
+<p>Now we can fit our multi-level model:</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1">m_course &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb319-2" title="2"><span class="st">  </span>lme4<span class="op">::</span><span class="kw">lmer</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent_std <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>course_id), <span class="dt">data =</span> dat)</a></code></pre></div>
 <!-- Preferable to add this as a footnote -->
-<p>To say <em>just</em> a bit more, there is a connection between multi-level models and Bayesian methods (<span class="citation">Gelman and Hill (<a href="#ref-gelman2006data">2006</a>)</span>); one way to think about the “regularizing” going on is that estimates for each group (class) are made
-taking account of the data across all of the groups (classes). The data for all of the classes can be interpreted as a <em>prior</em> for the group estimates.</p>
-<p>There is another part of the above code to mention. The <code>sjPlot::tab_model()</code> function comparably as it does for <code>lm()</code> models, providing output for the model, including some fit statistics as well as coefficients and their standard errors and estimates. There are two things to note about <code>lmer()</code> output:</p>
+<p>To say <em>just</em> a bit more, there is a connection between multi-level models and Bayesian methods (<span class="citation">Gelman and Hill (<a href="c19.html#ref-gelman2006data">2006</a>)</span>); one way to think about the “regularizing” going on is that estimates for each group (class) are made taking account of the data across all of the groups (classes). The data for all of the classes can be interpreted as a <em>prior</em> for the group estimates.</p>
+<p>In a way, what is going on above is straightforward (and similar to what we have
+seen with <code>lm()</code>), but, it is also different and potentially confusing.
+Parentheses are not commonly used with <code>lm()</code>; there is a term (<code>(1|course_id)</code>)
+in parentheses. Also, the bar symbol - <code>|</code> - is not commonly used with <code>lm()</code>.</p>
+<p>As different as these (the parentheses and bar) are, they are used for a
+relatively straightforward purpose: to model the group (in this case, courses)
+in the data. With <code>lmer()</code>, these group terms are specified in parentheses -
+specifically, to the right of the bar. That is what the <code>|course_id</code> part means
+- it is telling lmer that courses are groups in the data. The left side of the
+bar tells lmer that what we want to be specified are varying intercepts for each
+group (1 is used to denote the intercept). That is basically it!</p>
+<p>That is basically it, but there is potentially more to the story: In addition to
+the 1, variables which can be specified to have a different effect for each
+group can also be specified. These variables are referred to not as varying
+intercepts, but as varying slopes. We will not cover these in this walkthrough,
+but want you to be aware of them (we recommend the book by West, Welch, and
+Galecki [2014] provide an excellent walkthrough on how to specify varying
+slopes using lmer).<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+</div>
+</div>
+<div id="results-3" class="section level2">
+<h2><span class="header-section-number">13.7</span> Results</h2>
+<p>Let’s view the results using the <code>tab_model()</code> function from sjPlot.</p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1"><span class="kw">tab_model</span>(m_course)</a></code></pre></div>
+<p>There is another part of the above code to mention. The <code>tab_model()</code>
+function comparably as it does for <code>lm()</code> models, providing output for the
+model, including some fit statistics as well as coefficients and their standard
+errors and estimates. There are two things to note about <code>lmer()</code> output:</p>
 <ol style="list-style-type: decimal">
-<li><em>p</em>-values are not automatically provided, due to debates in the wider field about how to calculate the degrees of freedom for coefficients (run <code>?lme4::pvalues</code> to see a discussion of the issue as well as solutions; we have found the lmerTest to be helpful as an easy solution, though we note that some of the recommendations available through <code>?lme4::pvalues</code> may be preferable, as the technique lmerTest implements has some known issues)</li>
-<li>There</li>
+<li><p><em>p</em>-values are not automatically provided, due to debates in the wider field
+about how to calculate the degrees of freedom for coefficients<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></p></li>
+<li><p>In addition to the coefficients, there are also estimates for how much
+variability there is between the groups.</p></li>
 </ol>
 <p>As we mentioned earlier, a common way to understand how much variability is at
 the group level is to calculate the <em>intra-class</em> correlation. This value is the
 proportion of the variability in the outcome (the <em>y</em>-variable) that is
 accounted for solely by the groups identified in the model. There is a useful
-function in the <strong>performance</strong> package for doing this.</p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb311-1" title="1"><span class="co"># install.packages(&quot;performance&quot;)</span></a>
-<a class="sourceLine" id="cb311-2" title="2">performance<span class="op">::</span><span class="kw">icc</span>(m_course)</a></code></pre></div>
-<pre><code>## # Intraclass Correlation Coefficient
-## 
-##      Adjusted ICC: 0.076
-##   Conditional ICC: 0.076</code></pre>
+function in the {performance} package for doing this.</p>
+<p>You can install the {performance} package by typing this code in your console:</p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;performance&quot;</span>)</a></code></pre></div>
+<p>After that, try this function:</p>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1">performance<span class="op">::</span><span class="kw">icc</span>(m_course)</a></code></pre></div>
 <p>This shows that nearly 17% of the variability in the percentage of points
 students earned can be explained simply by knowing what class they are in.</p>
 <p>There is much more to do with multi-level models. We briefly discuss a common
@@ -1961,34 +1972,45 @@ with effects) model very similar to the model we estimated above, but simply
 with another group added for the school. The model will account for the way in
 which the classes are nested within the schools automatically (Bates, Maechler,
 Bolker, &amp; Walker, 2015).</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="co"># this model would specify a group effect for both the course and school</span></a>
-<a class="sourceLine" id="cb313-2" title="2">m_course_school &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb313-3" title="3"><span class="st">  </span>lme4<span class="op">::</span><span class="kw">lmer</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>course_ID) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>school_id), <span class="dt">data =</span> dat)</a></code></pre></div>
+<p>We don’t have a variable containing the name of different schools. If we did we could fit the model like this, where <code>school_id</code> is the variable containing different schools:</p>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="co"># this model would specify a group effect for both the course and school</span></a>
+<a class="sourceLine" id="cb323-2" title="2">m_course_school &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb323-3" title="3"><span class="st">  </span>lme4<span class="op">::</span><span class="kw">lmer</span>(percentage_earned <span class="op">~</span><span class="st"> </span>TimeSpent <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>course_id) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>school_id), <span class="dt">data =</span> dat)</a></code></pre></div>
 <p>Were we to estimate this model (and then use the <code>icc()</code> function), we would see
 two ICC values representing the proportion of the variation in the dependent
 variable explained by each of the two groups we added - the course <em>and</em> the
-school. A common question those using lme4 have is whether it is necessary to
+school. A common question those using {lme4} have is whether it is necessary to
 explicitly nest the courses within schools; as long as the courses are unique labelled, this is not necessary to do.</p>
 <p>You can add further still levels to the model, as the {lme4} package was
 designed for complex multi-level models (and even those with not nested, but
 crossed random effects; a topic beyond the scope of this walkthrough, but which
 is described in West, Welch, &amp; Galecki, 2015).</p>
 </div>
-<div id="other-groups" class="section level2">
-<h2><span class="header-section-number">13.3</span> Other groups</h2>
-<p>In this example (and in many examples in educational research), the groups are classes. But, multi-level models can be used for other cases in which data is associated with a common group. For example, if students respond to repeated measures (such as quizzes) over time, then the multiple quiz responses for each sudent could be considered to be “grouped” within students. In such a case, instead of specifying the model with the course as the “grouping factor”, students could be.</p>
-<p>Moreover, multi-level models can include multiple groups (as noted above), even if the groups are of very different kinds (i.e., if students from multiple classes responded to multiple quizzes).</p>
-<p>There is much more that can be done with multi-level models; we have additional recommendations in the <a href="#17=additional-resources">additional resources</a> chapter.</p>
+<div id="conclusion-8" class="section level2">
+<h2><span class="header-section-number">13.8</span> Conclusion</h2>
+<p>In this example (and in many examples in educational research), the groups are
+classes. But, multi-level models can be used for other cases in which data is
+associated with a common group. For example, if students respond to repeated
+measures (such as quizzes) over time, then the multiple quiz responses for each
+sudent could be considered to be “grouped” within students. In such a case,
+instead of specifying the model with the course as the “grouping factor”,
+students could be.</p>
+<p>Moreover, multi-level models can include multiple groups (as noted above), even
+if the groups are of very different kinds (i.e., if students from multiple
+classes responded to multiple quizzes).</p>
+<p>We note that the groups in multi-level models do not need to be nested: they can
+also be “crossed”, as may be the case for data from, for example, teachers in
+different schools who attended different teacher preparation programs: not every
+teacher in a school necessarily (or even likely) attended the same teacher
+preparation program, and graduates from every teacher preparation program are
+highly unlikely to all teach in the same school!</p>
+<p>There is much more that can be done with multi-level models; we have additional
+recommendations in the <a href="#17=additional-resources">additional resources</a> chapter.</p>
 <p>Finally, as noted earlier, multi-level models have similarities to the Bayesian
 methods which are becoming more common among some R users - and educational data
-scientists. There are also references to recommended books on Bayesian methods in the additional resources chapter.</p>
+scientists. There are also references to recommended books on Bayesian methods
+in the additional resources chapter.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-gelman2006data">
-<p>Gelman, Andrew, and Jennifer Hill. 2006. <em>Data Analysis Using Regression and Multilevel/Hierarchical Models</em>. Cambridge university press.</p>
 </div>
 </div>
             </section>

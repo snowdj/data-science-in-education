@@ -1,3 +1,4 @@
+
 # Introducing Data Science Tools To Your Education Job {#c15}
 
 ## Introduction 
@@ -26,36 +27,11 @@ The trick here is to use statistics, programming, and knowledge about education 
 
 #### Example: Preparing quiz data to compute average scores
 
-
-```r
-# TODO: Add an intervention column to make this example feel more connected to the anecdote 
-```
-
 Let's take our example of the education consultant tasked with computing the average quiz scores. Imagine the school district uses an online quiz system and each teacher's quiz export looks like this:
 
 
 ```r
 library(tidyverse)
-```
-
-```
-## ── Attaching packages ──────────────
-```
-
-```
-## ✓ ggplot2 3.2.1     ✓ purrr   0.3.3
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
-## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.4.0
-```
-
-```
-## ── Conflicts ───────────────────────
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
 set.seed(45)
 
 quizzes_1 <- tibble(
@@ -70,54 +46,54 @@ quizzes_1
 ```
 
 ```
-## # A tibble: 3 x 5
-##   teacher_id student_id quiz_1 quiz_2 quiz_3
-##        <dbl>      <int>  <int>  <int>  <int>
-## 1          1          1     36     95     82
-## 2          1          2     74     38     10
-## 3          1          3     45     57     63
+#> # A tibble: 3 x 5
+#>   teacher_id student_id quiz_1 quiz_2 quiz_3
+#>        <dbl>      <int>  <int>  <int>  <int>
+#> 1          1          1     36     95     82
+#> 2          1          2     74     38     10
+#> 3          1          3     45     57     63
 ```
 
-Tools like Excel and Google Sheets can help you compute statistics like mean scores for each quiz or mean scores for each student fairly quickly, but what if you'd like to do that for five teachers using the exact same method? First, let's tidy the data. This will prepare our data nicely to compute any number of summary statistics or plot results. Using `gather` to separate the quiz number and its score for each student will get us a long way: 
+Tools like Excel and Google Sheets can help you compute statistics like mean scores for each quiz or mean scores for each student fairly quickly, but what if you'd like to do that for five teachers using the exact same method? First, let's tidy the data. This will prepare our data nicely to compute any number of summary statistics or plot results. Using `pivot_longer()` to separate the quiz number and its score for each student will get us a long way: 
 
 
 ```r
 quizzes_1 %>% 
-    gather(quiz_number, score, -c(teacher_id, student_id))
+    pivot_longer(cols = quiz_1:quiz_3, names_to = "quiz_number", values_to = "score")
 ```
 
 ```
-## # A tibble: 9 x 4
-##   teacher_id student_id quiz_number score
-##        <dbl>      <int> <chr>       <int>
-## 1          1          1 quiz_1         36
-## 2          1          2 quiz_1         74
-## 3          1          3 quiz_1         45
-## 4          1          1 quiz_2         95
-## 5          1          2 quiz_2         38
-## 6          1          3 quiz_2         57
-## 7          1          1 quiz_3         82
-## 8          1          2 quiz_3         10
-## 9          1          3 quiz_3         63
+#> # A tibble: 9 x 4
+#>   teacher_id student_id quiz_number score
+#>        <dbl>      <int> <chr>       <int>
+#> 1          1          1 quiz_1         36
+#> 2          1          1 quiz_2         95
+#> 3          1          1 quiz_3         82
+#> 4          1          2 quiz_1         74
+#> 5          1          2 quiz_2         38
+#> 6          1          2 quiz_3         10
+#> 7          1          3 quiz_1         45
+#> 8          1          3 quiz_2         57
+#> 9          1          3 quiz_3         63
 ```
 
-Note now that in the first version of this dataset, each individual row represented a unique combination of teacher and student. After using `gather`, each row is now a unique combination of teacher, student, and quiz number. This is often talked about as changing a dataset from "wide" to "narrow" because of the change in the width of the dataset. The benefit to this change is that we can compute summary statistics by grouping values in any of the new columns. For example, here is how we would compute the mean quiz score for each student:
+Note now that in the first version of this dataset, each individual row represented a unique combination of teacher and student. After using `pivot_longer()`, each row is now a unique combination of teacher, student and quiz number. This is often talked about as changing a dataset from "wide" to "narrow" because of the change in the width of the dataset. The benefit to this change is that we can compute summary statistics by grouping values in any of the new columns. For example, here is how we would compute the mean quiz score for each student:
 
 
 ```r
 quizzes_1 %>% 
-    gather(quiz_number, score, -c(teacher_id, student_id)) %>% 
+    pivot_longer(cols = quiz_1:quiz_3, names_to = "quiz_number", values_to = "score") %>%
     group_by(student_id) %>% 
     summarise(quiz_mean = mean(score))
 ```
 
 ```
-## # A tibble: 3 x 2
-##   student_id quiz_mean
-##        <int>     <dbl>
-## 1          1      71  
-## 2          2      40.7
-## 3          3      55
+#> # A tibble: 3 x 2
+#>   student_id quiz_mean
+#>        <int>     <dbl>
+#> 1          1      71  
+#> 2          2      40.7
+#> 3          3      55
 ```
 
 Again, for one dataset this computation is fairly straight forward and can be done with a number of software tools. But what if the education consultant in our example wants to do this repeatedly for twenty five teacher quiz exports? Let's look at one way we can do this fairly quickly using R. We'll start by creating two additional datasets as an example. To make things feel authentic, we'll also add a column to show if the students participated in a new intervention. 
@@ -151,11 +127,9 @@ quizzes_3 <- tibble(
 
 The method we'll use to compute the mean quiz score for each student is to: 
 
-1. Combine all the datasets into one big dataset: Use `bind_rows` to combine all three quiz exports into one dataset. Remember, this can be done because each teacher's export uses the same imaginary online quiz system and export feature and thus use the same number of columns and variable names 
+1. Combine all the datasets into one big dataset: Use `bind_rows()` to combine all three quiz exports into one dataset. Remember, this can be done because each teacher's export uses the same imaginary online quiz system and export feature and thus use the same number of columns and variable names 
 
-1. Reuse the code from the first dataset on the new bigger dataset: Paste the code we used in the first example into the script so it cleans and computes the mean on the combined dataset 
-
-1. Compute the mean of each student: Now that the data is arranged so that each row is a unique combination of teacher, student, quiz number, and intervention status, we can compute the mean quiz score for each student. 
+1. Reuse the code from the first dataset on the new bigger dataset: Paste the code we used in the first example into the script so it cleans and computes the mean quiz score for each student 
 
 
 ```r
@@ -171,18 +145,18 @@ all_quizzes
 ```
 
 ```
-## # A tibble: 9 x 6
-##   teacher_id student_id quiz_1 quiz_2 quiz_3 intervention
-##        <dbl>      <int>  <int>  <int>  <int>        <dbl>
-## 1          1          1     36     95     82            0
-## 2          1          2     74     38     10            1
-## 3          1          3     45     57     63            0
-## 4          2          4     92     27     15            0
-## 5          2          5     37     80     99            1
-## 6          2          6     67     52     99            1
-## 7          3          7     60     78     13            0
-## 8          3          8     29      1     89            0
-## 9          3          9     93     52     25            1
+#> # A tibble: 9 x 6
+#>   teacher_id student_id quiz_1 quiz_2 quiz_3 intervention
+#>        <dbl>      <int>  <int>  <int>  <int>        <dbl>
+#> 1          1          1     36     95     82            0
+#> 2          1          2     74     38     10            1
+#> 3          1          3     45     57     63            0
+#> 4          2          4     92     27     15            0
+#> 5          2          5     37     80     99            1
+#> 6          2          6     67     52     99            1
+#> 7          3          7     60     78     13            0
+#> 8          3          8     29      1     89            0
+#> 9          3          9     93     52     25            1
 ```
 
 We'll combine the cleaning and computation of the mean steps neatly into one this chunk of code:
@@ -191,26 +165,27 @@ We'll combine the cleaning and computation of the mean steps neatly into one thi
 ```r
 # Reuse the code from the first dataset on the new bigger dataset
 all_quizzes %>% 
-    gather(quiz_number, score, -c(teacher_id, student_id, intervention)) %>% 
+    # Clean with pivot_longer
+    pivot_longer(cols = quiz_1:quiz_3, names_to = "quiz_number", values_to = "score") %>%
     # Compute the mean of each student
     group_by(student_id, intervention ) %>% 
     summarise(quiz_mean = mean(score))
 ```
 
 ```
-## # A tibble: 9 x 3
-## # Groups:   student_id [9]
-##   student_id intervention quiz_mean
-##        <int>        <dbl>     <dbl>
-## 1          1            0      71  
-## 2          2            1      40.7
-## 3          3            0      55  
-## 4          4            0      44.7
-## 5          5            1      72  
-## 6          6            1      72.7
-## 7          7            0      50.3
-## 8          8            0      39.7
-## 9          9            1      56.7
+#> # A tibble: 9 x 3
+#> # Groups:   student_id [9]
+#>   student_id intervention quiz_mean
+#>        <int>        <dbl>     <dbl>
+#> 1          1            0      71  
+#> 2          2            1      40.7
+#> 3          3            0      55  
+#> 4          4            0      44.7
+#> 5          5            1      72  
+#> 6          6            1      72.7
+#> 7          7            0      50.3
+#> 8          8            0      39.7
+#> 9          9            1      56.7
 ```
 
 Note here that our imaginary education consultant from the example is thinking ahead by including the `intervention` column. By doing so she's opened the possibility of collaboratively exploring any possible differences in the scores between the students who had the intervention and the students who did not when she reviews and discusses these results with the school staff. Adding these types of details ahead of time is one way to build conversation starters into your collaborations. It is also a way to get faster at responding to curiosities by anticipating useful questions from your clients. 
@@ -231,7 +206,7 @@ Here are more ways to get faster at answering analytic questions:
 
  - Recognize when you are using similar chunks of code to do repetitive operations. Store that code in an accessible place and reuse it 
  - Keep a notebook of the questions teachers and administrators ask to help you develop an instinct for common patterns of questions. Write your code to anticipate these questions 
- - Learn to use functions and packages like `purrr` to work on many datasets at once 
+ - Learn to use functions and packages like {purrr} to work on many datasets at once 
  - Install a prototyping habit by getting comfortable with quickly producing rough first drafts of your analysis. Your audience can give valuable feedback early and feel like you are quickly on the path to developing useful answers to their questions
 
 ### Working With More Data
@@ -247,18 +222,13 @@ This is where using R for data analysis enters the conversation. Working with da
 
 Say, for example, an elementary school administrator wants to replace each student name in a classroom dataset with a unique numerical ID. Doing this in a spreadsheet using good old fashioned data entry is fairly straightforward. Doing this for a whole school's worth of classrooms though, demands a different approach. Rather than hand enter a unique id into a spreadsheet, the administrator can write an R script that executes the following steps: 
 
- 1. Use `read_csv` to store every classroom's student list into the computer's memory
- 1. Use `bind_rows` to combine the separate lists into one long list 
- 1. Use `mutate` to replace student names with a randomized and unique numerical ID 
- 1. Use `split` to separate the data into classrooms again 
- 1. Use `purrr` and `write_csv` to create and rename individual spreadsheets to send back to teachers 
+ 1. Use `read_csv()` to store every classroom's student list into the computer's memory
+ 1. Use `bind_rows()` to combine the separate lists into one long list 
+ 1. Use `mutate()` to replace student names with a randomized and unique numerical ID 
+ 1. Use `split()` to separate the data into classrooms again 
+ 1. Use {purrr} and `write_csv()` to create and rename individual spreadsheets to send back to teachers 
 
 With some initial investment into thoughtful coding on the front end of this problem, the admininistrator now has a script she can use repeatedly in the future when she needs to do this task again.
-
-
-```r
-# TODO: More examples of differences in scale 
-```
 
 ##  Other Ways to Reimagine the Scale of Your Work
 
@@ -337,10 +307,10 @@ Yet the majority of teachers aren't interested in learning a programming languag
 
 If you do happen to be an elementary or high school teacher who wants use programming and statistics to improve how you use data, you will find the approaches in this book useful. But if you are not that person, there is still much to explore that will lead to a rewarding experience as you grow your analytic skill. This book lacks the scope to explore this topic thoroughly, but there are many ways to improve how you use data without requiring a programming language or deep knowledge of statistics. 
 
-For example, you can explore what is perhaps the most important element of starting a data analysis: asking the correct question. Chapter three of @peng2015's book, *The Art of Data Science* provides a useful process for getting better at asking data questions. 
+For example, you can explore what is perhaps the most important element of starting a data analysis: asking the correct question. Chapter three of *The Art of Data Science* [@peng2015] provides a useful process for getting better at asking data questions. 
 
-Given how often data is served to us through data visualizations, it is important to learn the best ways to create and consume these visualizations. Chapter one of @healy2019's book *Data Visualization: A Practical Introduction*, explores this topic using excellent examples and writing. 
+Given how often data is served to us through data visualizations, it is important to learn the best ways to create and consume these visualizations. Chapter one of book *Data Visualization: A Practical Introduction* [@healy2019] explores this topic using excellent examples and writing. 
 
-For practical applications of a data-informed approach, *Learning to Improve: How America's Schools Can Get Better at Getting Better* by @bryk2015 offers a thorough explanation of the improvement science process. The book is filled with examples of how data is used to understand problems and trial solutions. 
+For practical applications of a data-informed approach, *Learning to Improve: How America's Schools Can Get Better at Getting Better* [@bryk2015] offers a thorough explanation of the improvement science process. The book is filled with examples of how data is used to understand problems and trial solutions. 
 
 The final recommendation for elementary and secondary teachers wanting to get better at analysis is this: find, and partner with, someone who can help you answer the questions you have about how to serve your students better. You have the professional experience to come up with the right ideas and the curiosity to see what these ideas look like in the classroom. Inviting someone who can collaborate with you and help you measure the success of your ideas can be a rewarding partnership for you and your students. 

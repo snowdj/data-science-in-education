@@ -2,14 +2,14 @@
 
 At the conclusion of this book, we hope that you feel ready to take on the data-
 related question or problem you have wanted to address. We think that the work
-that you will do is important. In education, particularly, there is a lot of
+that you will do is important. Particularly in education, there is a lot of
 promise for how data can be used - by teachers, administrators, parents, and
 even by students. There is also some peril, though, especially if data is used
 that does not align with the goals and values of educators - and individually
 and collectively learning and changing. As you work toward that goal, we wish to
 offer some closing thoughts.
 
-## Take on challenges
+## Take on Challenges
 
 Many of the things that you surely want to do are likely beyond the realm of
 what is possible now. These challenges, from the social (the problem you are
@@ -29,9 +29,9 @@ using R for the first time constantly runs into difficulties when trying
 something new - you are not alone! So, take on challenges: a joy of doing data
 science is that it is a field at this time, especially in education, is that the
 promise and peril of using data are both very real, and those taking on
-challenges have the chance to shape the direction of how data is used
+challenges have the chance to shape the direction of how data is used.
 
-## Know when to turn to something else
+## Know When to Turn to Something Else
 
 In addition to taking on challenges (and turning to friends and laughing), we
 want to acknowledge everyone needs a break. Sometimes, instead of writing one
@@ -41,7 +41,7 @@ important. But, by doing so, you can live to code another day. We need as many
 data scientists working in different corners of education as possible, and we
 don't want to lose you to burn-out!
 
-Similarly, when working on any project - even (mand aybe particularly those you
+Similarly, when working on any project - even those you
 are passionate about - it can be important to switch to something else (data
 science-related or otherwise) to retain the curiosity, passion, and interest
 that brought you to the work in the first place. Consider working on a different

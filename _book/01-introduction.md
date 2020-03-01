@@ -1,3 +1,4 @@
+
 ## Learning Data Science in Education {#c01}
 
 Over the coming chapters we'll be learning together about what data science in education can look like. But to understand why we were compelled to write about the topic, we need to talk about why data science in education is not such a straightforward thing. 
@@ -35,3 +36,7 @@ Get value from publicly available data
 We'll end the book by discussing how to bring data science skills into your education job.
 
 We hope after reading this book you'll feel like you're not alone in learning to do data science in education. We hope your experience with this book is the right balance of challenging and fun. Finally, we hope you'll take what you learned and share it with others who are looking to start this journey.
+
+## About the Book
+
+Inspired by {bookdown}, this book is open source. This ensures its contents are reproducible and publicly accessible for people worldwide. The online version of the book is hosted at [datascienceineducation.com](https://www.datascienceineducation.com/).
